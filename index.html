@@ -36,33 +36,7 @@
     font-weight: 300;
     line-height: 1.6;
     overflow-x: hidden;
-    cursor: none;
   }
-
-  /* Custom cursor */
-  .cursor {
-    position: fixed;
-    width: 8px;
-    height: 8px;
-    background: var(--ink);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9999;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s, height 0.3s, background 0.3s;
-  }
-  .cursor-ring {
-    position: fixed;
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--accent);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: transform 0.12s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
-  }
-  a:hover ~ .cursor, button:hover ~ .cursor { width: 4px; height: 4px; }
 
   /* Grain overlay */
   body::before {
@@ -82,11 +56,12 @@
     left: 0;
     right: 0;
     z-index: 100;
-    padding: 28px 48px;
+    padding: 22px 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    mix-blend-mode: multiply;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border);
   }
   .nav-logo {
     font-family: var(--serif);
@@ -146,19 +121,27 @@
   /* HERO */
   .hero {
     min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    padding-top: 100px;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-left {
-    padding: 80px 48px 80px 80px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: center;
+    padding: 120px 0 80px;
+    position: relative;
+    overflow: hidden;
+    background: var(--warm-white);
+  }
+  .hero-content {
     position: relative;
     z-index: 2;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 80px;
+    align-items: center;
+  }
+  .hero-left {
+    display: flex;
+    flex-direction: column;
   }
   .hero-eyebrow {
     font-family: var(--mono);
@@ -167,7 +150,7 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 32px;
+    margin-bottom: 28px;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -181,12 +164,13 @@
   }
   .hero-h1 {
     font-family: var(--serif);
-    font-size: clamp(52px, 6vw, 88px);
+    font-size: clamp(48px, 5.5vw, 82px);
     font-weight: 300;
     line-height: 1.05;
     letter-spacing: -0.01em;
     color: var(--ink);
     margin-bottom: 28px;
+    max-width: 680px;
   }
   .hero-h1 em {
     font-style: italic;
@@ -197,14 +181,21 @@
     font-weight: 300;
     color: var(--ink-60);
     line-height: 1.75;
-    max-width: 420px;
-    margin-bottom: 48px;
+    max-width: 500px;
+    margin-bottom: 44px;
   }
   .hero-actions {
     display: flex;
     gap: 16px;
     align-items: center;
   }
+  .hero-diagram-wrap {
+    flex-shrink: 0;
+    position: relative;
+    width: 300px;
+    height: 300px;
+  }
+
   .btn-primary {
     background: var(--ink);
     color: var(--warm-white);
@@ -237,23 +228,7 @@
   .btn-ghost:hover { gap: 14px; color: var(--ink); }
   .btn-ghost-arrow { font-size: 16px; }
 
-  .hero-right {
-    position: relative;
-    overflow: hidden;
-    background: var(--cream);
-  }
-  .hero-right-inner {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .hero-diagram {
-    position: relative;
-    width: 380px;
-    height: 380px;
-  }
+  /* Diagram */
   .diagram-circle {
     position: absolute;
     border-radius: 50%;
@@ -265,23 +240,20 @@
     animation-direction: reverse;
   }
   .diagram-circle.c2 {
-    inset: 40px;
+    inset: 32px;
     animation-duration: 22s;
     border-style: dashed;
     border-color: var(--taupe);
   }
   .diagram-circle.c3 {
-    inset: 90px;
-    background: var(--warm-white);
+    inset: 72px;
+    background: var(--cream);
     border-color: var(--sand);
     animation: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
   }
   .diagram-center {
     position: absolute;
-    inset: 90px;
+    inset: 72px;
     border-radius: 50%;
     display: flex;
     flex-direction: column;
@@ -292,7 +264,7 @@
   }
   .diagram-center-label {
     font-family: var(--serif);
-    font-size: 22px;
+    font-size: 18px;
     font-weight: 300;
     font-style: italic;
     color: var(--ink);
@@ -300,15 +272,15 @@
   }
   .diagram-center-sub {
     font-family: var(--mono);
-    font-size: 9px;
+    font-size: 8px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent);
   }
   .diagram-node {
     position: absolute;
-    width: 68px;
-    height: 68px;
+    width: 56px;
+    height: 56px;
     background: var(--warm-white);
     border: 1px solid var(--border);
     border-radius: 50%;
@@ -318,12 +290,12 @@
     justify-content: center;
     gap: 3px;
     transform: translate(-50%, -50%);
-    box-shadow: 0 4px 24px rgba(26,23,20,0.06);
+    box-shadow: 0 4px 20px rgba(26,23,20,0.07);
   }
-  .node-icon { font-size: 18px; }
+  .node-icon { font-size: 15px; }
   .node-label {
     font-family: var(--mono);
-    font-size: 7px;
+    font-size: 6px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--accent);
@@ -333,6 +305,43 @@
   .node-right  { top: 50%; left: 100%; }
   .node-bottom { top: 100%; left: 50%; }
   .node-left   { top: 50%; left: 0; }
+
+  /* Hero stats row */
+  .hero-stats {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 64px;
+    background: var(--border);
+  }
+  .hero-stat {
+    background: var(--warm-white);
+    padding: 28px 36px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .hero-stat-num {
+    font-family: var(--serif);
+    font-size: 36px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .hero-stat-num em { color: var(--accent-warm); font-style: normal; }
+  .hero-stat-label {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--ink-60);
+    line-height: 1.5;
+  }
 
   @keyframes slow-spin {
     from { transform: rotate(0deg); }
@@ -385,20 +394,6 @@
     display: flex;
     align-items: center;
     gap: 10px;
-  }
-  .section-label::before {
-    content: attr(data-num);
-    display: block;
-    width: 22px;
-    height: 22px;
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 9px;
-    color: var(--ink-60);
-    flex-shrink: 0;
   }
 
   /* ABOUT */
@@ -483,7 +478,7 @@
     font-size: clamp(36px, 4vw, 58px);
     font-weight: 300;
     line-height: 1.1;
-    max-width: 520px;
+    max-width: 800px;
   }
   .services-h2 em { font-style: italic; color: var(--accent-warm); }
   .services-note {
@@ -512,6 +507,7 @@
     transition: background 0.25s;
     position: relative;
     overflow: hidden;
+    align-items: flex-start;
   }
   .service-card::after {
     content: '';
@@ -557,20 +553,8 @@
     font-weight: 300;
     color: var(--ink-60);
     line-height: 1.75;
-    flex: 1;
   }
-  .service-price {
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--ink);
-    padding-top: 20px;
-    border-top: 1px solid var(--border);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .service-price-arrow { color: var(--accent-warm); }
+
 
   /* METHODOLOGY */
   .methodology {
@@ -854,77 +838,179 @@
     padding: 120px 0;
     background: var(--cream);
   }
-  .icp-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
+  /* ICP TABS */
+  .icp-tabs-wrapper {
     margin-top: 56px;
-  }
-  .icp-card {
-    background: var(--cream);
-    padding: 56px 56px;
-    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 8px;
     overflow: hidden;
   }
-  .icp-bg-num {
-    position: absolute;
-    right: 40px;
-    top: 24px;
-    font-family: var(--serif);
-    font-size: 120px;
-    font-weight: 300;
-    font-style: italic;
-    color: var(--sand);
-    line-height: 1;
-    pointer-events: none;
-    z-index: 0;
+  .icp-tab-nav {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    background: var(--cream);
+    border-bottom: 1px solid var(--border);
   }
-  .icp-content { position: relative; z-index: 1; }
-  .icp-type {
+  .icp-tab-nav::-webkit-scrollbar { display: none; }
+  .icp-tab-btn {
+    flex-shrink: 0;
+    padding: 18px 24px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    color: var(--ink-60);
+    background: none;
+    border: none;
+    border-right: 1px solid var(--border);
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, background 0.2s, border-bottom-color 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+    margin-bottom: -1px;
+  }
+  .icp-tab-btn:last-child { border-right: none; }
+  .icp-tab-btn .tab-icon { font-size: 15px; }
+  .icp-tab-btn:hover { color: var(--ink); background: var(--sand); }
+  .icp-tab-btn.active {
+    color: var(--ink);
+    font-weight: 500;
+    background: var(--warm-white);
+    border-bottom-color: var(--accent-warm);
+  }
+
+  .icp-panel-wrap {
+    background: var(--warm-white);
+  }
+  .icp-panel {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    min-height: 340px;
+  }
+  .icp-panel.active { display: grid; }
+
+  .icp-panel-left {
+    padding: 56px 52px;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .icp-panel-right {
+    padding: 56px 52px;
+    background: var(--cream);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .icp-panel-eyebrow {
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: var(--accent);
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  .icp-type-dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--accent-warm);
+  .icp-panel-eyebrow::before {
+    content: '';
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: var(--accent);
+    flex-shrink: 0;
   }
-  .icp-title {
+  .icp-panel-title {
     font-family: var(--serif);
-    font-size: 30px;
+    font-size: clamp(28px, 3vw, 42px);
     font-weight: 300;
-    line-height: 1.2;
+    line-height: 1.15;
+    margin-bottom: 24px;
+  }
+  .icp-panel-title em { font-style: italic; color: var(--accent-warm); }
+
+  .icp-panel-pain {
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--ink-60);
+    line-height: 1.75;
+    font-style: italic;
+    padding: 20px 20px 20px 20px;
+    border-left: 2px solid var(--accent-warm);
+    background: var(--sand);
+    border-radius: 0 4px 4px 0;
+  }
+  .icp-panel-pain::before {
+    content: '"';
+    font-family: var(--serif);
+    font-size: 32px;
+    color: var(--accent-warm);
+    line-height: 0;
+    vertical-align: -12px;
+    margin-right: 4px;
+    font-style: normal;
+  }
+
+  .icp-panel-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
     margin-bottom: 20px;
   }
-  .icp-pain {
-    font-size: 13px;
-    font-weight: 300;
-    color: var(--ink-60);
-    line-height: 1.75;
+  .icp-deliverables {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
     margin-bottom: 28px;
-    padding: 20px;
-    background: var(--sand);
-    border-radius: 4px;
-    border-left: 2px solid var(--accent-warm);
-    font-style: italic;
   }
-  .icp-why {
+  .icp-deliverables li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
     font-size: 13px;
     font-weight: 300;
-    color: var(--ink-60);
-    line-height: 1.75;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+  .icp-deliverables li::before {
+    content: '→';
+    color: var(--accent-warm);
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .icp-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .icp-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: var(--accent);
+    background: var(--warm-white);
+  }
+
+  @media (max-width: 900px) {
+    .icp-panel { grid-template-columns: 1fr; }
+    .icp-panel-left { border-right: none; border-bottom: 1px solid var(--border); padding: 36px 28px; }
+    .icp-panel-right { padding: 36px 28px; }
+    .icp-tab-btn { padding: 14px 16px; font-size: 11px; }
   }
 
   /* CTA SECTION */
@@ -1117,29 +1203,19 @@
   .footer-bottom-links a:hover { color: #ffffff55; }
 
   /* ANIMATIONS */
-  .fade-up {
-    opacity: 0;
-    transform: translateY(32px);
-    transition: opacity 0.75s ease, transform 0.75s ease;
-  }
-  .fade-up.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  .fade-up.delay-1 { transition-delay: 0.1s; }
-  .fade-up.delay-2 { transition-delay: 0.2s; }
-  .fade-up.delay-3 { transition-delay: 0.3s; }
-  .fade-up.delay-4 { transition-delay: 0.4s; }
+  .fade-up { opacity: 1; transform: none; }
+  .fade-up.visible { opacity: 1; transform: none; }
 
   /* MOBILE */
   @media (max-width: 900px) {
     nav { padding: 20px 24px; }
     .nav-links { display: none; }
-    .hero { grid-template-columns: 1fr; min-height: auto; }
-    .hero-left { padding: 100px 24px 60px; }
-    .hero-right { height: 360px; }
+    .hero { padding: 100px 0 60px; }
+    .hero-content { grid-template-columns: 1fr; gap: 48px; }
+    .hero-diagram-wrap { width: 220px; height: 220px; margin: 0 auto; }
+    .hero-stats { grid-template-columns: 1fr; }
     .section-inner { padding: 0 24px; }
-    .about-grid, .icp-grid { grid-template-columns: 1fr; }
+    .about-grid { grid-template-columns: 1fr; }
     .services-grid, .phases, .pricing-grid { grid-template-columns: 1fr; }
     .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
     .services-note { text-align: left; }
@@ -1151,8 +1227,6 @@
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursor-ring"></div>
 
 <!-- NAV -->
 <nav>
@@ -1164,31 +1238,29 @@
     <li><a href="#services">Services</a></li>
     <li><a href="#methodology">Methodology</a></li>
     <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#contact" class="nav-cta">Start Audit</a></li>
+    <li><a href="#" class="nav-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Start Audit</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-  <div class="hero-left">
-    <div class="hero-eyebrow">Webflow Native WebOps Partner</div>
-    <h1 class="hero-h1">
-      Your website<br>
-      should be a<br>
-      <em>growth engine,</em><br>
-      not a bottleneck.
-    </h1>
-    <p class="hero-sub">
-      We embed as your fractional WebOps team — uniting design, development, and marketing into a single agile pod that eliminates backlogs and turns your marketing site into a revenue machine.
-    </p>
-    <div class="hero-actions">
-      <a href="#pricing" class="btn-primary">Get a Free Audit</a>
-      <a href="#services" class="btn-ghost">See Our Services <span class="btn-ghost-arrow">→</span></a>
-    </div>
-  </div>
-  <div class="hero-right">
-    <div class="hero-right-inner">
-      <div class="hero-diagram">
+  <div class="section-inner" style="width:100%">
+    <div class="hero-content">
+      <div class="hero-left">
+        <h1 class="hero-h1">
+          Your website should be a <em>growth engine,</em> not a bottleneck.
+        </h1>
+        <p class="hero-sub">
+          We embed as your fractional WebOps team — uniting design, development, and marketing into a single agile pod that eliminates backlogs and turns your site into a revenue machine.
+        </p>
+        <div class="hero-actions">
+          <a href="#" class="btn-primary" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Get a Free Audit</a>
+          <a href="#services" class="btn-ghost">See Our Services <span class="btn-ghost-arrow">→</span></a>
+        </div>
+      </div>
+
+      <!-- Diagram -->
+      <div class="hero-diagram-wrap">
         <div class="diagram-circle c1"></div>
         <div class="diagram-circle c2"></div>
         <div class="diagram-circle c3"></div>
@@ -1214,6 +1286,22 @@
         </div>
       </div>
     </div>
+
+    <!-- Stats row -->
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat-num">9<em>wk</em></span>
+        <span class="hero-stat-label">Average time from kickoff to live site</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">67<em>pt</em></span>
+        <span class="hero-stat-label">Technical audit covering every revenue leak</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-num">3<em>×</em></span>
+        <span class="hero-stat-label">Average conversion lift within 90 days</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1222,7 +1310,7 @@
   <div class="ticker-track" id="ticker">
     <span class="ticker-item"><span class="ticker-dot"></span> Webflow Native</span>
     <span class="ticker-item"><span class="ticker-dot"></span> CRO & A/B Testing</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> Wized Logic Layer</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> AI Agent Web-Apps</span>
     <span class="ticker-item"><span class="ticker-dot"></span> HubSpot & GoHighLevel</span>
     <span class="ticker-item"><span class="ticker-dot"></span> Core Web Vitals</span>
     <span class="ticker-item"><span class="ticker-dot"></span> WCAG 2.1 Compliant</span>
@@ -1232,7 +1320,7 @@
     <span class="ticker-item"><span class="ticker-dot"></span> Looker Studio Dashboards</span>
     <span class="ticker-item"><span class="ticker-dot"></span> Webflow Native</span>
     <span class="ticker-item"><span class="ticker-dot"></span> CRO & A/B Testing</span>
-    <span class="ticker-item"><span class="ticker-dot"></span> Wized Logic Layer</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> AI Agent Web-Apps</span>
     <span class="ticker-item"><span class="ticker-dot"></span> HubSpot & GoHighLevel</span>
     <span class="ticker-item"><span class="ticker-dot"></span> Core Web Vitals</span>
     <span class="ticker-item"><span class="ticker-dot"></span> WCAG 2.1 Compliant</span>
@@ -1265,7 +1353,7 @@
             <span class="pillar-num">01</span>
             <div>
               <div class="pillar-title">Webflow Specialists</div>
-              <p class="pillar-desc">We don't juggle platforms. Deep Webflow expertise means maximum leverage — advanced custom JS, complex CMS architectures, and Wized web-app logic.</p>
+              <p class="pillar-desc">We don't juggle platforms. Deep Webflow expertise means maximum leverage — advanced custom JS, complex CMS architectures, and AI Agent web-app logic.</p>
             </div>
           </div>
           <div class="pillar">
@@ -1308,30 +1396,18 @@
         <div class="service-tag">Entry Point</div>
         <div class="service-title">Technical Growth Audit</div>
         <p class="service-desc">Our 67-point inspection uncovers every revenue leak across Core Web Vitals, UX heuristics, GTM tag health, WCAG compliance, and AEO readiness. Delivered as a branded PDF report.</p>
-        <div class="service-price">
-          <span>$500 – $1,500</span>
-          <span class="service-price-arrow">→</span>
-        </div>
       </div>
       <div class="service-card">
         <div class="service-icon-wrap">⚡</div>
         <div class="service-tag">Project Build</div>
         <div class="service-title">Foundation Build</div>
-        <p class="service-desc">Scalable Webflow infrastructure built with Client-First framework. Includes Figma UI/UX, GSAP/Swiper.js interactions, CMS setup, Wized web-app integration, and CRM pipeline connection.</p>
-        <div class="service-price">
-          <span>$4,000 – $15,000</span>
-          <span class="service-price-arrow">→</span>
-        </div>
+        <p class="service-desc">Scalable Webflow infrastructure built with Client-First framework. Includes Figma UI/UX, GSAP/Swiper.js interactions, CMS setup, AI Agent web-app integration, and CRM pipeline connection.</p>
       </div>
       <div class="service-card">
         <div class="service-icon-wrap">📈</div>
         <div class="service-tag">Ongoing Retainer</div>
         <div class="service-title">Ongoing WebOps</div>
         <p class="service-desc">Your embedded team for continuous growth. Monthly A/B testing, CRO experiments, AEO content structuring, new campaign landing pages, and deep-dive Looker Studio reporting.</p>
-        <div class="service-price">
-          <span>$800 – $4,000/mo</span>
-          <span class="service-price-arrow">→</span>
-        </div>
       </div>
     </div>
   </div>
@@ -1345,7 +1421,7 @@
       <div class="stack-divider"></div>
       <div class="stack-items">
         <span class="stack-pill">Webflow</span>
-        <span class="stack-pill">Wized</span>
+        <span class="stack-pill">AI Agents</span>
         <span class="stack-pill">Figma</span>
         <span class="stack-pill">Supabase</span>
         <span class="stack-pill">Xano</span>
@@ -1402,7 +1478,7 @@
         <p class="phase-desc">Client-First Webflow build with full CRM and analytics integration.</p>
         <ul class="phase-items">
           <li>Webflow Client-First build</li>
-          <li>Wized logic & web-apps</li>
+          <li>AI Agent logic & web-apps</li>
           <li>CRM pipeline connection</li>
           <li>GTM & tracking setup</li>
         </ul>
@@ -1428,38 +1504,252 @@
   <div class="section-inner">
     <div class="section-label fade-up" data-num="04">Who We Serve</div>
     <h2 class="services-h2 fade-up delay-1">
-      Built for teams who<br>need to move <em>fast.</em>
+      Whatever your industry,<br>your website should <em>work harder.</em>
     </h2>
-    <div class="icp-grid fade-up delay-2">
-      <div class="icp-card">
-        <span class="icp-bg-num">01</span>
-        <div class="icp-content">
-          <div class="icp-type">
-            <span class="icp-type-dot"></span>
-            Primary ICP
-          </div>
-          <h3 class="icp-title">B2B SaaS & Tech Startups (Seed → Series A)</h3>
-          <div class="icp-pain">
-            "We're shipping great product but our marketing site is dragging down ad quality scores. Dev team is too busy."
-          </div>
-          <p class="icp-why">As your embedded WebOps partner, we take over the marketing site entirely. We use Wized to build interactive mini-apps — ROI calculators, configurators — that generate pipeline without touching your core product engineers.</p>
-        </div>
+
+    <div class="icp-tabs-wrapper fade-up delay-2">
+
+      <!-- Tab Nav -->
+      <div class="icp-tab-nav">
+        <button class="icp-tab-btn active" data-tab="saas"><span class="tab-icon">⚙️</span> SaaS & Tech</button>
+        <button class="icp-tab-btn" data-tab="ecom"><span class="tab-icon">🛍️</span> E-commerce</button>
+        <button class="icp-tab-btn" data-tab="health"><span class="tab-icon">🏥</span> Healthcare</button>
+        <button class="icp-tab-btn" data-tab="realestate"><span class="tab-icon">🏢</span> Real Estate</button>
+        <button class="icp-tab-btn" data-tab="legal"><span class="tab-icon">⚖️</span> Professional Services</button>
+        <button class="icp-tab-btn" data-tab="hospitality"><span class="tab-icon">🍽️</span> Hospitality</button>
+        <button class="icp-tab-btn" data-tab="education"><span class="tab-icon">🎓</span> Education</button>
+        <button class="icp-tab-btn" data-tab="agency"><span class="tab-icon">✦</span> Agencies</button>
       </div>
-      <div class="icp-card">
-        <span class="icp-bg-num">02</span>
-        <div class="icp-content">
-          <div class="icp-type">
-            <span class="icp-type-dot"></span>
-            Secondary ICP
+
+      <!-- Panels -->
+      <div class="icp-panel-wrap">
+
+        <!-- SaaS -->
+        <div class="icp-panel active" id="panel-saas">
+          <div class="icp-panel-left">
+            <div>
+              <div class="icp-panel-eyebrow">B2B SaaS & Tech Startups</div>
+              <h3 class="icp-panel-title">Your product ships daily.<br>Your <em>marketing site</em> doesn't.</h3>
+            </div>
+            <div class="icp-panel-pain">We ship great product but our marketing site hasn't been touched in a year. Dev team won't go near it.</div>
           </div>
-          <h3 class="icp-title">SMBs, Clinics & Boutique Agencies</h3>
-          <div class="icp-pain">
-            "We have traffic but no conversions. Leads fill out forms and never hear back. The site looks dated."
+          <div class="icp-panel-right">
+            <div>
+              <div class="icp-panel-label">What we deliver</div>
+              <ul class="icp-deliverables">
+                <li>AI-powered ROI calculators & interactive demos that generate pipeline</li>
+                <li>Autonomous landing page deployment — no engineering tickets</li>
+                <li>Accurate GA4 + GTM tracking so ad spend stops bleeding</li>
+                <li>Monthly CRO experiments with Looker Studio reporting</li>
+              </ul>
+            </div>
+            <div class="icp-tags">
+              <span class="icp-tag">Landing pages</span>
+              <span class="icp-tag">AI web-apps</span>
+              <span class="icp-tag">CRO testing</span>
+              <span class="icp-tag">Tracking integrity</span>
+            </div>
           </div>
-          <p class="icp-why">We provide a premium light-mode aesthetic that elevates the brand, paired with instant CRM automations — missed-call text backs, lead routing, drip sequences — to guarantee ROI within the first 30 days.</p>
         </div>
-      </div>
-    </div>
+
+        <!-- E-commerce -->
+        <div class="icp-panel" id="panel-ecom">
+          <div class="icp-panel-left">
+            <div>
+              <div class="icp-panel-eyebrow">E-commerce & DTC Brands</div>
+              <h3 class="icp-panel-title">Traffic is there.<br>The <em>conversion funnel</em> isn't.</h3>
+            </div>
+            <div class="icp-panel-pain">Our store looks great but conversions are flat. We have traffic but the checkout flow leaks customers at every step.</div>
+          </div>
+          <div class="icp-panel-right">
+            <div>
+              <div class="icp-panel-label">What we deliver</div>
+              <ul class="icp-deliverables">
+                <li>Full funnel audit from ad click to purchase confirmation</li>
+                <li>AI-powered product finder that personalises recommendations</li>
+                <li>Upsell & cross-sell flows that lift average order value</li>
+                <li>Abandoned cart recovery automations via SMS & email</li>
+              </ul>
+            </div>
+            <div class="icp-tags">
+              <span class="icp-tag">Funnel rebuild</span>
+              <span class="icp-tag">AI product finder</span>
+              <span class="icp-tag">AOV optimisation</span>
+              <span class="icp-tag">Recovery flows</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Healthcare -->
+        <div class="icp-panel" id="panel-health">
+          <div class="icp-panel-left">
+            <div>
+              <div class="icp-panel-eyebrow">Medical & Dental Clinics</div>
+              <h3 class="icp-panel-title">Calls coming in.<br>Wrong <em>patients</em> showing up.</h3>
+            </div>
+            <div class="icp-panel-pain">We get enquiries but half are the wrong patients or no-shows. Our site doesn't pre-qualify or follow up automatically.</div>
+          </div>
+          <div class="icp-panel-right">
+            <div>
+              <div class="icp-panel-label">What we deliver</div>
+              <ul class="icp-deliverables">
+                <li>AI intake agent that pre-qualifies patients before booking</li>
+                <li>Automated appointment scheduling with reminder sequences</li>
+                <li>Missed-call SMS follow-up so no lead goes cold</li>
+                <li>Trust-building design with clear service & pricing pages</li>
+              </ul>
+            </div>
+            <div class="icp-tags">
+              <span class="icp-tag">Intake automation</span>
+              <span class="icp-tag">Booking flows</span>
+              <span class="icp-tag">AI triage</span>
+              <span class="icp-tag">SMS follow-up</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real Estate -->
+        <div class="icp-panel" id="panel-realestate">
+          <div class="icp-panel-left">
+            <div>
+              <div class="icp-panel-eyebrow">Real Estate & Property</div>
+              <h3 class="icp-panel-title">Great listings.<br>Website is a <em>dead end.</em></h3>
+            </div>
+            <div class="icp-panel-pain">Listings are excellent but the website doesn't convert browsers. People leave without knowing what to do next.</div>
+          </div>
+          <div class="icp-panel-right">
+            <div>
+              <div class="icp-panel-label">What we deliver</div>
+              <ul class="icp-deliverables">
+                <li>Dynamic property search with AI-powered match scoring</li>
+                <li>Instant WhatsApp & SMS alerts when matching listings go live</li>
+                <li>Valuation request funnels that capture warm seller leads</li>
+                <li>Agent CRM integration with automatic lead routing</li>
+              </ul>
+            </div>
+            <div class="icp-tags">
+              <span class="icp-tag">Property search</span>
+              <span class="icp-tag">AI matching</span>
+              <span class="icp-tag">Lead alerts</span>
+              <span class="icp-tag">CRM routing</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Legal -->
+        <div class="icp-panel" id="panel-legal">
+          <div class="icp-panel-left">
+            <div>
+              <div class="icp-panel-eyebrow">Law Firms & Consultancies</div>
+              <h3 class="icp-panel-title">Deep expertise.<br>Site looks like a <em>brochure.</em></h3>
+            </div>
+            <div class="icp-panel-pain">We have real expertise but our website feels outdated. Prospects can't tell if we're the right fit before they even call.</div>
+          </div>
+          <div class="icp-panel-right">
+            <div>
+              <div class="icp-panel-label">What we deliver</div>
+              <ul class="icp-deliverables">
+                <li>AI intake assistant that pre-qualifies consultations 24/7</li>
+                <li>Elegant case study architecture that builds authority</li>
+                <li>AEO content structuring so you appear in AI search answers</li>
+                <li>Retainer & service calculator tools that shorten the sales cycle</li>
+              </ul>
+            </div>
+            <div class="icp-tags">
+              <span class="icp-tag">AEO content</span>
+              <span class="icp-tag">AI intake</span>
+              <span class="icp-tag">Authority design</span>
+              <span class="icp-tag">Lead qualification</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hospitality -->
+        <div class="icp-panel" id="panel-hospitality">
+          <div class="icp-panel-left">
+            <div>
+              <div class="icp-panel-eyebrow">Restaurants, Hotels & Venues</div>
+              <h3 class="icp-panel-title">People find you.<br>Then book through <em>someone else.</em></h3>
+            </div>
+            <div class="icp-panel-pain">People find us on Google then book through third-party platforms that take 20–30% commission. We don't own our customers.</div>
+          </div>
+          <div class="icp-panel-right">
+            <div>
+              <div class="icp-panel-label">What we deliver</div>
+              <ul class="icp-deliverables">
+                <li>Commission-free direct booking engine on your own domain</li>
+                <li>AI concierge for reservations, menus & dietary queries</li>
+                <li>Post-visit loyalty sequences that drive repeat bookings</li>
+                <li>Event & private hire inquiry funnels with instant quotes</li>
+              </ul>
+            </div>
+            <div class="icp-tags">
+              <span class="icp-tag">Direct booking</span>
+              <span class="icp-tag">AI concierge</span>
+              <span class="icp-tag">Loyalty flows</span>
+              <span class="icp-tag">Commission-free</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="icp-panel" id="panel-education">
+          <div class="icp-panel-left">
+            <div>
+              <div class="icp-panel-eyebrow">Courses, Academies & Coaches</div>
+              <h3 class="icp-panel-title">People visit.<br>They don't <em>enrol.</em></h3>
+            </div>
+            <div class="icp-panel-pain">People land on our course page and leave. We can't tell where they drop off or why they don't convert.</div>
+          </div>
+          <div class="icp-panel-right">
+            <div>
+              <div class="icp-panel-label">What we deliver</div>
+              <ul class="icp-deliverables">
+                <li>AI course recommender that matches visitors to the right programme</li>
+                <li>Cohort countdown & urgency pages that trigger enrolment</li>
+                <li>Drop-off triggered drip sequences that re-engage cold leads</li>
+                <li>Student portal & community page integrated with your LMS</li>
+              </ul>
+            </div>
+            <div class="icp-tags">
+              <span class="icp-tag">Enrolment funnels</span>
+              <span class="icp-tag">AI recommender</span>
+              <span class="icp-tag">Drip sequences</span>
+              <span class="icp-tag">LMS integration</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Agency -->
+        <div class="icp-panel" id="panel-agency">
+          <div class="icp-panel-left">
+            <div>
+              <div class="icp-panel-eyebrow">Creative & Marketing Agencies</div>
+              <h3 class="icp-panel-title">Building for clients.<br>Your own site is <em>embarrassing.</em></h3>
+            </div>
+            <div class="icp-panel-pain">We're so busy delivering for clients that our own website is years behind. It doesn't reflect the quality of work we actually do.</div>
+          </div>
+          <div class="icp-panel-right">
+            <div>
+              <div class="icp-panel-label">What we deliver</div>
+              <ul class="icp-deliverables">
+                <li>Flagship agency site that becomes your best sales tool</li>
+                <li>White-label WebOps — offer AI web-apps to your own clients</li>
+                <li>Case study CMS that makes updating your portfolio effortless</li>
+                <li>New business proposal pages that close without a call</li>
+              </ul>
+            </div>
+            <div class="icp-tags">
+              <span class="icp-tag">White-label</span>
+              <span class="icp-tag">Portfolio CMS</span>
+              <span class="icp-tag">Agency retainers</span>
+              <span class="icp-tag">Proposal pages</span>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- end panel wrap -->
+    </div><!-- end tabs wrapper -->
   </div>
 </section>
 
@@ -1487,7 +1777,7 @@
             <li>CRO & UX heuristics review</li>
             <li>Branded PDF report & roadmap</li>
           </ul>
-          <a href="#contact" class="pricing-cta">Book an Audit</a>
+          <a href="#" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book an Audit</a>
         </div>
       </div>
       <div class="pricing-card featured">
@@ -1501,12 +1791,12 @@
             <li>UI/UX design in Figma</li>
             <li>Webflow Client-First build</li>
             <li>GSAP animations & interactions</li>
-            <li>Wized web-app integration</li>
+            <li>AI Agent web-app integration</li>
             <li>CRM pipeline connection</li>
             <li>Looker Studio dashboard setup</li>
             <li>Pre-launch QA & team handoff</li>
           </ul>
-          <a href="#contact" class="pricing-cta">Start Building</a>
+          <a href="#" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Start Building</a>
         </div>
       </div>
       <div class="pricing-card">
@@ -1524,7 +1814,7 @@
             <li>Speed & performance monitoring</li>
             <li>Deep-dive Looker Studio reports</li>
           </ul>
-          <a href="#contact" class="pricing-cta">Embed Our Team</a>
+          <a href="#" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Embed Our Team</a>
         </div>
       </div>
     </div>
@@ -1544,8 +1834,8 @@
     Start with a $500 Technical Audit. We'll identify your exact revenue leaks, show you the fix, and embed as your WebOps team.
   </p>
   <div class="cta-actions">
-    <a href="mailto:hello@interfacelab.pro" class="btn-light">Book Your Audit →</a>
-    <a href="mailto:hello@interfacelab.pro" class="btn-outline-light">Schedule a Call</a>
+    <a href="#" class="btn-light" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book Your Audit →</a>
+    <a href="#" class="btn-outline-light" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Schedule a Call</a>
   </div>
 </section>
 
@@ -1558,7 +1848,7 @@
         Interface Lab OÜ
       </a>
       <p class="footer-tagline">Webflow-native WebOps partner for ambitious SaaS teams and growing businesses. We build, operate, and grow your marketing site.</p>
-      <span class="footer-reg">Registered in Estonia · interfacelab.pro</span>
+
     </div>
     <div>
       <div class="footer-col-title">Services</div>
@@ -1583,7 +1873,7 @@
       <ul class="footer-links">
         <li><a href="#">LinkedIn</a></li>
         <li><a href="#">Twitter / X</a></li>
-        <li><a href="mailto:hello@interfacelab.pro">hello@interfacelab.pro</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#cfa7aaa3a3a08fa6a1bbaabda9aeacaaa3aeade1bfbda0"><span class="__cf_email__" data-cfemail="f9919c959596b990978d9c8b9f989a9c95989bd7898b96">[email&#160;protected]</span></a></li>
       </ul>
     </div>
   </div>
@@ -1597,35 +1887,13 @@
 </footer>
 
 <script>
-  // Custom cursor
-  const cursor = document.getElementById('cursor');
-  const ring   = document.getElementById('cursor-ring');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-  function animateCursor() {
-    cursor.style.left = mx + 'px';
-    cursor.style.top  = my + 'px';
-    rx += (mx - rx) * 0.12;
-    ry += (my - ry) * 0.12;
-    ring.style.left = rx + 'px';
-    ring.style.top  = ry + 'px';
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
-  document.querySelectorAll('a, button').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.width  = '4px';
-      cursor.style.height = '4px';
-      ring.style.width    = '48px';
-      ring.style.height   = '48px';
-      ring.style.borderColor = 'var(--accent-warm)';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.width  = '8px';
-      cursor.style.height = '8px';
-      ring.style.width    = '36px';
-      ring.style.height   = '36px';
-      ring.style.borderColor = 'var(--accent)';
+  // Tab switching
+  document.querySelectorAll('.icp-tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.icp-tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.icp-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('panel-' + btn.dataset.tab).classList.add('active');
     });
   });
 
@@ -1639,15 +1907,11 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-  // Hero entrance
-  document.querySelector('.hero-left').style.opacity = '0';
-  document.querySelector('.hero-left').style.transform = 'translateY(24px)';
-  document.querySelector('.hero-left').style.transition = 'opacity 1s ease 0.3s, transform 1s ease 0.3s';
-  setTimeout(() => {
-    document.querySelector('.hero-left').style.opacity = '1';
-    document.querySelector('.hero-left').style.transform = 'translateY(0)';
-  }, 100);
+<!-- Cal element-click embed -->
+<script type="text/javascript">
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+  Cal("init", "30min", {origin:"https://app.cal.com"});
+  Cal.ns["30min"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
 </script>
 </body>
 </html>
