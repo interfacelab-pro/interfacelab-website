@@ -1,476 +1,1653 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>InterfaceLab.pro | Conversion-First Architecture for B2B SaaS</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Manrope', 'sans-serif'],
-                        mono: ['Space Grotesk', 'monospace'],
-                    },
-                    colors: {
-                        obsidian: '#050507',
-                        charcoal: '#0F1115',
-                        glass: 'rgba(255, 255, 255, 0.03)',
-                        glassBorder: 'rgba(255, 255, 255, 0.08)',
-                        brand: {
-                            500: '#6366f1', // Indigo
-                            400: '#818cf8',
-                            accent: '#00dc82', // Success Green/Data
-                            aeo: '#f43f5e' // Rose for AEO/AI
-                        }
-                    },
-                    backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                        'grid-pattern': "url(\"data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E\")",
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { background-color: #050507; color: #e2e8f0; }
-        .nav-active { border-bottom: 2px solid #6366f1; color: white; }
-        .glass-panel {
-            background: rgba(15, 17, 21, 0.6);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .text-glow { text-shadow: 0 0 20px rgba(99, 102, 241, 0.3); }
-        .hide-scrollbar::-webkit-scrollbar { display: none; }
-        .section-fade { animation: fadeIn 0.5s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interface Lab OÜ — Webflow Native WebOps Partner</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F4EF;
+    --warm-white: #FDFCFA;
+    --taupe: #C8BFB0;
+    --sand: #E8E0D4;
+    --ink: #1A1714;
+    --ink-60: #1A171499;
+    --ink-30: #1A17144D;
+    --accent: #7B6D5A;
+    --accent-warm: #A8936A;
+    --moss: #5C6B52;
+    --border: #E0D8CE;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'DM Sans', sans-serif;
+    --mono: 'DM Mono', monospace;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--warm-white);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.6;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--ink);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s, background 0.3s;
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.12s ease-out, width 0.3s, height 0.3s, border-color 0.3s;
+  }
+  a:hover ~ .cursor, button:hover ~ .cursor { width: 4px; height: 4px; }
+
+  /* Grain overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    mix-blend-mode: multiply;
+  }
+  .nav-logo {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-logo-mark {
+    width: 28px;
+    height: 28px;
+    border: 1px solid var(--ink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-family: var(--mono);
+    font-weight: 400;
+  }
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    align-items: center;
+  }
+  .nav-links a {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent-warm); }
+  .nav-cta {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink) !important;
+    border: 1px solid var(--ink);
+    padding: 10px 22px;
+    border-radius: 2px;
+    transition: background 0.25s, color 0.25s !important;
+  }
+  .nav-cta:hover {
+    background: var(--ink) !important;
+    color: var(--warm-white) !important;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 100px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-left {
+    padding: 80px 48px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+  .hero-h1 {
+    font-family: var(--serif);
+    font-size: clamp(52px, 6vw, 88px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+  .hero-h1 em {
+    font-style: italic;
+    color: var(--accent-warm);
+  }
+  .hero-sub {
+    font-size: 16px;
+    font-weight: 300;
+    color: var(--ink-60);
+    line-height: 1.75;
+    max-width: 420px;
+    margin-bottom: 48px;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  .btn-primary {
+    background: var(--ink);
+    color: var(--warm-white);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 16px 36px;
+    border-radius: 2px;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    transition: background 0.25s, color 0.25s;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    background: transparent;
+    color: var(--ink);
+  }
+  .btn-ghost {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    color: var(--accent);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.2s, color 0.2s;
+  }
+  .btn-ghost:hover { gap: 14px; color: var(--ink); }
+  .btn-ghost-arrow { font-size: 16px; }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: var(--cream);
+  }
+  .hero-right-inner {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .hero-diagram {
+    position: relative;
+    width: 380px;
+    height: 380px;
+  }
+  .diagram-circle {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    animation: slow-spin 30s linear infinite;
+  }
+  .diagram-circle.c1 {
+    inset: 0;
+    animation-direction: reverse;
+  }
+  .diagram-circle.c2 {
+    inset: 40px;
+    animation-duration: 22s;
+    border-style: dashed;
+    border-color: var(--taupe);
+  }
+  .diagram-circle.c3 {
+    inset: 90px;
+    background: var(--warm-white);
+    border-color: var(--sand);
+    animation: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .diagram-center {
+    position: absolute;
+    inset: 90px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 4px;
+  }
+  .diagram-center-label {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .diagram-center-sub {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .diagram-node {
+    position: absolute;
+    width: 68px;
+    height: 68px;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 4px 24px rgba(26,23,20,0.06);
+  }
+  .node-icon { font-size: 18px; }
+  .node-label {
+    font-family: var(--mono);
+    font-size: 7px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-align: center;
+  }
+  .node-top    { top: 0; left: 50%; }
+  .node-right  { top: 50%; left: 100%; }
+  .node-bottom { top: 100%; left: 50%; }
+  .node-left   { top: 50%; left: 0; }
+
+  @keyframes slow-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
+
+  /* TICKER */
+  .ticker {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 14px 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .ticker-track {
+    display: flex;
+    gap: 0;
+    animation: ticker-scroll 28s linear infinite;
+    white-space: nowrap;
+    width: max-content;
+  }
+  .ticker-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    padding: 0 40px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+  }
+  .ticker-dot { width: 4px; height: 4px; background: var(--accent-warm); border-radius: 50%; flex-shrink: 0; }
+  @keyframes ticker-scroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* SECTION SHARED */
+  section { position: relative; }
+  .section-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+  .section-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 300;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::before {
+    content: attr(data-num);
+    display: block;
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 9px;
+    color: var(--ink-60);
+    flex-shrink: 0;
+  }
+
+  /* ABOUT */
+  .about {
+    padding: 120px 0;
+    background: var(--cream);
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: start;
+  }
+  .about-h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .about-h2 em { font-style: italic; color: var(--accent-warm); }
+  .about-right { padding-top: 16px; }
+  .about-text {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink-60);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+  .pillars {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 40px;
+    border-top: 1px solid var(--border);
+  }
+  .pillar {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 20px;
+    align-items: start;
+    cursor: default;
+    transition: background 0.2s;
+  }
+  .pillar:hover { padding-left: 12px; padding-right: 12px; margin: 0 -12px; border-radius: 4px; background: var(--sand); }
+  .pillar-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 300;
+    color: var(--ink-30);
+    padding-top: 4px;
+  }
+  .pillar-title {
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+  .pillar-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-60);
+    line-height: 1.65;
+  }
+
+  /* SERVICES */
+  .services {
+    padding: 120px 0;
+    background: var(--warm-white);
+  }
+  .services-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 64px;
+  }
+  .services-h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1.1;
+    max-width: 520px;
+  }
+  .services-h2 em { font-style: italic; color: var(--accent-warm); }
+  .services-note {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-60);
+    max-width: 260px;
+    text-align: right;
+    line-height: 1.6;
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .service-card {
+    background: var(--warm-white);
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 40px;
+    right: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-warm), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .service-card:hover { background: var(--cream); }
+  .service-card:hover::after { transform: scaleX(1); }
+  .service-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    background: var(--cream);
+  }
+  .service-tag {
+    font-family: var(--mono);
+    font-size: 9px;
+    font-weight: 300;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .service-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+  .service-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-60);
+    line-height: 1.75;
+    flex: 1;
+  }
+  .service-price {
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink);
+    padding-top: 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .service-price-arrow { color: var(--accent-warm); }
+
+  /* METHODOLOGY */
+  .methodology {
+    padding: 120px 0;
+    background: var(--ink);
+    color: var(--cream);
+  }
+  .methodology .section-label { color: var(--accent-warm); }
+  .methodology .section-label::before { border-color: #ffffff22; color: var(--taupe); }
+  .method-h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 72px;
+    max-width: 600px;
+  }
+  .method-h2 em { font-style: italic; color: var(--accent-warm); }
+  .phases {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border-left: 1px solid #ffffff18;
+  }
+  .phase {
+    padding: 40px 40px 40px 40px;
+    border-right: 1px solid #ffffff18;
+    position: relative;
+  }
+  .phase-num {
+    font-family: var(--mono);
+    font-size: 72px;
+    font-weight: 300;
+    color: #ffffff08;
+    line-height: 1;
+    margin-bottom: 20px;
+    display: block;
+  }
+  .phase-weeks {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    margin-bottom: 16px;
+    display: block;
+  }
+  .phase-title {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .phase-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: #ffffff55;
+    line-height: 1.75;
+  }
+  .phase-items {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    list-style: none;
+  }
+  .phase-items li {
+    font-size: 12px;
+    font-weight: 300;
+    color: #ffffff44;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+  .phase-items li::before {
+    content: '—';
+    color: var(--accent-warm);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* STACK */
+  .stack {
+    padding: 80px 0;
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .stack-inner {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+  }
+  .stack-label-text {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .stack-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--border);
+    flex-shrink: 0;
+  }
+  .stack-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    flex: 1;
+  }
+  .stack-pill {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 8px 20px;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--ink);
+    letter-spacing: 0.02em;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .stack-pill:hover {
+    border-color: var(--accent);
+    background: var(--sand);
+  }
+
+  /* PRICING */
+  .pricing {
+    padding: 120px 0;
+    background: var(--warm-white);
+  }
+  .pricing-header {
+    text-align: center;
+    margin-bottom: 72px;
+  }
+  .pricing-h2 {
+    font-family: var(--serif);
+    font-size: clamp(36px, 4vw, 58px);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .pricing-h2 em { font-style: italic; color: var(--accent-warm); }
+  .pricing-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: var(--ink-60);
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+  .pricing-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--warm-white);
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .pricing-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(26,23,20,0.08);
+  }
+  .pricing-card.featured {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+  .pricing-card-head {
+    padding: 36px 36px 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .pricing-card.featured .pricing-card-head {
+    border-bottom-color: #ffffff18;
+  }
+  .pricing-tier {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .pricing-card.featured .pricing-tier { color: var(--accent-warm); }
+  .pricing-name {
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 300;
+    margin-bottom: 12px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .pricing-card.featured .pricing-name { color: var(--cream); }
+  .pricing-price {
+    font-family: var(--serif);
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1;
+  }
+  .pricing-card.featured .pricing-price { color: var(--cream); }
+  .pricing-price sup {
+    font-size: 18px;
+    vertical-align: super;
+    font-family: var(--sans);
+    font-weight: 300;
+  }
+  .pricing-cadence {
+    font-size: 12px;
+    font-weight: 300;
+    color: var(--ink-60);
+    margin-left: 4px;
+    font-family: var(--sans);
+  }
+  .pricing-card.featured .pricing-cadence { color: #ffffff44; }
+  .pricing-card-body {
+    padding: 32px 36px 36px;
+  }
+  .pricing-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .pricing-features li {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-60);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+  .pricing-card.featured .pricing-features li { color: #ffffff77; }
+  .pricing-features li::before {
+    content: '✓';
+    color: var(--moss);
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .pricing-card.featured .pricing-features li::before { color: var(--accent-warm); }
+  .pricing-cta {
+    display: block;
+    text-align: center;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s;
+  }
+  .pricing-cta:hover { background: var(--ink); color: var(--cream); border-color: var(--ink); }
+  .pricing-card.featured .pricing-cta {
+    background: var(--accent-warm);
+    border-color: var(--accent-warm);
+    color: var(--warm-white);
+  }
+  .pricing-card.featured .pricing-cta:hover {
+    background: var(--cream);
+    color: var(--ink);
+    border-color: var(--cream);
+  }
+
+  /* ICP */
+  .icp {
+    padding: 120px 0;
+    background: var(--cream);
+  }
+  .icp-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 56px;
+  }
+  .icp-card {
+    background: var(--cream);
+    padding: 56px 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .icp-bg-num {
+    position: absolute;
+    right: 40px;
+    top: 24px;
+    font-family: var(--serif);
+    font-size: 120px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--sand);
+    line-height: 1;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .icp-content { position: relative; z-index: 1; }
+  .icp-type {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .icp-type-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent-warm);
+  }
+  .icp-title {
+    font-family: var(--serif);
+    font-size: 30px;
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 20px;
+  }
+  .icp-pain {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-60);
+    line-height: 1.75;
+    margin-bottom: 28px;
+    padding: 20px;
+    background: var(--sand);
+    border-radius: 4px;
+    border-left: 2px solid var(--accent-warm);
+    font-style: italic;
+  }
+  .icp-why {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-60);
+    line-height: 1.75;
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    padding: 140px 48px;
+    background: var(--ink);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-bg-ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid #ffffff06;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .cta-bg-ring.r1 { width: 600px; height: 600px; top: 50%; left: 50%; }
+  .cta-bg-ring.r2 { width: 900px; height: 900px; top: 50%; left: 50%; }
+  .cta-bg-ring.r3 { width: 1200px; height: 1200px; top: 50%; left: 50%; }
+  .cta-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    margin-bottom: 24px;
+    display: block;
+  }
+  .cta-h2 {
+    font-family: var(--serif);
+    font-size: clamp(42px, 5.5vw, 78px);
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.05;
+    margin-bottom: 28px;
+  }
+  .cta-h2 em { font-style: italic; color: var(--accent-warm); }
+  .cta-sub {
+    font-size: 15px;
+    font-weight: 300;
+    color: #ffffff55;
+    line-height: 1.75;
+    max-width: 480px;
+    margin: 0 auto 48px;
+  }
+  .cta-actions {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .btn-light {
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    padding: 16px 40px;
+    border-radius: 2px;
+    text-decoration: none;
+    border: 1px solid var(--cream);
+    transition: background 0.25s, color 0.25s;
+    display: inline-block;
+  }
+  .btn-light:hover { background: transparent; color: var(--cream); }
+  .btn-outline-light {
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: #ffffff55;
+    text-decoration: none;
+    border: 1px solid #ffffff22;
+    padding: 16px 36px;
+    border-radius: 2px;
+    transition: color 0.2s, border-color 0.2s;
+    display: inline-block;
+  }
+  .btn-outline-light:hover { color: var(--cream); border-color: #ffffff55; }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid #ffffff10;
+    padding: 60px 48px 40px;
+  }
+  .footer-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .footer-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .footer-logo {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 300;
+    color: var(--cream);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .footer-logo-mark {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #ffffff33;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-family: var(--mono);
+    font-weight: 400;
+    color: var(--cream);
+  }
+  .footer-tagline {
+    font-size: 13px;
+    font-weight: 300;
+    color: #ffffff44;
+    line-height: 1.65;
+    max-width: 280px;
+  }
+  .footer-reg {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: #ffffff25;
+    margin-top: 8px;
+  }
+  .footer-col-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #ffffff33;
+    margin-bottom: 20px;
+  }
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .footer-links a {
+    font-size: 13px;
+    font-weight: 300;
+    color: #ffffff55;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--cream); }
+  .footer-bottom {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding-top: 28px;
+    border-top: 1px solid #ffffff10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-copy {
+    font-size: 12px;
+    font-weight: 300;
+    color: #ffffff25;
+    font-family: var(--mono);
+  }
+  .footer-bottom-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .footer-bottom-links a {
+    font-size: 12px;
+    font-weight: 300;
+    color: #ffffff25;
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .footer-bottom-links a:hover { color: #ffffff55; }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.75s ease, transform 0.75s ease;
+  }
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .fade-up.delay-1 { transition-delay: 0.1s; }
+  .fade-up.delay-2 { transition-delay: 0.2s; }
+  .fade-up.delay-3 { transition-delay: 0.3s; }
+  .fade-up.delay-4 { transition-delay: 0.4s; }
+
+  /* MOBILE */
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 100px 24px 60px; }
+    .hero-right { height: 360px; }
+    .section-inner { padding: 0 24px; }
+    .about-grid, .icp-grid { grid-template-columns: 1fr; }
+    .services-grid, .phases, .pricing-grid { grid-template-columns: 1fr; }
+    .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .services-note { text-align: left; }
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+    .stack-inner { flex-wrap: wrap; }
+    .footer-bottom { flex-direction: column; gap: 16px; }
+  }
+</style>
 </head>
-<body class="antialiased min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-white overflow-x-hidden">
+<body>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 border-b border-glassBorder bg-obsidian/90 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3 cursor-pointer" onclick="navigateTo('home')">
-                <div class="w-8 h-8 bg-brand-500 rounded flex items-center justify-center">
-                    <i class="fa-solid fa-layer-group text-white text-sm"></i>
-                </div>
-                <span class="font-mono font-bold text-xl tracking-tight text-white">InterfaceLab<span class="text-brand-500">.pro</span></span>
-            </div>
-            
-            <div class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-400">
-                <button onclick="navigateTo('home')" id="nav-home" class="hover:text-white transition-colors py-7 nav-active">Vision</button>
-                <button onclick="navigateTo('framework')" id="nav-framework" class="hover:text-white transition-colors py-7">The Framework</button>
-                <button onclick="navigateTo('audit')" id="nav-audit" class="hover:text-white transition-colors py-7">The Audit</button>
-            </div>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursor-ring"></div>
 
-            <button onclick="navigateTo('contact')" class="hidden md:flex items-center gap-2 bg-white text-obsidian px-5 py-2.5 rounded font-bold text-sm hover:bg-slate-200 transition-all">
-                <span>Partner With Us</span>
-                <i class="fa-solid fa-arrow-right -rotate-45 text-xs"></i>
-            </button>
-            
-            <!-- Mobile Menu Button -->
-            <button class="md:hidden text-white"><i class="fa-solid fa-bars text-xl"></i></button>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <span class="nav-logo-mark">IL</span>
+    Interface Lab OÜ
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#methodology">Methodology</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#contact" class="nav-cta">Start Audit</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Webflow Native WebOps Partner</div>
+    <h1 class="hero-h1">
+      Your website<br>
+      should be a<br>
+      <em>growth engine,</em><br>
+      not a bottleneck.
+    </h1>
+    <p class="hero-sub">
+      We embed as your fractional WebOps team — uniting design, development, and marketing into a single agile pod that eliminates backlogs and turns your marketing site into a revenue machine.
+    </p>
+    <div class="hero-actions">
+      <a href="#pricing" class="btn-primary">Get a Free Audit</a>
+      <a href="#services" class="btn-ghost">See Our Services <span class="btn-ghost-arrow">→</span></a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-inner">
+      <div class="hero-diagram">
+        <div class="diagram-circle c1"></div>
+        <div class="diagram-circle c2"></div>
+        <div class="diagram-circle c3"></div>
+        <div class="diagram-center">
+          <span class="diagram-center-label">Growth<br>Engine</span>
+          <span class="diagram-center-sub">WebOps Loop</span>
         </div>
-    </nav>
-
-    <!-- MAIN CONTENT AREA -->
-    <main id="app-content" class="pt-20 flex-grow relative">
-        <!-- Content injected via JS -->
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-glassBorder bg-charcoal mt-auto">
-        <div class="max-w-7xl mx-auto px-6 py-12 md:py-20 grid grid-cols-1 md:grid-cols-4 gap-12">
-            <div class="col-span-1 md:col-span-2">
-                <span class="font-mono font-bold text-xl tracking-tight text-white block mb-6">InterfaceLab<span class="text-brand-500">.pro</span></span>
-                <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
-                    We architect data-gathering revenue engines for B2B SaaS and Enterprise leaders. We don't just build websites; we build infrastructure.
-                </p>
-            </div>
-            <div>
-                <h4 class="text-white font-bold mb-6">Services</h4>
-                <ul class="space-y-4 text-sm text-slate-400">
-                    <li class="hover:text-brand-400 cursor-pointer">Webflow Architecture</li>
-                    <li class="hover:text-brand-400 cursor-pointer">Revenue Ops & CRM</li>
-                    <li class="hover:text-brand-400 cursor-pointer">AEO & Technical SEO</li>
-                    <li class="hover:text-brand-400 cursor-pointer" onclick="navigateTo('audit')">Infrastructure Audit</li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-white font-bold mb-6">Connect</h4>
-                <div class="flex gap-4">
-                    <a href="#" class="w-10 h-10 rounded bg-glass border border-glassBorder flex items-center justify-center hover:bg-brand-500 hover:border-brand-500 transition-all text-white"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="#" class="w-10 h-10 rounded bg-glass border border-glassBorder flex items-center justify-center hover:bg-brand-500 hover:border-brand-500 transition-all text-white"><i class="fa-brands fa-twitter"></i></a>
-                </div>
-                <p class="text-xs text-slate-500 mt-8">© 2026 InterfaceLab. All rights reserved.</p>
-            </div>
+        <div class="diagram-node node-top">
+          <span class="node-icon">⚡</span>
+          <span class="node-label">Build</span>
         </div>
-    </footer>
+        <div class="diagram-node node-right">
+          <span class="node-icon">📈</span>
+          <span class="node-label">Grow</span>
+        </div>
+        <div class="diagram-node node-bottom">
+          <span class="node-icon">🔁</span>
+          <span class="node-label">Operate</span>
+        </div>
+        <div class="diagram-node node-left">
+          <span class="node-icon">🔍</span>
+          <span class="node-label">Diagnose</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <!-- JAVASCRIPT LOGIC -->
-    <script>
-        // PAGES DATA
-        const pages = {
-            home: `
-                <!-- HERO SECTION -->
-                <section class="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-                    <div class="absolute inset-0 bg-grid-pattern opacity-20"></div>
-                    <div class="absolute top-0 left-1/4 w-96 h-96 bg-brand-500 rounded-full mix-blend-screen filter blur-[128px] opacity-20 animate-pulse"></div>
-                    <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-accent rounded-full mix-blend-screen filter blur-[128px] opacity-10"></div>
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track" id="ticker">
+    <span class="ticker-item"><span class="ticker-dot"></span> Webflow Native</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> CRO & A/B Testing</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Wized Logic Layer</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> HubSpot & GoHighLevel</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Core Web Vitals</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> WCAG 2.1 Compliant</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Supabase & Xano</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Answer Engine Optimization</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> No Developer Backlogs</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Looker Studio Dashboards</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Webflow Native</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> CRO & A/B Testing</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Wized Logic Layer</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> HubSpot & GoHighLevel</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Core Web Vitals</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> WCAG 2.1 Compliant</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Supabase & Xano</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Answer Engine Optimization</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> No Developer Backlogs</span>
+    <span class="ticker-item"><span class="ticker-dot"></span> Looker Studio Dashboards</span>
+  </div>
+</div>
 
-                    <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
-                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-500/30 bg-brand-500/10 text-brand-400 text-xs font-mono mb-8 uppercase tracking-wider">
-                            <span class="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
-                            Accepting Q2 2026 Partners
-                        </div>
-                        <h1 class="text-5xl md:text-7xl font-bold text-white tracking-tight leading-[1.1] mb-8 font-mono">
-                            Turn Your Website Into A <br/>
-                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 via-white to-brand-accent text-glow">Data-Gathering Engine.</span>
-                        </h1>
-                        <p class="text-lg md:text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-10">
-                            For CMOs tired of "pretty" websites that don't perform. We use the 
-                            <strong class="text-white">Conversion-First Framework™</strong> to build high-performance Webflow architectures that integrate deeply with HubSpot, GA4, and the AI-future.
-                        </p>
-                        <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-                            <button onclick="navigateTo('audit')" class="w-full md:w-auto px-8 py-4 bg-white text-obsidian font-bold rounded hover:bg-slate-200 transition-all flex items-center justify-center gap-2">
-                                Book Revenue Audit
-                                <i class="fa-solid fa-arrow-right"></i>
-                            </button>
-                            <button onclick="navigateTo('framework')" class="w-full md:w-auto px-8 py-4 border border-glassBorder bg-glass text-white font-medium rounded hover:bg-glassBorder transition-all backdrop-blur-sm">
-                                Explore The Framework
-                            </button>
-                        </div>
-                    </div>
-                </section>
+<!-- ABOUT -->
+<section class="about" id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div>
+        <div class="section-label fade-up" data-num="01">Who We Are</div>
+        <h2 class="about-h2 fade-up delay-1">
+          Not a vendor.<br>An <em>embedded</em><br>WebOps partner.
+        </h2>
+      </div>
+      <div class="about-right fade-up delay-2">
+        <p class="about-text">
+          Interface Lab OÜ was built for one reason: the traditional project-based agency model is broken. Businesses are tired of hiring separate designers, developers, and marketers — only to be left with disjointed websites and massive developer backlogs.
+        </p>
+        <p class="about-text">
+          We operate as a Webflow-native embedded team. Your growth partner, not just another vendor. We build, operate, and grow your marketing site on a continuous loop — delivering the technical scale of an enterprise shop without the enterprise bloat.
+        </p>
+        <div class="pillars">
+          <div class="pillar">
+            <span class="pillar-num">01</span>
+            <div>
+              <div class="pillar-title">Webflow Specialists</div>
+              <p class="pillar-desc">We don't juggle platforms. Deep Webflow expertise means maximum leverage — advanced custom JS, complex CMS architectures, and Wized web-app logic.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar-num">02</span>
+            <div>
+              <div class="pillar-title">Scientific Aesthetics</div>
+              <p class="pillar-desc">Visuals engineered with heuristics, accessibility standards (WCAG 2.1), and psychological triggers. Beautiful and effective.</p>
+            </div>
+          </div>
+          <div class="pillar">
+            <span class="pillar-num">03</span>
+            <div>
+              <div class="pillar-title">No Developer Backlogs</div>
+              <p class="pillar-desc">We hook Webflow into flexible databases and CRMs so marketing teams can deploy campaigns instantly — no engineering tickets required.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <!-- LOGOS -->
-                <section class="border-y border-glassBorder bg-charcoal/50 py-10">
-                    <div class="max-w-7xl mx-auto px-6">
-                        <p class="text-center text-xs font-mono text-slate-500 uppercase tracking-widest mb-8">Trusted by data-driven marketing teams at</p>
-                        <div class="flex flex-wrap justify-center gap-12 md:gap-20 opacity-50 grayscale hover:grayscale-0 transition-all duration-500">
-                            <!-- Mock Logos -->
-                            <div class="text-xl font-bold font-mono text-white flex items-center gap-2"><i class="fa-brands fa-hubspot"></i> HubSpark</div>
-                            <div class="text-xl font-bold font-mono text-white flex items-center gap-2"><i class="fa-brands fa-stripe"></i> StripeFlow</div>
-                            <div class="text-xl font-bold font-mono text-white flex items-center gap-2"><i class="fa-brands fa-aws"></i> CloudScale</div>
-                            <div class="text-xl font-bold font-mono text-white flex items-center gap-2"><i class="fa-brands fa-intercom"></i> Connect.io</div>
-                        </div>
-                    </div>
-                </section>
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="section-inner">
+    <div class="services-header">
+      <div>
+        <div class="section-label fade-up" data-num="02">Services</div>
+        <h2 class="services-h2 fade-up delay-1">
+          Three ways to<br>engage with us, one<br><em>unified outcome.</em>
+        </h2>
+      </div>
+      <p class="services-note fade-up delay-2">
+        Every engagement starts with diagnosis. We don't guess — we find the exact revenue leaks before writing a line of code.
+      </p>
+    </div>
+    <div class="services-grid fade-up delay-2">
+      <div class="service-card">
+        <div class="service-icon-wrap">🔍</div>
+        <div class="service-tag">Entry Point</div>
+        <div class="service-title">Technical Growth Audit</div>
+        <p class="service-desc">Our 67-point inspection uncovers every revenue leak across Core Web Vitals, UX heuristics, GTM tag health, WCAG compliance, and AEO readiness. Delivered as a branded PDF report.</p>
+        <div class="service-price">
+          <span>$500 – $1,500</span>
+          <span class="service-price-arrow">→</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">⚡</div>
+        <div class="service-tag">Project Build</div>
+        <div class="service-title">Foundation Build</div>
+        <p class="service-desc">Scalable Webflow infrastructure built with Client-First framework. Includes Figma UI/UX, GSAP/Swiper.js interactions, CMS setup, Wized web-app integration, and CRM pipeline connection.</p>
+        <div class="service-price">
+          <span>$4,000 – $15,000</span>
+          <span class="service-price-arrow">→</span>
+        </div>
+      </div>
+      <div class="service-card">
+        <div class="service-icon-wrap">📈</div>
+        <div class="service-tag">Ongoing Retainer</div>
+        <div class="service-title">Ongoing WebOps</div>
+        <p class="service-desc">Your embedded team for continuous growth. Monthly A/B testing, CRO experiments, AEO content structuring, new campaign landing pages, and deep-dive Looker Studio reporting.</p>
+        <div class="service-price">
+          <span>$800 – $4,000/mo</span>
+          <span class="service-price-arrow">→</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <!-- THE PROBLEM (BENTO GRID) -->
-                <section class="py-24 relative">
-                    <div class="max-w-7xl mx-auto px-6">
-                        <div class="mb-16 md:text-center max-w-3xl mx-auto">
-                            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 font-mono">Is your website holding your marketing team hostage?</h2>
-                            <p class="text-slate-400 text-lg">You’ve invested in ads, content, and a killer sales team. But your website is the bottleneck in your revenue operations.</p>
-                        </div>
+<!-- STACK -->
+<section class="stack">
+  <div class="section-inner">
+    <div class="stack-inner">
+      <span class="stack-label-text">Our Tech Stack</span>
+      <div class="stack-divider"></div>
+      <div class="stack-items">
+        <span class="stack-pill">Webflow</span>
+        <span class="stack-pill">Wized</span>
+        <span class="stack-pill">Figma</span>
+        <span class="stack-pill">Supabase</span>
+        <span class="stack-pill">Xano</span>
+        <span class="stack-pill">HubSpot</span>
+        <span class="stack-pill">GoHighLevel</span>
+        <span class="stack-pill">Make / n8n</span>
+        <span class="stack-pill">GSAP</span>
+        <span class="stack-pill">Looker Studio</span>
+        <span class="stack-pill">GTM</span>
+        <span class="stack-pill">GA4</span>
+        <span class="stack-pill">Microsoft Clarity</span>
+        <span class="stack-pill">Replit</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            <!-- Card 1 -->
-                            <div class="glass-panel p-8 rounded-2xl border-l-4 border-brand-aeo relative overflow-hidden group hover:bg-white/5 transition-all">
-                                <div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-server text-4xl text-brand-aeo"></i></div>
-                                <h3 class="text-xl font-bold text-white mb-4">The Engineering Gap</h3>
-                                <p class="text-slate-400 leading-relaxed">Marketing waits 3 weeks for devs to update a simple landing page. You lose momentum, and campaign ROI suffers.</p>
-                            </div>
-                            
-                            <!-- Card 2 -->
-                            <div class="glass-panel p-8 rounded-2xl border-l-4 border-brand-500 relative overflow-hidden group hover:bg-white/5 transition-all">
-                                <div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-eye-slash text-4xl text-brand-500"></i></div>
-                                <h3 class="text-xl font-bold text-white mb-4">The Analytics Black Box</h3>
-                                <p class="text-slate-400 leading-relaxed">You can’t tell which LinkedIn ad brought in the $100k Enterprise lead. Attribution is broken, and data is messy.</p>
-                            </div>
+<!-- METHODOLOGY -->
+<section class="methodology" id="methodology">
+  <div class="section-inner">
+    <div class="section-label fade-up" data-num="03">Methodology</div>
+    <h2 class="method-h2 fade-up delay-1">
+      A four-phase process.<br><em>Zero</em> ambiguity.
+    </h2>
+    <div class="phases fade-up delay-2">
+      <div class="phase">
+        <span class="phase-num">01</span>
+        <span class="phase-weeks">Weeks 1–2</span>
+        <div class="phase-title">Discovery & Architecture</div>
+        <p class="phase-desc">We map your full technical ecosystem before a single pixel is designed.</p>
+        <ul class="phase-items">
+          <li>Collaborative roadmapping</li>
+          <li>Data architecture planning</li>
+          <li>CRM & database selection</li>
+          <li>Revenue leak identification</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <span class="phase-num">02</span>
+        <span class="phase-weeks">Weeks 3–4</span>
+        <div class="phase-title">UI/UX Design</div>
+        <p class="phase-desc">Light-mode, conversion-focused design in Figma using modern aesthetics.</p>
+        <ul class="phase-items">
+          <li>High-fidelity wireframing</li>
+          <li>Conversion-focused layouts</li>
+          <li>Typography & color system</li>
+          <li>Accessibility (WCAG 2.1)</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <span class="phase-num">03</span>
+        <span class="phase-weeks">Weeks 5–8</span>
+        <div class="phase-title">Development & Integration</div>
+        <p class="phase-desc">Client-First Webflow build with full CRM and analytics integration.</p>
+        <ul class="phase-items">
+          <li>Webflow Client-First build</li>
+          <li>Wized logic & web-apps</li>
+          <li>CRM pipeline connection</li>
+          <li>GTM & tracking setup</li>
+        </ul>
+      </div>
+      <div class="phase">
+        <span class="phase-num">04</span>
+        <span class="phase-weeks">Week 9</span>
+        <div class="phase-title">Launch & Dashboarding</div>
+        <p class="phase-desc">Pre-launch QA and day-one ROI visibility with live Looker Studio dashboards.</p>
+        <ul class="phase-items">
+          <li>Pre-launch QA checklist</li>
+          <li>Looker Studio dashboard</li>
+          <li>Performance baselining</li>
+          <li>Team handoff & training</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
 
-                            <!-- Card 3 -->
-                            <div class="glass-panel p-8 rounded-2xl border-l-4 border-brand-accent relative overflow-hidden group hover:bg-white/5 transition-all">
-                                <div class="absolute top-0 right-0 p-4 opacity-20 group-hover:opacity-100 transition-opacity"><i class="fa-solid fa-robot text-4xl text-brand-accent"></i></div>
-                                <h3 class="text-xl font-bold text-white mb-4">Invisible to AI</h3>
-                                <p class="text-slate-400 leading-relaxed">Your content isn't structured for LLMs (ChatGPT, Perplexity). When buyers ask AI for vendors, you don't exist.</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+<!-- ICP -->
+<section class="icp" id="clients">
+  <div class="section-inner">
+    <div class="section-label fade-up" data-num="04">Who We Serve</div>
+    <h2 class="services-h2 fade-up delay-1">
+      Built for teams who<br>need to move <em>fast.</em>
+    </h2>
+    <div class="icp-grid fade-up delay-2">
+      <div class="icp-card">
+        <span class="icp-bg-num">01</span>
+        <div class="icp-content">
+          <div class="icp-type">
+            <span class="icp-type-dot"></span>
+            Primary ICP
+          </div>
+          <h3 class="icp-title">B2B SaaS & Tech Startups (Seed → Series A)</h3>
+          <div class="icp-pain">
+            "We're shipping great product but our marketing site is dragging down ad quality scores. Dev team is too busy."
+          </div>
+          <p class="icp-why">As your embedded WebOps partner, we take over the marketing site entirely. We use Wized to build interactive mini-apps — ROI calculators, configurators — that generate pipeline without touching your core product engineers.</p>
+        </div>
+      </div>
+      <div class="icp-card">
+        <span class="icp-bg-num">02</span>
+        <div class="icp-content">
+          <div class="icp-type">
+            <span class="icp-type-dot"></span>
+            Secondary ICP
+          </div>
+          <h3 class="icp-title">SMBs, Clinics & Boutique Agencies</h3>
+          <div class="icp-pain">
+            "We have traffic but no conversions. Leads fill out forms and never hear back. The site looks dated."
+          </div>
+          <p class="icp-why">We provide a premium light-mode aesthetic that elevates the brand, paired with instant CRM automations — missed-call text backs, lead routing, drip sequences — to guarantee ROI within the first 30 days.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <!-- CTA STRIP -->
-                <section class="py-20 bg-brand-500 text-white">
-                    <div class="max-w-5xl mx-auto px-6 text-center">
-                        <h2 class="text-3xl font-bold font-mono mb-6">Stop guessing. Start scaling.</h2>
-                        <p class="text-white/80 text-lg mb-8 max-w-2xl mx-auto">We bridge the gap between "Brand" and "Revenue Ops." No code bloat. No data silos.</p>
-                        <button onclick="navigateTo('framework')" class="px-8 py-4 bg-white text-brand-500 font-bold rounded hover:bg-slate-100 transition-all shadow-xl">
-                            See How We Do It
-                        </button>
-                    </div>
-                </section>
-            `,
-            framework: `
-                <!-- FRAMEWORK HERO -->
-                <section class="pt-32 pb-20 px-6">
-                    <div class="max-w-4xl mx-auto text-center">
-                        <span class="text-brand-500 font-mono text-sm tracking-widest uppercase mb-4 block">The Methodology</span>
-                        <h1 class="text-4xl md:text-6xl font-bold text-white font-mono mb-8">Conversion-First<br>Architecture Framework™</h1>
-                        <p class="text-xl text-slate-400 leading-relaxed">
-                            Most agencies start with design. We start with data. We build a seamless pipeline from the first click to the closed deal in your CRM.
-                        </p>
-                    </div>
-                </section>
+<!-- PRICING -->
+<section class="pricing" id="pricing">
+  <div class="section-inner">
+    <div class="section-label fade-up" style="justify-content:center" data-num="05">Pricing</div>
+    <div class="pricing-header fade-up delay-1">
+      <h2 class="pricing-h2">Transparent. Tiered. <em>Outcome-driven.</em></h2>
+      <p class="pricing-sub">No hourly rates. No surprise invoices. Just clear value at every tier.</p>
+    </div>
+    <div class="pricing-grid fade-up delay-2">
+      <div class="pricing-card">
+        <div class="pricing-card-head">
+          <div class="pricing-tier">Tier 1 · One-Time</div>
+          <div class="pricing-name">Technical Growth Audit</div>
+          <div class="pricing-price"><sup>$</sup>500<span class="pricing-cadence">starting price</span></div>
+        </div>
+        <div class="pricing-card-body">
+          <ul class="pricing-features">
+            <li>67-point technical inspection</li>
+            <li>Core Web Vitals & LCP analysis</li>
+            <li>GTM & GA4 tag audit</li>
+            <li>WCAG 2.1 compliance check</li>
+            <li>CRO & UX heuristics review</li>
+            <li>Branded PDF report & roadmap</li>
+          </ul>
+          <a href="#contact" class="pricing-cta">Book an Audit</a>
+        </div>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-card-head">
+          <div class="pricing-tier">Tier 2 · Project</div>
+          <div class="pricing-name">Foundation Build</div>
+          <div class="pricing-price"><sup>$</sup>4k<span class="pricing-cadence">– $15,000 one-time</span></div>
+        </div>
+        <div class="pricing-card-body">
+          <ul class="pricing-features">
+            <li>UI/UX design in Figma</li>
+            <li>Webflow Client-First build</li>
+            <li>GSAP animations & interactions</li>
+            <li>Wized web-app integration</li>
+            <li>CRM pipeline connection</li>
+            <li>Looker Studio dashboard setup</li>
+            <li>Pre-launch QA & team handoff</li>
+          </ul>
+          <a href="#contact" class="pricing-cta">Start Building</a>
+        </div>
+      </div>
+      <div class="pricing-card">
+        <div class="pricing-card-head">
+          <div class="pricing-tier">Tier 3 · Retainer</div>
+          <div class="pricing-name">Growth WebOps</div>
+          <div class="pricing-price"><sup>$</sup>800<span class="pricing-cadence">– $4,000 / month</span></div>
+        </div>
+        <div class="pricing-card-body">
+          <ul class="pricing-features">
+            <li>Priority support & CMS updates</li>
+            <li>Monthly A/B testing (CRO)</li>
+            <li>Campaign landing page creation</li>
+            <li>AEO content structuring</li>
+            <li>Speed & performance monitoring</li>
+            <li>Deep-dive Looker Studio reports</li>
+          </ul>
+          <a href="#contact" class="pricing-cta">Embed Our Team</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                <!-- STEP 1 -->
-                <section class="py-20 border-t border-glassBorder relative">
-                    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                        <div class="order-2 md:order-1">
-                            <div class="w-12 h-12 bg-brand-500 rounded flex items-center justify-center text-white font-mono text-xl font-bold mb-6">01</div>
-                            <h2 class="text-3xl font-bold text-white mb-6">Answer Engine Optimization (AEO)</h2>
-                            <p class="text-slate-400 text-lg mb-6">
-                                The way people search is changing. We structure your schema and content hierarchy so that Google <em>and</em> AI models understand exactly who you are.
-                            </p>
-                            <ul class="space-y-3 text-slate-300">
-                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> JSON-LD Schema Architecture</li>
-                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Entity Graph Mapping</li>
-                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> LLM-Readable Content Blocks</li>
-                            </ul>
-                        </div>
-                        <div class="order-1 md:order-2 glass-panel h-80 rounded-2xl flex items-center justify-center relative overflow-hidden border border-brand-500/20">
-                            <!-- Abstract Visual -->
-                            <div class="absolute inset-0 bg-gradient-to-br from-brand-aeo/10 to-transparent"></div>
-                            <i class="fa-solid fa-brain text-9xl text-white/5"></i>
-                            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-                                <div class="bg-charcoal border border-glassBorder px-6 py-3 rounded-lg shadow-2xl mb-4 text-sm text-slate-300">
-                                    <span class="text-brand-aeo font-mono mr-2">Query:</span> "Best Enterprise CRM?"
-                                </div>
-                                <div class="bg-white text-obsidian px-6 py-4 rounded-lg shadow-2xl font-bold">
-                                    <i class="fa-solid fa-bolt text-brand-500 mr-2"></i> Your Brand
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <div class="cta-bg-ring r1"></div>
+  <div class="cta-bg-ring r2"></div>
+  <div class="cta-bg-ring r3"></div>
+  <span class="cta-label">Let's Build Together</span>
+  <h2 class="cta-h2">
+    Ready to stop losing<br>revenue to a <em>broken</em><br>marketing site?
+  </h2>
+  <p class="cta-sub">
+    Start with a $500 Technical Audit. We'll identify your exact revenue leaks, show you the fix, and embed as your WebOps team.
+  </p>
+  <div class="cta-actions">
+    <a href="mailto:hello@interfacelab.pro" class="btn-light">Book Your Audit →</a>
+    <a href="mailto:hello@interfacelab.pro" class="btn-outline-light">Schedule a Call</a>
+  </div>
+</section>
 
-                <!-- STEP 2 -->
-                <section class="py-20 border-t border-glassBorder bg-white/05">
-                    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                         <div class="glass-panel h-80 rounded-2xl flex items-center justify-center relative overflow-hidden border border-brand-500/20">
-                            <div class="absolute inset-0 bg-grid-pattern opacity-10"></div>
-                            <div class="flex flex-col gap-4 w-2/3">
-                                <div class="h-4 bg-brand-500/20 rounded w-full animate-pulse"></div>
-                                <div class="h-4 bg-brand-500/20 rounded w-3/4 animate-pulse" style="animation-delay: 0.2s"></div>
-                                <div class="h-32 bg-brand-500/10 rounded w-full border border-brand-500/30 flex items-center justify-center">
-                                    <span class="text-brand-400 font-mono text-sm">&lt;Webflow /&gt;</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div>
-                            <div class="w-12 h-12 bg-white text-obsidian rounded flex items-center justify-center font-mono text-xl font-bold mb-6">02</div>
-                            <h2 class="text-3xl font-bold text-white mb-6">High-Fidelity Webflow Build</h2>
-                            <p class="text-slate-400 text-lg mb-6">
-                                Pixel-perfect execution. We build modular Design Systems in Webflow, giving your marketing team a "Lego kit" to build new pages instantly without breaking the brand.
-                            </p>
-                            <ul class="space-y-3 text-slate-300">
-                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Component-Based Design System</li>
-                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> GSAP Interactions & WebGL</li>
-                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> 99/100 Core Web Vitals</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="footer-logo">
+        <span class="footer-logo-mark">IL</span>
+        Interface Lab OÜ
+      </a>
+      <p class="footer-tagline">Webflow-native WebOps partner for ambitious SaaS teams and growing businesses. We build, operate, and grow your marketing site.</p>
+      <span class="footer-reg">Registered in Estonia · interfacelab.pro</span>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">Technical Audit</a></li>
+        <li><a href="#services">Foundation Build</a></li>
+        <li><a href="#services">WebOps Retainer</a></li>
+        <li><a href="#services">CRM Architecture</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#methodology">Methodology</a></li>
+        <li><a href="#clients">Who We Serve</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Connect</div>
+      <ul class="footer-links">
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">Twitter / X</a></li>
+        <li><a href="mailto:hello@interfacelab.pro">hello@interfacelab.pro</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 Interface Lab OÜ. All rights reserved.</span>
+    <ul class="footer-bottom-links">
+      <li><a href="#">Privacy Policy</a></li>
+      <li><a href="#">Terms of Service</a></li>
+    </ul>
+  </div>
+</footer>
 
-                <!-- STEP 3 -->
-                <section class="py-20 border-t border-glassBorder">
-                    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                        <div class="order-2 md:order-1">
-                            <div class="w-12 h-12 bg-brand-accent text-obsidian rounded flex items-center justify-center font-mono text-xl font-bold mb-6">03</div>
-                            <h2 class="text-3xl font-bold text-white mb-6">The Data Layer (RevOps)</h2>
-                            <p class="text-slate-400 text-lg mb-6">
-                                A pretty site is useless if it's dumb. We wire up server-side tracking, form handlers, and CRM automations.
-                            </p>
-                            <ul class="space-y-3 text-slate-300">
-                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> GA4 Server-Side Config</li>
-                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> HubSpot / Salesforce Bi-Directional Sync</li>
-                                <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-accent"></i> Conversion API (CAPI) Setup</li>
-                            </ul>
-                        </div>
-                        <div class="order-1 md:order-2 glass-panel h-80 rounded-2xl flex items-center justify-center relative overflow-hidden border border-brand-accent/20">
-                             <div class="text-center space-y-4">
-                                <div class="inline-block px-4 py-2 rounded bg-charcoal border border-slate-700 text-slate-300 text-sm">Visitor Clicks</div>
-                                <div class="h-8 w-0.5 bg-slate-700 mx-auto"></div>
-                                <div class="inline-block px-4 py-2 rounded bg-brand-500 text-white font-bold shadow-[0_0_20px_rgba(99,102,241,0.5)]">HubSpot Deal: $50k</div>
-                             </div>
-                        </div>
-                    </div>
-                </section>
-                
-                <section class="py-20 text-center">
-                    <button onclick="navigateTo('audit')" class="px-8 py-4 bg-brand-500 text-white font-bold rounded hover:bg-brand-400 transition-all shadow-xl">
-                        Audit My Current Architecture
-                    </button>
-                </section>
-            `,
-            audit: `
-                <!-- AUDIT HEADER -->
-                <section class="pt-32 pb-16 px-6 bg-gradient-to-b from-charcoal to-obsidian">
-                    <div class="max-w-4xl mx-auto text-center">
-                        <div class="inline-block px-3 py-1 bg-brand-accent/10 text-brand-accent border border-brand-accent/20 rounded-full text-xs font-mono mb-6">ENTRY OFFER</div>
-                        <h1 class="text-4xl md:text-5xl font-bold text-white font-mono mb-6">The 50-Point Revenue<br>Infrastructure Audit</h1>
-                        <p class="text-lg text-slate-400 max-w-2xl mx-auto">
-                            Before we write a line of code, we diagnose exactly why your current site is leaking revenue. 
-                            If you hire us for the rebuild, <strong class="text-white">we credit 100% of the audit cost</strong> towards the project.
-                        </p>
-                    </div>
-                </section>
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animateCursor() {
+    cursor.style.left = mx + 'px';
+    cursor.style.top  = my + 'px';
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top  = ry + 'px';
+    requestAnimationFrame(animateCursor);
+  }
+  animateCursor();
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width  = '4px';
+      cursor.style.height = '4px';
+      ring.style.width    = '48px';
+      ring.style.height   = '48px';
+      ring.style.borderColor = 'var(--accent-warm)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width  = '8px';
+      cursor.style.height = '8px';
+      ring.style.width    = '36px';
+      ring.style.height   = '36px';
+      ring.style.borderColor = 'var(--accent)';
+    });
+  });
 
-                <!-- AUDIT DELIVERABLES -->
-                <section class="py-16">
-                    <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        
-                        <!-- Deliverable List -->
-                        <div class="space-y-8">
-                            <div>
-                                <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                    <i class="fa-solid fa-magnifying-glass-chart text-brand-500"></i> Technical Diagnosis
-                                </h3>
-                                <ul class="space-y-3 text-sm text-slate-400">
-                                    <li class="flex gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i> Core Web Vitals Deep Dive (LCP, CLS, INP)</li>
-                                    <li class="flex gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i> DOM Size & Unused CSS Analysis</li>
-                                    <li class="flex gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i> Mobile Usability & Tap Target Check</li>
-                                </ul>
-                            </div>
+  // Intersection observer for fade-up
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-                            <div>
-                                <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                    <i class="fa-solid fa-database text-brand-500"></i> RevOps & Tracking
-                                </h3>
-                                <ul class="space-y-3 text-sm text-slate-400">
-                                    <li class="flex gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i> GTM Container Hygiene Check</li>
-                                    <li class="flex gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i> GA4 Event Taxonomy Audit</li>
-                                    <li class="flex gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i> CRM Field Mapping Verification</li>
-                                </ul>
-                            </div>
-
-                            <div>
-                                <h3 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
-                                    <i class="fa-solid fa-robot text-brand-500"></i> AEO & AI Readiness
-                                </h3>
-                                <ul class="space-y-3 text-sm text-slate-400">
-                                    <li class="flex gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i> Schema Markup Validation</li>
-                                    <li class="flex gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i> LLM Entity Recognition Test</li>
-                                    <li class="flex gap-3"><i class="fa-solid fa-check text-green-500 mt-1"></i> Content Structure Analysis</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <!-- PRICING CARD -->
-                        <div class="glass-panel p-8 rounded-2xl border border-brand-500/30 shadow-[0_0_40px_rgba(99,102,241,0.1)] sticky top-24">
-                            <h3 class="text-2xl font-bold text-white font-mono mb-2">Diagnostic Audit</h3>
-                            <p class="text-slate-400 text-sm mb-8">2-Week Turnaround. Full PDF Report + Video Walkthrough.</p>
-                            
-                            <div class="flex items-end gap-2 mb-8">
-                                <span class="text-5xl font-bold text-white">$2,500</span>
-                                <span class="text-slate-500 text-sm mb-2">one-time</span>
-                            </div>
-
-                            <a href="mailto:consult@interfacelab.pro?subject=Audit Request" class="block w-full py-4 bg-brand-500 hover:bg-brand-400 text-white font-bold text-center rounded transition-colors mb-4">
-                                Secure Your Audit
-                            </a>
-                            <p class="text-center text-xs text-slate-500">Credited back if you proceed with Full Build.</p>
-
-                            <div class="mt-8 pt-8 border-t border-white/10">
-                                <h4 class="text-white font-bold text-sm mb-4">What you get:</h4>
-                                <ul class="space-y-2 text-xs text-slate-400">
-                                    <li>• 40+ Page Technical Report</li>
-                                    <li>• 60-Minute Strategy Call</li>
-                                    <li>• Prioritized Fix Roadmap</li>
-                                    <li>• Competitor AEO Analysis</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                </section>
-            `,
-            contact: `
-                <section class="min-h-screen flex items-center justify-center px-6 py-20">
-                    <div class="max-w-2xl w-full">
-                        <div class="text-center mb-12">
-                            <h1 class="text-4xl font-bold text-white font-mono mb-4">Let's Build Your Engine</h1>
-                            <p class="text-slate-400">We take on 3 new partners per quarter to maintain premium quality.</p>
-                        </div>
-
-                        <form class="glass-panel p-8 md:p-12 rounded-2xl border border-glassBorder space-y-6" onsubmit="event.preventDefault(); alert('In a real deployment, this would connect to your CRM/Form Handler.');">
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <label class="block text-xs font-mono text-slate-500 uppercase mb-2">Name</label>
-                                    <input type="text" class="w-full bg-charcoal border border-slate-700 rounded p-3 text-white focus:border-brand-500 focus:outline-none transition-colors" placeholder="John Doe">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-mono text-slate-500 uppercase mb-2">Company URL</label>
-                                    <input type="url" class="w-full bg-charcoal border border-slate-700 rounded p-3 text-white focus:border-brand-500 focus:outline-none transition-colors" placeholder="company.com">
-                                </div>
-                            </div>
-                            
-                            <div>
-                                <label class="block text-xs font-mono text-slate-500 uppercase mb-2">Work Email</label>
-                                <input type="email" class="w-full bg-charcoal border border-slate-700 rounded p-3 text-white focus:border-brand-500 focus:outline-none transition-colors" placeholder="john@company.com">
-                            </div>
-
-                            <div>
-                                <label class="block text-xs font-mono text-slate-500 uppercase mb-2">Project Type</label>
-                                <select class="w-full bg-charcoal border border-slate-700 rounded p-3 text-white focus:border-brand-500 focus:outline-none transition-colors">
-                                    <option>Full Platform Rebuild ($30k - $60k+)</option>
-                                    <option>Infrastructure Audit ($2.5k)</option>
-                                    <option>Webflow Migration</option>
-                                    <option>AEO & Data Optimization</option>
-                                </select>
-                            </div>
-
-                            <div>
-                                <label class="block text-xs font-mono text-slate-500 uppercase mb-2">Tell us about your biggest bottleneck</label>
-                                <textarea class="w-full bg-charcoal border border-slate-700 rounded p-3 text-white h-32 focus:border-brand-500 focus:outline-none transition-colors" placeholder="e.g. Can't track leads, site is slow..."></textarea>
-                            </div>
-
-                            <button class="w-full py-4 bg-brand-500 hover:bg-brand-400 text-white font-bold rounded transition-colors text-lg">
-                                Submit Application
-                            </button>
-                        </form>
-                    </div>
-                </section>
-            `
-        };
-
-        // Navigation Logic
-        function navigateTo(pageId) {
-            const contentDiv = document.getElementById('app-content');
-            
-            // Fade out
-            contentDiv.style.opacity = '0';
-            
-            setTimeout(() => {
-                // Change Content
-                contentDiv.innerHTML = pages[pageId];
-                window.scrollTo(0, 0);
-                
-                // Update Nav States
-                document.querySelectorAll('nav button').forEach(btn => btn.classList.remove('nav-active'));
-                const activeBtn = document.getElementById(`nav-${pageId}`);
-                if(activeBtn) activeBtn.classList.add('nav-active');
-
-                // Fade in
-                contentDiv.classList.remove('section-fade');
-                void contentDiv.offsetWidth; // trigger reflow
-                contentDiv.classList.add('section-fade');
-                contentDiv.style.opacity = '1';
-            }, 200);
-        }
-
-        // Init
-        document.addEventListener('DOMContentLoaded', () => {
-            navigateTo('home');
-        });
-
-    </script>
+  // Hero entrance
+  document.querySelector('.hero-left').style.opacity = '0';
+  document.querySelector('.hero-left').style.transform = 'translateY(24px)';
+  document.querySelector('.hero-left').style.transition = 'opacity 1s ease 0.3s, transform 1s ease 0.3s';
+  setTimeout(() => {
+    document.querySelector('.hero-left').style.opacity = '1';
+    document.querySelector('.hero-left').style.transform = 'translateY(0)';
+  }, 100);
+</script>
 </body>
 </html>
