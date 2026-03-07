@@ -141,7 +141,6 @@
   .hero-bg-ring.r2 { width: 800px; height: 800px; top: 50%; left: 50%; }
   .hero-bg-ring.r3 { width: 1100px; height: 1100px; top: 50%; left: 50%; }
   .hero-bg-ring.r4 { width: 1400px; height: 1400px; top: 50%; left: 50%; }
-  }
   .hero-content {
     position: relative;
     z-index: 2;
@@ -275,8 +274,6 @@
   .diagram-center-label {
     font-family: var(--serif);
     font-size: 18px;
-    font-weight: 300;
-    font-style: normal;
     font-weight: 600;
     color: var(--ink);
     line-height: 1.2;
@@ -473,6 +470,173 @@
     line-height: 1.7;
   }
 
+  /* ENGINES — uses same card language as services */
+  .engines {
+    padding: 120px 0;
+    background: var(--warm-white);
+  }
+  .engines-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .engine-card {
+    background: var(--warm-white);
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    transition: background 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .engine-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 40px;
+    right: 40px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-warm), transparent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .engine-card:hover { background: var(--cream); }
+  .engine-card:hover::after { transform: scaleX(1); }
+  .engine-icon-wrap {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    background: var(--cream);
+  }
+  .engine-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #555555;
+  }
+  .engine-title {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 300;
+    line-height: 1.2;
+  }
+  .engine-desc {
+    font-size: 13px;
+    font-weight: 300;
+    color: var(--ink-60);
+    line-height: 1.75;
+  }
+  .engine-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .engine-pill {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    color: #444444;
+    background: var(--cream);
+  }
+
+  /* AEO CALLOUT — uses methodology dark strip pattern */
+  .aeo-callout {
+    background: #111111;
+    padding: 80px 0;
+  }
+  .aeo-callout-inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 72px;
+    align-items: center;
+  }
+  .aeo-badge-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
+  }
+  .aeo-badge {
+    width: 96px;
+    height: 96px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--mono);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    color: #3B7EF6;
+    text-transform: uppercase;
+  }
+  .aeo-badge-label {
+    font-family: var(--mono);
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.25);
+    text-align: center;
+  }
+  .aeo-callout-eyebrow {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .aeo-callout-h2 {
+    font-family: var(--serif);
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    color: #F0F0F0;
+    line-height: 1.3;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+  }
+  .aeo-callout-h2 em {
+    font-style: normal;
+    font-weight: 700;
+    background: linear-gradient(135deg, #3B7EF6 0%, #2563EB 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .aeo-callout-p {
+    font-size: 14px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.8;
+    max-width: 640px;
+  }
+
   /* SERVICES */
   .services {
     padding: 120px 0;
@@ -565,7 +729,6 @@
     color: var(--ink-60);
     line-height: 1.75;
   }
-
 
   /* METHODOLOGY */
   .methodology {
@@ -735,7 +898,19 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
-    align-items: start;
+    align-items: stretch;
+  }
+  .pricing-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .pricing-card-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .pricing-features {
+    flex: 1;
   }
   .pricing-card {
     border: 1px solid var(--border);
@@ -862,7 +1037,6 @@
     padding: 120px 0;
     background: var(--cream);
   }
-  /* ICP TABS */
   .icp-tabs-wrapper {
     margin-top: 56px;
     border: 1px solid var(--border);
@@ -906,17 +1080,9 @@
     background: var(--warm-white);
     border-bottom-color: var(--accent-warm);
   }
-
-  .icp-panel-wrap {
-    background: var(--warm-white);
-  }
-  .icp-panel {
-    display: none;
-    grid-template-columns: 1fr 1fr;
-    min-height: 340px;
-  }
+  .icp-panel-wrap { background: var(--warm-white); }
+  .icp-panel { display: none; grid-template-columns: 1fr 1fr; min-height: 340px; }
   .icp-panel.active { display: grid; }
-
   .icp-panel-left {
     padding: 56px 52px;
     border-right: 1px solid var(--border);
@@ -931,7 +1097,6 @@
     flex-direction: column;
     justify-content: space-between;
   }
-
   .icp-panel-eyebrow {
     font-family: var(--mono);
     font-size: 10px;
@@ -959,7 +1124,6 @@
     margin-bottom: 24px;
   }
   .icp-panel-title em { font-style: normal; font-weight: 700; color: var(--ink); }
-
   .icp-panel-pain {
     font-size: 14px;
     font-weight: 300;
@@ -981,7 +1145,6 @@
     margin-right: 4px;
     font-style: normal;
   }
-
   .icp-panel-label {
     font-family: var(--mono);
     font-size: 10px;
@@ -1014,11 +1177,7 @@
     flex-shrink: 0;
     margin-top: 2px;
   }
-  .icp-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
+  .icp-tags { display: flex; flex-wrap: wrap; gap: 6px; }
   .icp-tag {
     font-family: var(--mono);
     font-size: 10px;
@@ -1029,13 +1188,6 @@
     border: 1px solid var(--border);
     color: #444444;
     background: var(--warm-white);
-  }
-
-  @media (max-width: 900px) {
-    .icp-panel { grid-template-columns: 1fr; }
-    .icp-panel-left { border-right: none; border-bottom: 1px solid var(--border); padding: 36px 28px; }
-    .icp-panel-right { padding: 36px 28px; }
-    .icp-tab-btn { padding: 14px 16px; font-size: 11px; }
   }
 
   /* CTA SECTION */
@@ -1141,11 +1293,7 @@
     gap: 60px;
     margin-bottom: 60px;
   }
-  .footer-brand {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+  .footer-brand { display: flex; flex-direction: column; gap: 16px; }
   .footer-logo {
     font-family: var(--serif);
     font-size: 20px;
@@ -1176,13 +1324,6 @@
     line-height: 1.65;
     max-width: 280px;
   }
-  .footer-reg {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.08em;
-    color: #ffffff25;
-    margin-top: 8px;
-  }
   .footer-col-title {
     font-family: var(--mono);
     font-size: 10px;
@@ -1191,12 +1332,7 @@
     color: #ffffff33;
     margin-bottom: 20px;
   }
-  .footer-links {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
   .footer-links a {
     font-size: 13px;
     font-weight: 300;
@@ -1220,11 +1356,7 @@
     color: #ffffff25;
     font-family: var(--mono);
   }
-  .footer-bottom-links {
-    display: flex;
-    gap: 28px;
-    list-style: none;
-  }
+  .footer-bottom-links { display: flex; gap: 28px; list-style: none; }
   .footer-bottom-links a {
     font-size: 12px;
     font-weight: 300;
@@ -1245,13 +1377,17 @@
     .nav-links { display: none; }
     .hero { padding: 100px 0 60px; }
     .hero-content { grid-template-columns: 1fr; gap: 48px; }
-    .hero-diagram-wrap { width: 220px; height: 220px; margin: 0 auto; }
     .hero-stats { grid-template-columns: 1fr; }
     .section-inner { padding: 0 24px; }
     .about-grid { grid-template-columns: 1fr; }
-    .services-grid, .phases, .pricing-grid { grid-template-columns: 1fr; }
+    .engines-grid, .services-grid, .phases, .pricing-grid { grid-template-columns: 1fr; }
     .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
     .services-note { text-align: left; }
+    .aeo-callout-inner { grid-template-columns: 1fr; gap: 36px; }
+    .icp-panel { grid-template-columns: 1fr; }
+    .icp-panel-left { border-right: none; border-bottom: 1px solid var(--border); padding: 36px 28px; }
+    .icp-panel-right { padding: 36px 28px; }
+    .icp-tab-btn { padding: 14px 16px; font-size: 11px; }
     .footer-inner { grid-template-columns: 1fr 1fr; }
     .stack-inner { flex-wrap: wrap; }
     .footer-bottom { flex-direction: column; gap: 16px; }
@@ -1259,7 +1395,6 @@
 </style>
 </head>
 <body>
-
 
 <!-- NAV -->
 <nav>
@@ -1271,7 +1406,7 @@
     <li><a href="#services">Services</a></li>
     <li><a href="#methodology">Methodology</a></li>
     <li><a href="#pricing">Pricing</a></li>
-    <li><a href="javascript:void(0)" class="nav-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Start Audit</a></li>
+    <li><a href="javascript:void(0)" class="nav-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book $500 Audit</a></li>
   </ul>
 </nav>
 
@@ -1288,38 +1423,11 @@
           Your website should be a <em>growth engine,</em> not a bottleneck.
         </h1>
         <p class="hero-sub">
-          We embed as your fractional WebOps team — uniting design, development, and marketing into a single agile pod that eliminates backlogs and turns your site into a revenue machine.
+          We embed as your fractional WebOps team — uniting design, development, and marketing into a single agile pod that eliminates developer backlogs and turns your site into a revenue machine.
         </p>
         <div class="hero-actions">
-          <a href="javascript:void(0)" class="btn-primary" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Get a Free Audit</a>
+          <a href="javascript:void(0)" class="btn-primary" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book a $500 Technical Audit</a>
           <a href="#services" class="btn-ghost">See Our Services <span class="btn-ghost-arrow">→</span></a>
-        </div>
-      </div>
-
-      <!-- Diagram -->
-      <div class="hero-diagram-wrap">
-        <div class="diagram-circle c1"></div>
-        <div class="diagram-circle c2"></div>
-        <div class="diagram-circle c3"></div>
-        <div class="diagram-center">
-          <span class="diagram-center-label">Growth<br>Engine</span>
-          <span class="diagram-center-sub">WebOps Loop</span>
-        </div>
-        <div class="diagram-node node-top">
-          <span class="node-icon">⚡</span>
-          <span class="node-label">Build</span>
-        </div>
-        <div class="diagram-node node-right">
-          <span class="node-icon">📈</span>
-          <span class="node-label">Grow</span>
-        </div>
-        <div class="diagram-node node-bottom">
-          <span class="node-icon">🔁</span>
-          <span class="node-label">Operate</span>
-        </div>
-        <div class="diagram-node node-left">
-          <span class="node-icon">🔍</span>
-          <span class="node-label">Diagnose</span>
         </div>
       </div>
     </div>
@@ -1380,33 +1488,87 @@
       </div>
       <div class="about-right fade-up delay-2">
         <p class="about-text">
-          Interface Lab OÜ was built for one reason: the traditional project-based agency model is broken. Businesses are tired of hiring separate designers, developers, and marketers — only to be left with disjointed websites and massive developer backlogs.
+          The traditional project-based agency model is broken. Businesses are tired of hiring separate designers, developers, and marketers — only to be left with disjointed websites and massive developer backlogs.
         </p>
         <p class="about-text">
-          We operate as a Webflow-native embedded team. Your growth partner, not just another vendor. We build, operate, and grow your marketing site on a continuous loop — delivering the technical scale of an enterprise shop without the enterprise bloat.
+          We operate as a Webflow-native embedded team — delivering the technical scale of an enterprise shop without the enterprise bloat or the €30k+ price tag. Your growth partner on a continuous loop, not just another vendor.
         </p>
         <div class="pillars">
           <div class="pillar">
             <span class="pillar-num">01</span>
             <div>
               <div class="pillar-title">Webflow Specialists</div>
-              <p class="pillar-desc">We don't juggle platforms. Deep Webflow expertise means maximum leverage — advanced custom JS, complex CMS architectures, and AI Agent web-app logic.</p>
+              <p class="pillar-desc">We don't juggle platforms. Deep Webflow expertise means maximum leverage — advanced custom JS, complex CMS architectures, and AI Agent web-app logic baked in from day one.</p>
             </div>
           </div>
           <div class="pillar">
             <span class="pillar-num">02</span>
             <div>
               <div class="pillar-title">Scientific Aesthetics</div>
-              <p class="pillar-desc">Visuals engineered with heuristics, accessibility standards (WCAG 2.1), and psychological triggers. Beautiful and effective.</p>
+              <p class="pillar-desc">Visuals engineered with cognitive heuristics, accessibility standards (WCAG 2.1), and psychological triggers. Beautiful and effective — never one without the other.</p>
             </div>
           </div>
           <div class="pillar">
             <span class="pillar-num">03</span>
             <div>
               <div class="pillar-title">No Developer Backlogs</div>
-              <p class="pillar-desc">We hook Webflow into flexible databases and CRMs so marketing teams can deploy campaigns instantly — no engineering tickets required.</p>
+              <p class="pillar-desc">We give control back to the marketing team. By building on a Client-First Webflow framework, we remove the need to wait for IT. Launch new campaigns in days, not weeks — no engineering tickets required.</p>
             </div>
           </div>
+          <div class="pillar">
+            <span class="pillar-num">04</span>
+            <div>
+              <div class="pillar-title">Full ROI Visibility</div>
+              <p class="pillar-desc">Every engagement ships with live Looker Studio dashboards. You'll always know what's converting, what's leaking, and where to push next — no guesswork.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TWO ENGINES -->
+<section class="engines" id="engines">
+  <div class="section-inner">
+    <div class="services-header">
+      <div>
+        <div class="section-label fade-up" data-num="02">The Framework</div>
+        <h2 class="services-h2 fade-up delay-1">
+          Two engines.<br>One <em>revenue machine.</em>
+        </h2>
+      </div>
+      <p class="services-note fade-up delay-2">
+        Most agencies build a website. We build a system — two engines working in concert, one converting visitors, one compounding growth.
+      </p>
+    </div>
+    <div class="engines-grid fade-up delay-2">
+      <div class="engine-card">
+        <div class="engine-icon-wrap">🎯</div>
+        <div class="engine-tag">Engine One · Front-End</div>
+        <div class="engine-title">The Conversion Engine</div>
+        <p class="engine-desc">The layer engineered to turn visitors into leads. Using Scientific Aesthetics — visuals built on cognitive heuristics, WCAG 2.1 accessibility, and psychological conversion triggers — every pixel has a measurable job. We run continuous A/B testing so the site gets smarter every month.</p>
+        <div class="engine-pills">
+          <span class="engine-pill">Scientific Aesthetics</span>
+          <span class="engine-pill">WCAG 2.1</span>
+          <span class="engine-pill">A/B Testing</span>
+          <span class="engine-pill">CRO</span>
+          <span class="engine-pill">UX Heuristics</span>
+          <span class="engine-pill">Core Web Vitals</span>
+        </div>
+      </div>
+      <div class="engine-card">
+        <div class="engine-icon-wrap">⚙️</div>
+        <div class="engine-tag">Engine Two · Back-End</div>
+        <div class="engine-title">The Growth Engine</div>
+        <p class="engine-desc">The infrastructure that compounds results over time. We connect Webflow to your CRM pipelines (HubSpot / GoHighLevel), automate lead flows, build AI Agent logic, and configure deep data tracking via GA4 and GTM. Your site stops being a brochure and starts being a pipeline.</p>
+        <div class="engine-pills">
+          <span class="engine-pill">HubSpot / GHL</span>
+          <span class="engine-pill">GA4 + GTM</span>
+          <span class="engine-pill">AI Agents</span>
+          <span class="engine-pill">Supabase / Xano</span>
+          <span class="engine-pill">Make / n8n</span>
+          <span class="engine-pill">Looker Studio</span>
         </div>
       </div>
     </div>
@@ -1418,33 +1580,33 @@
   <div class="section-inner">
     <div class="services-header">
       <div>
-        <div class="section-label fade-up" data-num="02">Services</div>
+        <div class="section-label fade-up" data-num="03">Services</div>
         <h2 class="services-h2 fade-up delay-1">
           Three ways to<br>engage with us, one<br><em>unified outcome.</em>
         </h2>
       </div>
       <p class="services-note fade-up delay-2">
-        Every engagement starts with diagnosis. We don't guess — we find the exact revenue leaks before writing a line of code.
+        Every engagement starts with diagnosis. We find the exact revenue leaks before writing a single line of code.
       </p>
     </div>
     <div class="services-grid fade-up delay-2">
       <div class="service-card">
         <div class="service-icon-wrap">🔍</div>
-        <div class="service-tag">Entry Point</div>
+        <div class="service-tag">Tier 1 · Entry Point</div>
         <div class="service-title">Technical Growth Audit</div>
-        <p class="service-desc">Our 67-point inspection uncovers every revenue leak across Core Web Vitals, UX heuristics, GTM tag health, WCAG compliance, and AEO readiness. Delivered as a branded PDF report.</p>
+        <p class="service-desc">We find the revenue leaks before touching a single pixel. Our 67-point inspection covers Core Web Vitals, UX heuristics, GTM tag health, WCAG compliance, and AEO readiness — delivered as a branded PDF report and implementation roadmap.</p>
       </div>
       <div class="service-card">
         <div class="service-icon-wrap">⚡</div>
-        <div class="service-tag">Project Build</div>
-        <div class="service-title">Foundation Build</div>
-        <p class="service-desc">Scalable Webflow infrastructure built with Client-First framework. Includes Figma UI/UX, GSAP/Swiper.js interactions, CMS setup, AI Agent web-app integration, and CRM pipeline connection.</p>
+        <div class="service-tag">Tier 2 · Foundation Build</div>
+        <div class="service-title">Scalable Infrastructure</div>
+        <p class="service-desc">Your Conversion Engine and Growth Engine, built and integrated simultaneously. Client-First Webflow build with Figma UI/UX, GSAP interactions, AI Agent web-app integration, CRM pipeline connection, and Looker Studio dashboards. This is not a template — this is a revenue system.</p>
       </div>
       <div class="service-card">
         <div class="service-icon-wrap">📈</div>
-        <div class="service-tag">Ongoing Retainer</div>
-        <div class="service-title">Ongoing WebOps</div>
-        <p class="service-desc">Your embedded team for continuous growth. Monthly A/B testing, CRO experiments, AEO content structuring, new campaign landing pages, and deep-dive Looker Studio reporting.</p>
+        <div class="service-tag">Tier 3 · Ongoing Retainer</div>
+        <div class="service-title">Embedded WebOps Team</div>
+        <p class="service-desc">Your embedded team for continuous compounding growth. Monthly A/B testing, CRO experiments, AEO content structuring, new campaign landing pages, and deep-dive Looker Studio reporting. We never stop pushing your site forward.</p>
       </div>
     </div>
   </div>
@@ -1476,10 +1638,25 @@
   </div>
 </section>
 
+<!-- AEO CALLOUT -->
+<div class="aeo-callout">
+  <div class="aeo-callout-inner">
+    <div class="aeo-badge-wrap">
+      <div class="aeo-badge">AEO</div>
+      <div class="aeo-badge-label">Forward-Looking</div>
+    </div>
+    <div>
+      <div class="aeo-callout-eyebrow">Search is changing</div>
+      <h2 class="aeo-callout-h2">Traditional SEO is dead.<br>We've already <em>moved on.</em></h2>
+      <p class="aeo-callout-p">We optimize your site for AEO — Answer Engine Optimization — ensuring your brand becomes the primary source cited by AI agents like ChatGPT, Perplexity, and Google's AI Overviews. When a buyer asks an AI "what's the best solution for X," your brand should be the answer. We make sure it is.</p>
+    </div>
+  </div>
+</div>
+
 <!-- METHODOLOGY -->
 <section class="methodology" id="methodology">
   <div class="section-inner">
-    <div class="section-label fade-up" data-num="03">Methodology</div>
+    <div class="section-label fade-up" data-num="04">Methodology</div>
     <h2 class="method-h2 fade-up delay-1">
       A four-phase process.<br><em>Zero</em> ambiguity.
     </h2>
@@ -1500,7 +1677,7 @@
         <span class="phase-num">02</span>
         <span class="phase-weeks">Weeks 3–4</span>
         <div class="phase-title">UI/UX Design</div>
-        <p class="phase-desc">Light-mode, conversion-focused design in Figma using modern aesthetics.</p>
+        <p class="phase-desc">Conversion-focused design in Figma, engineered with Scientific Aesthetics.</p>
         <ul class="phase-items">
           <li>High-fidelity wireframing</li>
           <li>Conversion-focused layouts</li>
@@ -1512,7 +1689,7 @@
         <span class="phase-num">03</span>
         <span class="phase-weeks">Weeks 5–8</span>
         <div class="phase-title">Development & Integration</div>
-        <p class="phase-desc">Client-First Webflow build with full CRM and analytics integration.</p>
+        <p class="phase-desc">Client-First Webflow build with full CRM, AI Agent, and analytics integration.</p>
         <ul class="phase-items">
           <li>Webflow Client-First build</li>
           <li>AI Agent logic & web-apps</li>
@@ -1524,7 +1701,7 @@
         <span class="phase-num">04</span>
         <span class="phase-weeks">Week 9</span>
         <div class="phase-title">Launch & Dashboarding</div>
-        <p class="phase-desc">Pre-launch QA and day-one ROI visibility with live Looker Studio dashboards.</p>
+        <p class="phase-desc">Pre-launch QA and day-one ROI visibility — no dark period after go-live.</p>
         <ul class="phase-items">
           <li>Pre-launch QA checklist</li>
           <li>Looker Studio dashboard</li>
@@ -1539,14 +1716,12 @@
 <!-- ICP -->
 <section class="icp" id="clients">
   <div class="section-inner">
-    <div class="section-label fade-up" data-num="04">Who We Serve</div>
+    <div class="section-label fade-up" data-num="05">Who We Serve</div>
     <h2 class="services-h2 fade-up delay-1">
       Whatever your industry,<br>your website should <em>work harder.</em>
     </h2>
 
     <div class="icp-tabs-wrapper fade-up delay-2">
-
-      <!-- Tab Nav -->
       <div class="icp-tab-nav">
         <button class="icp-tab-btn active" data-tab="saas"><span class="tab-icon">⚙️</span> SaaS & Tech</button>
         <button class="icp-tab-btn" data-tab="ecom"><span class="tab-icon">🛍️</span> E-commerce</button>
@@ -1558,7 +1733,6 @@
         <button class="icp-tab-btn" data-tab="agency"><span class="tab-icon">✦</span> Agencies</button>
       </div>
 
-      <!-- Panels -->
       <div class="icp-panel-wrap">
 
         <!-- SaaS -->
@@ -1568,14 +1742,14 @@
               <div class="icp-panel-eyebrow">B2B SaaS & Tech Startups</div>
               <h3 class="icp-panel-title">Your product ships daily.<br>Your <em>marketing site</em> doesn't.</h3>
             </div>
-            <div class="icp-panel-pain">We ship great product but our marketing site hasn't been touched in a year. Dev team won't go near it.</div>
+            <div class="icp-panel-pain">We ship great product but our marketing site hasn't been touched in a year. The dev team won't go near it — they're heads-down on the roadmap.</div>
           </div>
           <div class="icp-panel-right">
             <div>
               <div class="icp-panel-label">What we deliver</div>
               <ul class="icp-deliverables">
                 <li>AI-powered ROI calculators & interactive demos that generate pipeline</li>
-                <li>Autonomous landing page deployment — no engineering tickets</li>
+                <li>Autonomous landing page deployment — no engineering tickets, ever</li>
                 <li>Accurate GA4 + GTM tracking so ad spend stops bleeding</li>
                 <li>Monthly CRO experiments with Looker Studio reporting</li>
               </ul>
@@ -1622,7 +1796,7 @@
           <div class="icp-panel-left">
             <div>
               <div class="icp-panel-eyebrow">Medical & Dental Clinics</div>
-              <h3 class="icp-panel-title">Calls coming in.<br>Wrong <em>patients</em> showing up.</h3>
+              <h3 class="icp-panel-title">Turn high traffic into<br><em>qualified patients.</em></h3>
             </div>
             <div class="icp-panel-pain">We get enquiries but half are the wrong patients or no-shows. Our site doesn't pre-qualify or follow up automatically.</div>
           </div>
@@ -1678,7 +1852,7 @@
           <div class="icp-panel-left">
             <div>
               <div class="icp-panel-eyebrow">Law Firms & Consultancies</div>
-              <h3 class="icp-panel-title">Deep expertise.<br>Site looks like a <em>brochure.</em></h3>
+              <h3 class="icp-panel-title">Stop looking like<br>a <em>brochure.</em></h3>
             </div>
             <div class="icp-panel-pain">We have real expertise but our website feels outdated. Prospects can't tell if we're the right fit before they even call.</div>
           </div>
@@ -1785,15 +1959,15 @@
           </div>
         </div>
 
-      </div><!-- end panel wrap -->
-    </div><!-- end tabs wrapper -->
+      </div>
+    </div>
   </div>
 </section>
 
 <!-- PRICING -->
 <section class="pricing" id="pricing">
   <div class="section-inner">
-    <div class="section-label fade-up" style="justify-content:center" data-num="05">Pricing</div>
+    <div class="section-label fade-up" style="justify-content:center" data-num="06">Pricing</div>
     <div class="pricing-header fade-up delay-1">
       <h2 class="pricing-h2">Transparent. Tiered. <em>Outcome-driven.</em></h2>
       <p class="pricing-sub">No hourly rates. No surprise invoices. Just clear value at every tier.</p>
@@ -1812,6 +1986,7 @@
             <li>GTM & GA4 tag audit</li>
             <li>WCAG 2.1 compliance check</li>
             <li>CRO & UX heuristics review</li>
+            <li>AEO readiness assessment</li>
             <li>Branded PDF report & roadmap</li>
           </ul>
           <a href="javascript:void(0)" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book an Audit</a>
@@ -1868,10 +2043,10 @@
     Ready to stop losing<br>revenue to a <em>broken</em><br>marketing site?
   </h2>
   <p class="cta-sub">
-    Start with a $500 Technical Audit. We'll identify your exact revenue leaks, show you the fix, and embed as your WebOps team.
+    Start with a $500 Technical Audit. We'll identify your exact revenue leaks, show you the fix, and embed as your WebOps team on a continuous growth loop.
   </p>
   <div class="cta-actions">
-    <a href="javascript:void(0)" class="btn-light" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book Your Audit →</a>
+    <a href="javascript:void(0)" class="btn-light" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book Your $500 Audit →</a>
     <a href="javascript:void(0)" class="btn-outline-light" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Schedule a Call</a>
   </div>
 </section>
@@ -1885,7 +2060,6 @@
         Interface Lab OÜ
       </a>
       <p class="footer-tagline">Webflow-native WebOps partner for ambitious SaaS teams and growing businesses. We build, operate, and grow your marketing site.</p>
-
     </div>
     <div>
       <div class="footer-col-title">Services</div>
@@ -1909,7 +2083,7 @@
       <div class="footer-col-title">Connect</div>
       <ul class="footer-links">
         <li><a href="https://www.linkedin.com/company/interface-lab-pro" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="mailto:contact@interfacelab.pro">contact@interfacelab.pro</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#4f2c20213b2e2c3b0f26213b2a3d292e2c2a232e2d613f3d20"><span class="__cf_email__" data-cfemail="20434f4e5441435460494e544552464143454c41420e50524f">[email&#160;protected]</span></a></li>
       </ul>
     </div>
   </div>
@@ -1947,9 +2121,4 @@
 
 <!-- Cal element-click embed -->
 <script type="text/javascript">
-  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-  Cal("init", "30min", {origin:"https://app.cal.com"});
-  Cal.ns["30min"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
-</script>
-</body>
-</html>
+  (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(
