@@ -3,71 +3,67 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interface Lab OÜ — Webflow Native WebOps Partner</title>
+<title>Interface Lab — Webflow Native WebOps Partner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Inter:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
 <style>
   :root {
-    --cream: #F5F5F5;
-    --warm-white: #FAFAFA;
-    --taupe: #ABABAB;
-    --sand: #EBEBEB;
-    --ink: #0D0D0D;
-    --ink-60: rgba(13,13,13,0.55);
-    --ink-30: rgba(13,13,13,0.25);
-    --accent: #555555;
-    --accent-warm: #3B7EF6;
-    --moss: #2563EB;
-    --border: #E0E0E0;
-    --serif: 'Manrope', sans-serif;
-    --sans: 'DM Sans', sans-serif;
-    --mono: 'DM Mono', monospace;
+    --bg:         #EFEFEF;
+    --surface:    #FFFFFF;
+    --surface-2:  #F5F5F5;
+    --ink:        #0D0D0D;
+    --ink-60:     rgba(13,13,13,0.55);
+    --ink-30:     rgba(13,13,13,0.22);
+    --muted:      #888888;
+    --border:     #E2E2E2;
+    --dark:       #111111;
+    --dark-2:     #1A1A1A;
+    --accent:     #0D0D0D;
+    --radius-sm:  10px;
+    --radius-md:  16px;
+    --radius-lg:  24px;
+    --shadow:     0 2px 16px rgba(0,0,0,0.07);
+    --shadow-md:  0 8px 40px rgba(0,0,0,0.10);
+    --grad:       linear-gradient(135deg, #0B1B2B 0%, #0D3257 100%);
+    --grad-dark:  linear-gradient(135deg, #0B1B2B 0%, #0D3257 100%);
+    --grad-text:  linear-gradient(120deg, #1a6dcc 0%, #4fa8ff 100%);
+    --display:    'Manrope', sans-serif;
+    --sans:       'Inter', sans-serif;
+    --mono:       'DM Mono', monospace;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
   html { scroll-behavior: smooth; }
 
   body {
-    background: var(--warm-white);
+    background: var(--bg);
     color: var(--ink);
     font-family: var(--sans);
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.6;
     overflow-x: hidden;
   }
 
-  /* Grain overlay */
-  body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-    pointer-events: none;
-    z-index: 1000;
-    opacity: 0.4;
-  }
-
-  /* NAV */
+  /* ── NAV ── */
   nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 0; left: 0; right: 0;
     z-index: 100;
-    padding: 22px 48px;
+    padding: 20px 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: var(--warm-white);
+    background: rgba(239,239,239,0.92);
+    backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
   .nav-logo {
-    font-family: var(--serif);
-    font-weight: 300;
-    font-size: 18px;
-    letter-spacing: 0.02em;
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: 0.04em;
     color: var(--ink);
     text-decoration: none;
     display: flex;
@@ -75,72 +71,72 @@
     gap: 10px;
   }
   .nav-logo-mark {
-    width: 28px;
-    height: 28px;
-    border: 1px solid var(--ink);
-    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 11px;
-    font-family: var(--mono);
-    font-weight: 400;
   }
   .nav-links {
     display: flex;
-    gap: 40px;
+    gap: 36px;
     list-style: none;
     align-items: center;
   }
   .nav-links a {
     font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink-60);
     text-decoration: none;
     transition: color 0.2s;
   }
-  .nav-links a:hover { color: var(--accent-warm); }
+  .nav-links a:hover { color: var(--ink); }
   .nav-cta {
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink) !important;
-    border: 1px solid var(--ink);
-    padding: 10px 22px;
-    border-radius: 2px;
-    transition: background 0.25s, color 0.25s !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.02em;
+    color: #fff !important;
+    background: var(--grad);
+    border: none !important;
+    padding: 15px 32px !important;
+    border-radius: 100px;
+    transition: opacity 0.2s !important;
   }
-  .nav-cta:hover {
-    background: var(--ink) !important;
-    color: var(--warm-white) !important;
-  }
+  .nav-cta:hover { opacity: 0.88 !important; background: var(--grad) !important; color: #fff !important; }
 
-  /* HERO */
+  /* ── HERO ── */
   .hero {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 120px 0 80px;
+    padding: 140px 0 80px;
     position: relative;
     overflow: hidden;
-    background-color: var(--warm-white);
+    background: var(--bg);
   }
-  .hero-bg-ring {
+  .hero::before {
+    content: '';
     position: absolute;
-    border-radius: 50%;
-    border: 1px solid rgba(0,0,0,0.06);
-    transform: translate(-50%, -50%);
+    top: -20%; left: -10%;
+    width: 70%; height: 80%;
+    background: radial-gradient(ellipse at top left, rgba(13,50,87,0.12) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .hero-bg-ring { display: none; }
+  /* Hero image background strip */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 45%;
+    height: 100%;
+    background: url('https://i.ibb.co/JFnth5YP/image.jpg') center/cover no-repeat;
+    border-radius: 0 0 0 24px;
+    opacity: 0.18;
     pointer-events: none;
   }
-  .hero-bg-ring.r1 { width: 500px; height: 500px; top: 50%; left: 50%; }
-  .hero-bg-ring.r2 { width: 800px; height: 800px; top: 50%; left: 50%; }
-  .hero-bg-ring.r3 { width: 1100px; height: 1100px; top: 50%; left: 50%; }
-  .hero-bg-ring.r4 { width: 1400px; height: 1400px; top: 50%; left: 50%; }
   .hero-content {
     position: relative;
     z-index: 2;
@@ -151,7 +147,7 @@
   .hero-left {
     display: flex;
     flex-direction: column;
-    max-width: 900px;
+    max-width: 100%;
   }
   .hero-eyebrow {
     font-family: var(--mono);
@@ -159,191 +155,111 @@
     font-weight: 300;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--accent);
-    margin-bottom: 28px;
+    color: var(--muted);
+    margin-bottom: 24px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
   }
   .hero-eyebrow::before {
     content: '';
     display: block;
-    width: 32px;
-    height: 1px;
-    background: var(--accent);
+    width: 28px; height: 1px;
+    background: var(--grad);
   }
   .hero-h1 {
-    font-family: var(--serif);
-    font-size: clamp(44px, 5.5vw, 76px);
-    font-weight: 300;
+    text-wrap: balance;
+    font-family: var(--display);
+    font-size: clamp(44px, 5.5vw, 80px);
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: -0.02em;
     color: var(--ink);
-    margin-bottom: 28px;
+    margin-bottom: 32px;
   }
   .hero-h1 em {
     font-style: normal;
-    font-weight: 700;
-    background: linear-gradient(135deg, #3B7EF6 0%, #2563EB 100%);
+    background: var(--grad-text);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    display: block;
+    padding-bottom: 0.1em;
   }
   .hero-sub {
     font-size: 16px;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--ink-60);
-    line-height: 1.75;
-    max-width: 500px;
-    margin-bottom: 44px;
+    line-height: 1.7;
+    max-width: 480px;
+    margin-bottom: 40px;
   }
-  .hero-actions {
-    display: flex;
-    gap: 16px;
-    align-items: center;
-  }
+  .hero-actions { display: flex; gap: 14px; align-items: center; }
   .hero-diagram-wrap { display: none; }
 
   .btn-primary {
-    background: linear-gradient(135deg, #3B7EF6 0%, #2563EB 100%);
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    padding: 16px 36px;
-    border-radius: 4px;
+    background: var(--grad);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 15px 32px;
+    border-radius: 100px;
     text-decoration: none;
     border: none;
-    transition: opacity 0.25s, transform 0.2s;
+    transition: opacity 0.2s, transform 0.2s;
     display: inline-block;
-    box-shadow: 0 4px 16px rgba(59,126,246,0.3);
   }
-  .btn-primary:hover {
-    opacity: 0.88;
-    transform: translateY(-1px);
-  }
+  .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
+
   .btn-ghost {
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.05em;
-    color: var(--accent);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-60);
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 8px;
-    transition: gap 0.2s, color 0.2s;
+    transition: color 0.2s;
   }
-  .btn-ghost:hover { gap: 14px; color: var(--ink); }
+  .btn-ghost:hover { color: var(--ink); }
   .btn-ghost-arrow { font-size: 16px; }
 
-  /* Diagram */
-  .diagram-circle {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    animation: slow-spin 30s linear infinite;
-  }
-  .diagram-circle.c1 {
-    inset: 0;
-    animation-direction: reverse;
-  }
-  .diagram-circle.c2 {
-    inset: 32px;
-    animation-duration: 22s;
-    border-style: dashed;
-    border-color: var(--taupe);
-  }
-  .diagram-circle.c3 {
-    inset: 72px;
-    background: var(--cream);
-    border-color: var(--sand);
-    animation: none;
-  }
-  .diagram-center {
-    position: absolute;
-    inset: 72px;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    gap: 4px;
-  }
-  .diagram-center-label {
-    font-family: var(--serif);
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--ink);
-    line-height: 1.2;
-  }
-  .diagram-center-sub {
-    font-family: var(--mono);
-    font-size: 8px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-  }
-  .diagram-node {
-    position: absolute;
-    width: 56px;
-    height: 56px;
-    background: var(--warm-white);
-    border: 1px solid var(--border);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 3px;
-    transform: translate(-50%, -50%);
-    box-shadow: 0 4px 20px rgba(26,23,20,0.07);
-  }
-  .node-icon { font-size: 15px; }
-  .node-label {
-    font-family: var(--mono);
-    font-size: 7px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #555555;
-    text-align: center;
-  }
-  .node-top    { top: 0; left: 50%; }
-  .node-right  { top: 50%; left: 100%; }
-  .node-bottom { top: 100%; left: 50%; }
-  .node-left   { top: 50%; left: 0; }
-
-  /* Hero stats row */
+  /* ── HERO STATS ── */
   .hero-stats {
     position: relative;
     z-index: 2;
     width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 0;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
+    gap: 12px;
     margin-top: 64px;
-    background: var(--border);
+    background: none;
+    border: none;
+    border-radius: 0;
   }
   .hero-stat {
-    background: var(--warm-white);
-    padding: 32px 40px;
+    background: var(--surface);
+    padding: 28px 32px;
+    border-radius: var(--radius-md);
     display: flex;
     flex-direction: column;
     gap: 8px;
+    box-shadow: var(--shadow);
   }
   .hero-stat-num {
-    font-family: var(--serif);
+    font-family: var(--display);
     font-size: 48px;
-    font-weight: 700;
-    color: var(--ink);
+    font-weight: 600;
+    background: var(--grad);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     line-height: 1;
     letter-spacing: -0.02em;
+    text-transform: uppercase;
   }
-  .hero-stat-num em { color: #BBBBBB; font-style: normal; font-weight: 400; font-size: 32px; }
+  .hero-stat-num em { font-family: var(--sans); color: var(--ink-60); font-style: normal; font-weight: 400; font-size: 18px; letter-spacing: 0; margin-left: 3px; vertical-align: middle; }
   .hero-stat-label {
     font-size: 13px;
     font-weight: 400;
@@ -351,22 +267,15 @@
     line-height: 1.5;
   }
 
-  @keyframes slow-spin {
-    from { transform: rotate(0deg); }
-    to   { transform: rotate(360deg); }
-  }
-
-  /* TICKER */
+  /* ── TICKER ── */
   .ticker {
-    background: var(--ink);
-    color: var(--cream);
+    background: var(--dark);
+    color: #fff;
     padding: 14px 0;
     overflow: hidden;
-    position: relative;
   }
   .ticker-track {
     display: flex;
-    gap: 0;
     animation: ticker-scroll 28s linear infinite;
     white-space: nowrap;
     width: max-content;
@@ -375,39 +284,39 @@
     display: inline-flex;
     align-items: center;
     gap: 20px;
-    padding: 0 40px;
+    padding: 0 36px;
     font-family: var(--mono);
     font-size: 11px;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    opacity: 0.85;
+    opacity: 0.75;
   }
-  .ticker-dot { width: 4px; height: 4px; background: var(--accent-warm); border-radius: 50%; flex-shrink: 0; }
+  .ticker-dot { width: 4px; height: 4px; background: #fff; border-radius: 50%; flex-shrink: 0; opacity: 0.4; }
   @keyframes ticker-scroll {
     from { transform: translateX(0); }
     to   { transform: translateX(-50%); }
   }
 
-  /* SECTION SHARED */
+  /* ── SECTION SHARED ── */
   section { position: relative; }
   .section-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
   .section-label {
     font-family: var(--mono);
     font-size: 10px;
-    font-weight: 300;
+    font-weight: 400;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #555555;
-    margin-bottom: 20px;
+    color: var(--muted);
+    margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 10px;
   }
 
-  /* ABOUT */
+  /* ── ABOUT ── */
   .about {
     padding: 120px 0;
-    background: var(--cream);
+    background: var(--bg);
   }
   .about-grid {
     display: grid;
@@ -416,363 +325,425 @@
     align-items: start;
   }
   .about-h2 {
-    font-family: var(--serif);
-    font-size: clamp(36px, 4vw, 58px);
-    font-weight: 300;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    text-wrap: balance;
+    font-family: var(--display);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
   }
-  .about-h2 em { font-style: normal; font-weight: 600; color: var(--accent-warm); }
-  .about-right { padding-top: 16px; }
+  .about-h2 em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .about-right { padding-top: 8px; }
   .about-text {
     font-size: 15px;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--ink-60);
     line-height: 1.8;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
   .pillars {
     display: flex;
     flex-direction: column;
     gap: 0;
-    margin-top: 40px;
-    border-top: 1px solid var(--border);
+    margin-top: 36px;
   }
   .pillar {
-    padding: 24px 0;
-    border-bottom: 1px solid var(--border);
+    padding: 20px 0;
+    border-top: 1px solid var(--border);
     display: grid;
-    grid-template-columns: 24px 1fr;
-    gap: 20px;
+    grid-template-columns: 28px 1fr;
+    gap: 16px;
     align-items: start;
     cursor: default;
-    transition: background 0.2s;
+    transition: padding 0.2s;
   }
-  .pillar:hover { padding-left: 12px; padding-right: 12px; margin: 0 -12px; border-radius: 4px; background: var(--sand); }
+  .pillar:last-child { border-bottom: 1px solid var(--border); }
+  .pillar:hover { padding-left: 8px; }
   .pillar-num {
     font-family: var(--mono);
     font-size: 10px;
     font-weight: 300;
     color: var(--ink-30);
-    padding-top: 4px;
+    padding-top: 3px;
   }
   .pillar-title {
     font-family: var(--sans);
     font-size: 14px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    margin-bottom: 6px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 5px;
+    color: var(--ink);
   }
   .pillar-desc {
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 13px;
+    font-weight: 400;
     color: var(--ink-60);
     line-height: 1.7;
   }
 
-  /* ENGINES — uses same card language as services */
+  /* ── ENGINES ── */
   .engines {
     padding: 120px 0;
-    background: var(--warm-white);
+    background: var(--surface-2);
   }
   .engines-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
+    gap: 16px;
   }
   .engine-card {
-    background: var(--warm-white);
-    padding: 48px 40px;
+    background: var(--surface);
+    padding: 44px 40px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    transition: background 0.25s;
+    gap: 18px;
+    transition: transform 0.25s, box-shadow 0.25s;
     position: relative;
     overflow: hidden;
   }
-  .engine-card::after {
+  .engine-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .engine-card::before {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 40px;
-    right: 40px;
+    top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--accent-warm), transparent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.35s;
+    background: var(--grad);
+    opacity: 0;
+    transition: opacity 0.25s;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
   }
-  .engine-card:hover { background: var(--cream); }
-  .engine-card:hover::after { transform: scaleX(1); }
+  .engine-card:hover::before { opacity: 1; }
+  .engine-card::after { display: none; }
   .engine-icon-wrap {
-    width: 48px;
-    height: 48px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
+    width: 48px; height: 48px;
+    background: var(--bg);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 20px;
-    background: var(--cream);
+    border: none;
   }
   .engine-tag {
     font-family: var(--mono);
     font-size: 10px;
-    font-weight: 400;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #555555;
+    color: var(--muted);
   }
   .engine-title {
-    font-family: var(--serif);
-    font-size: 26px;
-    font-weight: 300;
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 600;
     line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: var(--ink);
   }
   .engine-desc {
-    font-size: 13px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 400;
     color: var(--ink-60);
     line-height: 1.75;
   }
-  .engine-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 4px;
-  }
+  .engine-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
   .engine-pill {
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    padding: 5px 12px;
+    padding: 5px 14px;
     border-radius: 100px;
     border: 1px solid var(--border);
-    color: #444444;
-    background: var(--cream);
+    color: var(--ink-60);
+    background: var(--bg);
   }
 
-  /* AEO CALLOUT — uses methodology dark strip pattern */
+  /* ── AEO SECTION ── */
   .aeo-callout {
-    background: #111111;
-    padding: 80px 0;
+    background: var(--bg);
+    padding: 120px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: none;
   }
   .aeo-callout-inner {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 48px;
+  }
+  .aeo-top {
     display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 72px;
-    align-items: center;
-  }
-  .aeo-badge-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
-    flex-shrink: 0;
-  }
-  .aeo-badge {
-    width: 96px;
-    height: 96px;
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: var(--mono);
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    color: #3B7EF6;
-    text-transform: uppercase;
-  }
-  .aeo-badge-label {
-    font-family: var(--mono);
-    font-size: 9px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(255,255,255,0.25);
-    text-align: center;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: end;
+    margin-bottom: 48px;
   }
   .aeo-callout-eyebrow {
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
+    color: var(--muted);
     margin-bottom: 16px;
     display: flex;
     align-items: center;
     gap: 10px;
   }
   .aeo-callout-h2 {
-    font-family: var(--serif);
-    font-size: clamp(28px, 3.5vw, 44px);
-    font-weight: 300;
-    color: #F0F0F0;
-    line-height: 1.3;
-    letter-spacing: -0.02em;
-    margin-bottom: 16px;
+    text-wrap: balance;
+    font-family: var(--display);
+    font-size: clamp(30px, 3.5vw, 50px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
   }
-  .aeo-callout-h2 em {
-    font-style: normal;
-    font-weight: 700;
-    background: linear-gradient(135deg, #3B7EF6 0%, #2563EB 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  .aeo-callout-h2 em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .aeo-callout-p {
-    font-size: 14px;
-    font-weight: 300;
-    color: rgba(255,255,255,0.45);
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink-60);
     line-height: 1.8;
-    max-width: 640px;
+  }
+  .aeo-platforms {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .aeo-platform {
+    background: var(--surface);
+    padding: 36px 32px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .aeo-platform::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--grad);
+    opacity: 0;
+    transition: opacity 0.25s;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+  .aeo-platform:hover::before { opacity: 1; }
+  .aeo-platform::after { display: none; }
+  .aeo-platform:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+  .aeo-platform-name {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .aeo-platform-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .aeo-platform-desc {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--ink-60);
+    line-height: 1.7;
   }
 
-  /* SERVICES */
+  /* ── SERVICES ── */
   .services {
     padding: 120px 0;
-    background: var(--warm-white);
+    background: var(--surface-2);
   }
   .services-header {
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
-    margin-bottom: 64px;
+    margin-bottom: 48px;
   }
   .services-h2 {
-    font-family: var(--serif);
-    font-size: clamp(36px, 4vw, 58px);
-    font-weight: 300;
-    line-height: 1.25;
-    max-width: 800px;
+    text-wrap: balance;
+    font-family: var(--display);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    max-width: 700px;
   }
-  .services-h2 em { font-style: normal; font-weight: 600; color: var(--accent-warm); }
+  .services-h2 em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .services-note {
-    font-size: 13px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 400;
     color: var(--ink-60);
     max-width: 260px;
     text-align: right;
-    line-height: 1.6;
+    line-height: 1.65;
+    padding-bottom: 4px;
   }
   .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 2px;
-    background: var(--border);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    overflow: hidden;
+    gap: 16px;
+    background: none;
+    border: none;
+    border-radius: 0;
   }
   .service-card {
-    background: var(--warm-white);
-    padding: 48px 40px;
+    background: var(--surface);
+    padding: 44px 36px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow);
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    transition: background 0.25s;
+    gap: 16px;
+    transition: transform 0.25s, box-shadow 0.25s;
     position: relative;
     overflow: hidden;
     align-items: flex-start;
   }
-  .service-card::after {
+  .service-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); background: var(--surface); }
+  .service-card::before {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 40px;
-    right: 40px;
+    top: 0; left: 0; right: 0;
     height: 2px;
-    background: linear-gradient(90deg, var(--accent-warm), transparent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.35s;
+    background: var(--grad);
+    opacity: 0;
+    transition: opacity 0.25s;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
   }
-  .service-card:hover { background: var(--cream); }
-  .service-card:hover::after { transform: scaleX(1); }
+  .service-card:hover::before { opacity: 1; }
+  .service-card::after { display: none; }
   .service-icon-wrap {
-    width: 48px;
-    height: 48px;
-    border: 1px solid var(--border);
-    border-radius: 4px;
+    width: 48px; height: 48px;
+    background: var(--bg);
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 20px;
-    background: var(--cream);
+    border: none;
   }
   .service-tag {
     font-family: var(--mono);
     font-size: 10px;
-    font-weight: 400;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #555555;
+    color: var(--muted);
   }
   .service-title {
-    font-family: var(--serif);
-    font-size: 26px;
-    font-weight: 300;
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 600;
     line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: var(--ink);
   }
   .service-desc {
     font-size: 13px;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--ink-60);
     line-height: 1.75;
   }
 
-  /* METHODOLOGY */
+  /* ── STACK ── */
+  .stack {
+    padding: 72px 0;
+    background: var(--grad-dark);
+    border-top: none;
+    border-bottom: none;
+  }
+  .stack-inner { display: flex; align-items: center; gap: 48px; }
+  .stack-label-text {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .stack-divider {
+    width: 1px; height: 36px;
+    background: rgba(255,255,255,0.1);
+    flex-shrink: 0;
+  }
+  .stack-items { display: flex; flex-wrap: wrap; gap: 10px; flex: 1; }
+  .stack-logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 100px;
+    padding: 8px 18px 8px 12px;
+    font-size: 13px;
+    font-weight: 400;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 0.01em;
+    transition: background 0.2s, color 0.2s;
+  }
+  .stack-logo:hover { background: rgba(255,255,255,0.14); color: #fff; }
+  .stack-logo img, .stack-logo svg {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    opacity: 0.7;
+    flex-shrink: 0;
+    filter: brightness(0) invert(1);
+  }
+  .stack-logo:hover img, .stack-logo:hover svg { opacity: 1; }
+
+  /* ── METHODOLOGY ── */
   .methodology {
     padding: 120px 0;
-    background: #111111;
+    background: linear-gradient(160deg, #0B1B2B 0%, #0D3257 60%, #0B1B2B 100%);
     color: #F0F0F0;
   }
-  .methodology .section-label { color: rgba(255,255,255,0.4); letter-spacing: 0.16em; }
+  .methodology .section-label { color: rgba(255,255,255,0.35); }
   .method-h2 {
-    font-family: var(--serif);
-    font-size: clamp(36px, 4vw, 58px);
-    font-weight: 300;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
+    text-wrap: balance;
+    font-family: var(--display);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
     color: #F0F0F0;
-    margin-bottom: 72px;
+    margin-bottom: 64px;
     max-width: 600px;
   }
-  .method-h2 em {
-    font-style: normal;
-    font-weight: 700;
-    background: linear-gradient(135deg, #3B7EF6 0%, #2563EB 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  .method-h2 em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .phases {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 0;
-    border-left: 1px solid rgba(255,255,255,0.08);
+    gap: 16px;
+    border: none;
   }
   .phase {
-    padding: 40px;
-    border-right: 1px solid rgba(255,255,255,0.08);
-    position: relative;
+    padding: 36px 32px;
+    border-right: none;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: var(--radius-md);
+    background: rgba(255,255,255,0.03);
+    transition: background 0.2s;
   }
+  .phase:hover { background: rgba(255,255,255,0.06); }
   .phase-num {
-    font-family: var(--mono);
-    font-size: 64px;
-    font-weight: 700;
+    font-family: var(--display);
+    font-size: 72px;
+    font-weight: 600;
     color: rgba(255,255,255,0.05);
     line-height: 1;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     display: block;
     letter-spacing: -0.02em;
   }
@@ -781,399 +752,162 @@
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-    margin-bottom: 14px;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 12px;
     display: block;
   }
   .phase-title {
-    font-family: var(--serif);
-    font-size: 20px;
+    font-family: var(--display);
+    font-size: 18px;
     font-weight: 600;
     color: #F0F0F0;
-    margin-bottom: 12px;
-    line-height: 1.3;
+    margin-bottom: 10px;
+    line-height: 1.2;
   }
   .phase-desc {
     font-size: 13px;
-    font-weight: 300;
-    color: rgba(255,255,255,0.45);
-    line-height: 1.75;
+    font-weight: 400;
+    color: rgba(255,255,255,0.4);
+    line-height: 1.7;
   }
   .phase-items {
-    margin-top: 20px;
+    margin-top: 18px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     list-style: none;
   }
   .phase-items li {
     font-size: 13px;
-    font-weight: 300;
-    color: rgba(255,255,255,0.5);
+    font-weight: 400;
+    color: rgba(255,255,255,0.45);
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    line-height: 1.55;
+    line-height: 1.5;
   }
   .phase-items li::before {
     content: '·';
-    color: #3B7EF6;
+    color: rgba(255,255,255,0.3);
     font-size: 18px;
     flex-shrink: 0;
-    line-height: 1.2;
+    line-height: 1.1;
   }
 
-  /* STACK */
-  .stack {
-    padding: 80px 0;
-    background: var(--cream);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  .stack-inner {
-    display: flex;
-    align-items: center;
-    gap: 60px;
-  }
-  .stack-label-text {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--accent);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-  .stack-divider {
-    width: 1px;
-    height: 40px;
-    background: var(--border);
-    flex-shrink: 0;
-  }
-  .stack-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    flex: 1;
-  }
-  .stack-pill {
-    background: var(--warm-white);
-    border: 1px solid var(--border);
-    border-radius: 100px;
-    padding: 9px 20px;
-    font-size: 13px;
-    font-weight: 400;
-    color: var(--ink);
-    letter-spacing: 0.01em;
-    transition: border-color 0.2s, background 0.2s;
-  }
-  .stack-pill:hover {
-    border-color: var(--accent-warm);
-    background: var(--sand);
-  }
-
-  /* PRICING */
-  .pricing {
-    padding: 120px 0;
-    background: var(--warm-white);
-  }
-  .pricing-header {
-    text-align: center;
-    margin-bottom: 72px;
-  }
-  .pricing-h2 {
-    font-family: var(--serif);
-    font-size: clamp(36px, 4vw, 58px);
-    font-weight: 300;
-    line-height: 1.25;
-    margin-bottom: 16px;
-  }
-  .pricing-h2 em { font-style: normal; font-weight: 700; color: var(--ink); }
-  .pricing-sub {
-    font-size: 15px;
-    font-weight: 300;
-    color: var(--ink-60);
-  }
-  .pricing-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    align-items: stretch;
-  }
-  .pricing-card {
-    display: flex;
-    flex-direction: column;
-  }
-  .pricing-card-body {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-  }
-  .pricing-features {
-    flex: 1;
-  }
-  .pricing-card {
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    overflow: hidden;
-    background: var(--warm-white);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
-  .pricing-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-  }
-  .pricing-card.featured {
-    background: #111111;
-    border-color: #111111;
-  }
-  .pricing-card-head {
-    padding: 36px 36px 28px;
-    border-bottom: 1px solid var(--border);
-  }
-  .pricing-card.featured .pricing-card-head {
-    border-bottom-color: rgba(255,255,255,0.08);
-  }
-  .pricing-tier {
-    font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #888888;
-    margin-bottom: 16px;
-  }
-  .pricing-card.featured .pricing-tier { color: rgba(255,255,255,0.35); }
-  .pricing-name {
-    font-family: var(--serif);
-    font-size: 26px;
-    font-weight: 600;
-    margin-bottom: 12px;
-    color: var(--ink);
-    line-height: 1.25;
-  }
-  .pricing-card.featured .pricing-name { color: #F0F0F0; }
-  .pricing-price {
-    font-family: var(--serif);
-    font-size: 48px;
-    font-weight: 700;
-    color: var(--ink);
-    line-height: 1;
-  }
-  .pricing-card.featured .pricing-price { color: #F0F0F0; }
-  .pricing-price sup {
-    font-size: 20px;
-    vertical-align: super;
-    font-family: var(--sans);
-    font-weight: 400;
-  }
-  .pricing-cadence {
-    font-size: 12px;
-    font-weight: 300;
-    color: #999999;
-    margin-left: 6px;
-    font-family: var(--sans);
-  }
-  .pricing-card.featured .pricing-cadence { color: rgba(255,255,255,0.3); }
-  .pricing-card-body {
-    padding: 32px 36px 36px;
-  }
-  .pricing-features {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    margin-bottom: 32px;
-  }
-  .pricing-features li {
-    font-size: 13px;
-    font-weight: 400;
-    color: #444444;
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    line-height: 1.55;
-  }
-  .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.55); }
-  .pricing-features li::before {
-    content: '✓';
-    color: #888888;
-    font-size: 13px;
-    font-weight: 600;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .pricing-card.featured .pricing-features li::before { color: rgba(255,255,255,0.3); }
-  .pricing-cta {
-    display: block;
-    text-align: center;
-    padding: 14px;
-    border: 1px solid #D0D0D0;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
-    transition: background 0.25s, color 0.25s, border-color 0.25s;
-  }
-  .pricing-cta:hover { background: var(--ink); color: #FAFAFA; border-color: var(--ink); }
-  .pricing-card.featured .pricing-cta {
-    background: linear-gradient(135deg, #3B7EF6 0%, #2563EB 100%);
-    border-color: transparent;
-    color: #ffffff;
-    box-shadow: 0 4px 16px rgba(59,126,246,0.35);
-  }
-  .pricing-card.featured .pricing-cta:hover {
-    opacity: 0.88;
-    transform: translateY(-1px);
-    background: linear-gradient(135deg, #3B7EF6 0%, #2563EB 100%);
-    border-color: transparent;
-    color: #ffffff;
-  }
-
-  /* ICP */
+  /* ── ICP ── */
   .icp {
     padding: 120px 0;
-    background: var(--cream);
+    background: var(--bg);
   }
-  .icp-tabs-wrapper {
+  .icp-accordion {
     margin-top: 56px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
+    border-top: 1px solid var(--border);
+  }
+  .icp-item {
+    border-bottom: 1px solid var(--border);
     overflow: hidden;
   }
-  .icp-tab-nav {
+  .icp-item-header {
     display: flex;
-    overflow-x: auto;
-    scrollbar-width: none;
-    background: var(--cream);
-    border-bottom: 1px solid var(--border);
-  }
-  .icp-tab-nav::-webkit-scrollbar { display: none; }
-  .icp-tab-btn {
-    flex-shrink: 0;
-    padding: 18px 24px;
-    font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 400;
-    letter-spacing: 0.03em;
-    color: var(--ink-60);
+    align-items: center;
+    gap: 32px;
+    padding: 28px 0;
+    cursor: pointer;
     background: none;
     border: none;
-    border-right: 1px solid var(--border);
-    border-bottom: 2px solid transparent;
-    cursor: pointer;
-    transition: color 0.2s, background 0.2s, border-bottom-color 0.2s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    white-space: nowrap;
-    margin-bottom: -1px;
+    width: 100%;
+    text-align: left;
+    transition: background 0.2s;
   }
-  .icp-tab-btn:last-child { border-right: none; }
-  .icp-tab-btn .tab-icon { font-size: 15px; }
-  .icp-tab-btn:hover { color: var(--ink); background: var(--sand); }
-  .icp-tab-btn.active {
-    color: var(--ink);
-    font-weight: 500;
-    background: var(--warm-white);
-    border-bottom-color: var(--accent-warm);
-  }
-  .icp-panel-wrap { background: var(--warm-white); }
-  .icp-panel { display: none; grid-template-columns: 1fr 1fr; min-height: 340px; }
-  .icp-panel.active { display: grid; }
-  .icp-panel-left {
-    padding: 56px 52px;
-    border-right: 1px solid var(--border);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .icp-panel-right {
-    padding: 56px 52px;
-    background: var(--cream);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .icp-panel-eyebrow {
+  .icp-item-header:hover .icp-item-title { color: var(--ink); }
+  .icp-item-num {
     font-family: var(--mono);
-    font-size: 10px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: #888888;
-    margin-bottom: 16px;
+    font-size: 12px;
+    color: var(--ink-30);
+    min-width: 36px;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+  }
+  .icp-item-title {
+    font-family: var(--display);
+    font-size: clamp(20px, 2.2vw, 28px);
+    font-weight: 600;
+    color: var(--ink-60);
+    flex: 1;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    transition: color 0.2s;
+    text-wrap: balance;
+  }
+  .icp-item.open .icp-item-title { color: var(--ink); }
+  .icp-item-arrow {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
     display: flex;
     align-items: center;
-    gap: 8px;
-  }
-  .icp-panel-eyebrow::before {
-    content: '';
-    display: block;
-    width: 20px;
-    height: 1px;
-    background: #BBBBBB;
+    justify-content: center;
     flex-shrink: 0;
+    transition: background 0.25s, border-color 0.25s, transform 0.3s;
+    font-size: 18px;
+    color: var(--ink);
   }
-  .icp-panel-title {
-    font-family: var(--serif);
-    font-size: clamp(28px, 3vw, 42px);
-    font-weight: 300;
-    line-height: 1.2;
-    margin-bottom: 24px;
+  .icp-item.open .icp-item-arrow {
+    background: var(--grad);
+    border-color: transparent;
+    color: #fff;
+    transform: rotate(90deg);
   }
-  .icp-panel-title em { font-style: normal; font-weight: 700; color: var(--ink); }
-  .icp-panel-pain {
+  .icp-item-body {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    padding: 0 0 40px 68px;
+    align-items: start;
+  }
+  .icp-item.open .icp-item-body { display: grid; }
+  .icp-item-left { display: flex; flex-direction: column; gap: 24px; }
+  .icp-item-pain {
     font-size: 14px;
-    font-weight: 300;
+    font-weight: 400;
     color: var(--ink-60);
     line-height: 1.75;
     font-style: italic;
-    padding: 20px 20px 20px 20px;
-    border-left: 2px solid #D0D0D0;
-    background: var(--sand);
-    border-radius: 0 4px 4px 0;
+    padding: 16px 20px;
+    border-left: 3px solid transparent;
+    border-image: var(--grad) 1;
+    background: var(--surface);
+    border-radius: 0 10px 10px 0;
   }
-  .icp-panel-pain::before {
-    content: '"';
-    font-family: var(--serif);
-    font-size: 32px;
-    color: #AAAAAA;
-    line-height: 0;
-    vertical-align: -12px;
-    margin-right: 4px;
-    font-style: normal;
-  }
-  .icp-panel-label {
+  .icp-item-label {
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #888888;
-    margin-bottom: 20px;
+    color: var(--muted);
+    margin-bottom: 14px;
   }
   .icp-deliverables {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: 14px;
-    margin-bottom: 28px;
+    gap: 12px;
+    margin-bottom: 20px;
   }
   .icp-deliverables li {
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    font-size: 13px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 400;
     color: var(--ink);
     line-height: 1.5;
   }
   .icp-deliverables li::before {
     content: '→';
-    color: #999999;
+    color: var(--muted);
     font-size: 13px;
-    font-weight: 400;
     flex-shrink: 0;
     margin-top: 2px;
   }
@@ -1183,107 +917,238 @@
     font-size: 10px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    padding: 5px 12px;
+    padding: 5px 14px;
     border-radius: 100px;
     border: 1px solid var(--border);
-    color: #444444;
-    background: var(--warm-white);
+    color: var(--ink-60);
+    background: var(--surface);
   }
 
-  /* CTA SECTION */
+  /* ── PRICING ── */
+  .pricing {
+    padding: 120px 0;
+    background: var(--bg);
+  }
+  .pricing-header { text-align: center; margin-bottom: 64px; }
+  .pricing-h2 {
+    text-wrap: balance;
+    font-family: var(--display);
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin-bottom: 14px;
+    color: var(--ink);
+  }
+  .pricing-h2 em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .pricing-sub {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--ink-60);
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    align-items: stretch;
+  }
+  .pricing-card {
+    border: none;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .pricing-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+  .pricing-card.featured {
+    background: linear-gradient(160deg, #0D3257 0%, #0B1B2B 100%);
+    border: 1px solid rgba(13,50,87,0.5);
+    box-shadow: 0 16px 60px rgba(11,27,43,0.4);
+  }
+  .pricing-card-head {
+    padding: 36px 36px 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .pricing-card.featured .pricing-card-head { border-bottom-color: rgba(255,255,255,0.08); }
+  .pricing-tier {
+    font-family: var(--mono);
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+  .pricing-card.featured .pricing-tier { color: rgba(255,255,255,0.3); }
+  .pricing-name {
+    font-family: var(--display);
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  .pricing-card.featured .pricing-name { color: #F0F0F0; }
+  .pricing-price {
+    font-family: var(--display);
+    font-size: 48px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+  .pricing-card.featured .pricing-price { color: #F0F0F0; }
+  .pricing-price sup {
+    font-size: 22px;
+    vertical-align: super;
+    font-family: var(--sans);
+    font-weight: 400;
+  }
+  .pricing-cadence {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--muted);
+    margin-left: 6px;
+    font-family: var(--sans);
+  }
+  .pricing-card.featured .pricing-cadence { color: rgba(255,255,255,0.3); }
+  .pricing-card-body {
+    padding: 28px 36px 36px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .pricing-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 13px;
+    margin-bottom: 28px;
+    flex: 1;
+  }
+  .pricing-features li {
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink-60);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+  }
+  .pricing-card.featured .pricing-features li { color: rgba(255,255,255,0.5); }
+  .pricing-features li::before {
+    content: '✓';
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .pricing-card.featured .pricing-features li::before { color: rgba(255,255,255,0.3); }
+  .pricing-cta {
+    display: block;
+    text-align: center;
+    padding: 14px;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    text-decoration: none;
+    transition: background 0.25s, color 0.25s, border-color 0.25s;
+  }
+  .pricing-cta:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+  .pricing-card.featured .pricing-cta {
+    background: #fff;
+    border-color: transparent;
+    color: var(--ink);
+  }
+  .pricing-card.featured .pricing-features li::before { color: rgba(255,255,255,0.5); }
+  .pricing-card.featured .pricing-cta:hover { background: rgba(255,255,255,0.85); }
+
+  /* ── CTA SECTION ── */
   .cta-section {
     padding: 140px 48px;
-    background: #111111;
+    background: linear-gradient(135deg, #0B1B2B 0%, #0D3257 50%, #0B1B2B 100%);
     text-align: center;
     position: relative;
     overflow: hidden;
   }
-  .cta-bg-ring {
-    position: absolute;
-    border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.05);
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-  .cta-bg-ring.r1 { width: 600px; height: 600px; top: 50%; left: 50%; }
-  .cta-bg-ring.r2 { width: 900px; height: 900px; top: 50%; left: 50%; }
-  .cta-bg-ring.r3 { width: 1200px; height: 1200px; top: 50%; left: 50%; }
+  .cta-bg-ring { display: none; }
   .cta-label {
     font-family: var(--mono);
     font-size: 10px;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.35);
-    margin-bottom: 24px;
+    color: rgba(255,255,255,0.3);
+    margin-bottom: 20px;
     display: block;
   }
   .cta-h2 {
-    font-family: var(--serif);
-    font-size: clamp(42px, 5.5vw, 78px);
-    font-weight: 300;
-    color: #F0F0F0;
+    text-wrap: balance;
+    font-family: var(--display);
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 600;
     line-height: 1.2;
-    margin-bottom: 28px;
+    letter-spacing: -0.01em;
+    color: #F0F0F0;
+    margin-bottom: 24px;
   }
-  .cta-h2 em {
-    font-style: normal;
-    font-weight: 700;
-    background: linear-gradient(135deg, #3B7EF6 0%, #2563EB 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
+  .cta-h2 em { font-style: normal; background: var(--grad-text); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   .cta-sub {
-    font-size: 15px;
-    font-weight: 300;
+    font-size: 16px;
+    font-weight: 400;
     color: rgba(255,255,255,0.45);
     line-height: 1.75;
     max-width: 480px;
-    margin: 0 auto 48px;
+    margin: 0 auto 44px;
   }
-  .cta-actions {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-  }
+  .cta-actions { display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
   .btn-light {
-    background: linear-gradient(135deg, #3B7EF6 0%, #2563EB 100%);
-    color: #ffffff;
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    padding: 16px 40px;
-    border-radius: 4px;
+    background: #fff;
+    color: var(--ink);
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 15px 36px;
+    border-radius: 100px;
     text-decoration: none;
     border: none;
-    transition: opacity 0.25s, transform 0.2s;
+    transition: opacity 0.2s, transform 0.2s;
     display: inline-block;
-    box-shadow: 0 4px 20px rgba(59,126,246,0.35);
   }
   .btn-light:hover { opacity: 0.88; transform: translateY(-1px); }
   .btn-outline-light {
-    font-size: 13px;
-    font-weight: 400;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: #ffffff55;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.5);
     text-decoration: none;
-    border: 1px solid #ffffff22;
-    padding: 16px 36px;
-    border-radius: 2px;
+    border: 1px solid rgba(255,255,255,0.2);
+    padding: 15px 32px;
+    border-radius: 100px;
     transition: color 0.2s, border-color 0.2s;
     display: inline-block;
   }
-  .btn-outline-light:hover { color: var(--cream); border-color: #ffffff55; }
+  .btn-outline-light:hover { color: #fff; border-color: rgba(255,255,255,0.5); }
 
-  /* FOOTER */
+  /* ── FOOTER ── */
   footer {
-    background: #111111;
-    border-top: 1px solid rgba(255,255,255,0.07);
+    background: linear-gradient(160deg, #0B1B2B 0%, #0D3257 100%);
+    border-top: 1px solid rgba(255,255,255,0.08);
     padding: 60px 48px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  footer::before {
+    content: '';
+    position: absolute;
+    bottom: -40%; right: -10%;
+    width: 60%; height: 100%;
+    background: radial-gradient(ellipse, rgba(255,255,255,0.03) 0%, transparent 65%);
+    pointer-events: none;
   }
   .footer-inner {
     max-width: 1280px;
@@ -1295,32 +1160,21 @@
   }
   .footer-brand { display: flex; flex-direction: column; gap: 16px; }
   .footer-logo {
-    font-family: var(--serif);
-    font-size: 20px;
-    font-weight: 300;
-    color: var(--cream);
+    font-family: var(--display);
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: #fff;
     text-decoration: none;
     display: flex;
     align-items: center;
     gap: 10px;
   }
-  .footer-logo-mark {
-    width: 28px;
-    height: 28px;
-    border: 1px solid #ffffff33;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 11px;
-    font-family: var(--mono);
-    font-weight: 400;
-    color: var(--cream);
-  }
+  .footer-logo-mark { display: none; }
   .footer-tagline {
     font-size: 13px;
-    font-weight: 300;
-    color: #ffffff44;
+    font-weight: 400;
+    color: rgba(255,255,255,0.35);
     line-height: 1.65;
     max-width: 280px;
   }
@@ -1329,84 +1183,97 @@
     font-size: 10px;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #ffffff33;
-    margin-bottom: 20px;
+    color: rgba(255,255,255,0.25);
+    margin-bottom: 18px;
   }
-  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 11px; }
   .footer-links a {
     font-size: 13px;
-    font-weight: 300;
-    color: #ffffff55;
+    font-weight: 400;
+    color: rgba(255,255,255,0.45);
     text-decoration: none;
     transition: color 0.2s;
   }
-  .footer-links a:hover { color: var(--cream); }
+  .footer-links a:hover { color: #fff; }
   .footer-bottom {
     max-width: 1280px;
     margin: 0 auto;
-    padding-top: 28px;
-    border-top: 1px solid #ffffff10;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.07);
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
   .footer-copy {
     font-size: 12px;
-    font-weight: 300;
-    color: #ffffff25;
+    font-weight: 400;
+    color: rgba(255,255,255,0.2);
     font-family: var(--mono);
   }
-  .footer-bottom-links { display: flex; gap: 28px; list-style: none; }
+  .footer-bottom-links { display: flex; gap: 24px; list-style: none; }
   .footer-bottom-links a {
     font-size: 12px;
-    font-weight: 300;
-    color: #ffffff25;
+    font-weight: 400;
+    color: rgba(255,255,255,0.2);
     text-decoration: none;
-    letter-spacing: 0.04em;
     transition: color 0.2s;
   }
-  .footer-bottom-links a:hover { color: #ffffff55; }
+  .footer-bottom-links a:hover { color: rgba(255,255,255,0.5); }
 
-  /* ANIMATIONS */
+  /* ── MATERIAL SYMBOLS ── */
+  .mi {
+    font-size: 20px;
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    line-height: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: inherit;
+    user-select: none;
+  }
+  .icp-tab-btn .mi { font-size: 14px; }
+
+  /* ── ANIMATIONS ── */
   .fade-up { opacity: 1; transform: none; }
   .fade-up.visible { opacity: 1; transform: none; }
 
-  /* MOBILE */
+  /* ── MOBILE ── */
   @media (max-width: 900px) {
-    nav { padding: 20px 24px; }
+    nav { padding: 18px 24px; }
     .nav-links { display: none; }
-    .hero { padding: 100px 0 60px; }
-    .hero-content { grid-template-columns: 1fr; gap: 48px; }
+    .hero { padding: 110px 0 60px; }
+    .hero::after { display: none; }
     .hero-stats { grid-template-columns: 1fr; }
     .section-inner { padding: 0 24px; }
     .about-grid { grid-template-columns: 1fr; }
     .engines-grid, .services-grid, .phases, .pricing-grid { grid-template-columns: 1fr; }
     .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
     .services-note { text-align: left; }
-    .aeo-callout-inner { grid-template-columns: 1fr; gap: 36px; }
+    .aeo-top { grid-template-columns: 1fr; gap: 20px; margin-bottom: 32px; }
+    .aeo-platforms { grid-template-columns: 1fr; }
     .icp-panel { grid-template-columns: 1fr; }
-    .icp-panel-left { border-right: none; border-bottom: 1px solid var(--border); padding: 36px 28px; }
-    .icp-panel-right { padding: 36px 28px; }
+    .icp-panel-left { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 24px; }
+    .icp-panel-right { padding: 32px 24px; }
     .icp-tab-btn { padding: 14px 16px; font-size: 11px; }
     .footer-inner { grid-template-columns: 1fr 1fr; }
     .stack-inner { flex-wrap: wrap; }
-    .footer-bottom { flex-direction: column; gap: 16px; }
+    .footer-bottom { flex-direction: column; gap: 12px; }
+    .cta-section { padding: 100px 24px; }
   }
 </style>
 </head>
 <body>
 
+
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">
-    <span class="nav-logo-mark">IL</span>
-    Interface Lab OÜ
+  <a href="#" class="nav-logo"><svg width="36" height="21" viewBox="0 0 264 152" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 7.99999C0 3.58171 3.58172 0 8 0H166.98C171.399 0 174.98 3.58172 174.98 8V55.0057C174.98 59.424 171.399 63.0057 166.98 63.0057H7.99999C3.58172 63.0057 0 59.424 0 55.0057V7.99999Z" fill="#0D0D0D"/><path d="M0 96.5268C0 92.1086 3.58172 88.5269 8 88.5269H255.446C259.864 88.5269 263.446 92.1086 263.446 96.5269V143.533C263.446 147.951 259.864 151.533 255.446 151.533H7.99999C3.58171 151.533 0 147.951 0 143.533V96.5268Z" fill="#0D0D0D"/></svg>Interface Lab
   </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#methodology">Methodology</a></li>
     <li><a href="#pricing">Pricing</a></li>
-    <li><a href="https://cal.com/interfacelab.pro/30min" target="_blank" class="nav-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book $500 Audit</a></li>
+    <li><a href="#" class="nav-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Let's Talk</a></li>
   </ul>
 </nav>
 
@@ -1426,8 +1293,8 @@
           We embed as your fractional WebOps team — uniting design, development, and marketing into a single agile pod that eliminates developer backlogs and turns your site into a revenue machine.
         </p>
         <div class="hero-actions">
-          <a href="https://cal.com/interfacelab.pro/30min" target="_blank" class="btn-primary" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book a $500 Technical Audit</a>
-          <a href="#services" class="btn-ghost">See Our Services <span class="btn-ghost-arrow">→</span></a>
+          <a href="#" class="btn-primary" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Work With Us</a>
+
         </div>
       </div>
     </div>
@@ -1483,15 +1350,15 @@
       <div>
         <div class="section-label fade-up" data-num="01">Who We Are</div>
         <h2 class="about-h2 fade-up delay-1">
-          Not a vendor.<br>An <em>embedded</em><br>WebOps partner.
+          Not a vendor. An <em>embedded</em> WebOps partner.
         </h2>
       </div>
       <div class="about-right fade-up delay-2">
         <p class="about-text">
-          The traditional project-based agency model is broken. Businesses are tired of hiring separate designers, developers, and marketers — only to be left with disjointed websites and massive developer backlogs.
+          No more fragmented agencies, dev backlogs, or disjointed deliverables.
         </p>
         <p class="about-text">
-          We operate as a Webflow-native embedded team — delivering the technical scale of an enterprise shop without the enterprise bloat or the €30k+ price tag. Your growth partner on a continuous loop, not just another vendor.
+          We embed as your WebOps team — technical scale without the enterprise price tag.
         </p>
         <div class="pillars">
           <div class="pillar">
@@ -1535,20 +1402,21 @@
       <div>
         <div class="section-label fade-up" data-num="02">The Framework</div>
         <h2 class="services-h2 fade-up delay-1">
-          Two engines.<br>One <em>revenue machine.</em>
+          Two engines. One <em>revenue machine.</em>
         </h2>
       </div>
       <p class="services-note fade-up delay-2">
-        Most agencies build a website. We build a system — two engines working in concert, one converting visitors, one compounding growth.
+        Two engines. One system. Compounding growth.
       </p>
     </div>
     <div class="engines-grid fade-up delay-2">
       <div class="engine-card">
-        <div class="engine-icon-wrap">🎯</div>
+        <div class="engine-icon-wrap"><span class="material-symbols-outlined mi">ads_click</span></div>
         <div class="engine-tag">Engine One · Front-End</div>
         <div class="engine-title">The Conversion Engine</div>
         <p class="engine-desc">The layer engineered to turn visitors into leads. Using Scientific Aesthetics — visuals built on cognitive heuristics, WCAG 2.1 accessibility, and psychological conversion triggers — every pixel has a measurable job. We run continuous A/B testing so the site gets smarter every month.</p>
         <div class="engine-pills">
+          <span class="engine-pill">Webflow</span>
           <span class="engine-pill">Scientific Aesthetics</span>
           <span class="engine-pill">WCAG 2.1</span>
           <span class="engine-pill">A/B Testing</span>
@@ -1558,7 +1426,7 @@
         </div>
       </div>
       <div class="engine-card">
-        <div class="engine-icon-wrap">⚙️</div>
+        <div class="engine-icon-wrap"><span class="material-symbols-outlined mi">account_tree</span></div>
         <div class="engine-tag">Engine Two · Back-End</div>
         <div class="engine-title">The Growth Engine</div>
         <p class="engine-desc">The infrastructure that compounds results over time. We connect Webflow to your CRM pipelines (HubSpot / GoHighLevel), automate lead flows, build AI Agent logic, and configure deep data tracking via GA4 and GTM. Your site stops being a brochure and starts being a pipeline.</p>
@@ -1582,28 +1450,28 @@
       <div>
         <div class="section-label fade-up" data-num="03">Services</div>
         <h2 class="services-h2 fade-up delay-1">
-          Three ways to<br>engage with us, one<br><em>unified outcome.</em>
+          Three ways to engage with us, one <em>unified outcome.</em>
         </h2>
       </div>
       <p class="services-note fade-up delay-2">
-        Every engagement starts with diagnosis. We find the exact revenue leaks before writing a single line of code.
+        Every engagement starts with diagnosis.
       </p>
     </div>
     <div class="services-grid fade-up delay-2">
       <div class="service-card">
-        <div class="service-icon-wrap">🔍</div>
+        <div class="service-icon-wrap"><span class="material-symbols-outlined mi">biotech</span></div>
         <div class="service-tag">Tier 1 · Entry Point</div>
         <div class="service-title">Technical Growth Audit</div>
         <p class="service-desc">We find the revenue leaks before touching a single pixel. Our 67-point inspection covers Core Web Vitals, UX heuristics, GTM tag health, WCAG compliance, and AEO readiness — delivered as a branded PDF report and implementation roadmap.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon-wrap">⚡</div>
+        <div class="service-icon-wrap"><span class="material-symbols-outlined mi">bolt</span></div>
         <div class="service-tag">Tier 2 · Foundation Build</div>
         <div class="service-title">Scalable Infrastructure</div>
         <p class="service-desc">Your Conversion Engine and Growth Engine, built and integrated simultaneously. Client-First Webflow build with Figma UI/UX, GSAP interactions, AI Agent web-app integration, CRM pipeline connection, and Looker Studio dashboards. This is not a template — this is a revenue system.</p>
       </div>
       <div class="service-card">
-        <div class="service-icon-wrap">📈</div>
+        <div class="service-icon-wrap"><span class="material-symbols-outlined mi">trending_up</span></div>
         <div class="service-tag">Tier 3 · Ongoing Retainer</div>
         <div class="service-title">Embedded WebOps Team</div>
         <p class="service-desc">Your embedded team for continuous compounding growth. Monthly A/B testing, CRO experiments, AEO content structuring, new campaign landing pages, and deep-dive Looker Studio reporting. We never stop pushing your site forward.</p>
@@ -1619,20 +1487,14 @@
       <span class="stack-label-text">Our Tech Stack</span>
       <div class="stack-divider"></div>
       <div class="stack-items">
-        <span class="stack-pill">Webflow</span>
-        <span class="stack-pill">AI Agents</span>
-        <span class="stack-pill">Figma</span>
-        <span class="stack-pill">Supabase</span>
-        <span class="stack-pill">Xano</span>
-        <span class="stack-pill">HubSpot</span>
-        <span class="stack-pill">GoHighLevel</span>
-        <span class="stack-pill">Make / n8n</span>
-        <span class="stack-pill">GSAP</span>
-        <span class="stack-pill">Looker Studio</span>
-        <span class="stack-pill">GTM</span>
-        <span class="stack-pill">GA4</span>
-        <span class="stack-pill">Microsoft Clarity</span>
-        <span class="stack-pill">Replit</span>
+        <span class="stack-logo"><svg width="39" height="24" viewBox="0 0 39 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M38.7475 0L26.4707 24H14.9392L20.077 14.0534H19.8465C15.6078 19.5558 9.28359 23.178 0.272522 24V14.191C0.272522 14.191 6.03712 13.8505 9.42596 10.2877H0.272522V0.000189575H10.56V8.46149L10.7909 8.46054L14.9947 0.000189575H22.7749V8.40784L23.0058 8.40746L27.3673 0H38.7475Z" fill="#146EF5"/></svg><span>Webflow</span></span>
+        <span class="stack-logo"><svg xmlns="http://www.w3.org/2000/svg" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd" viewBox="0 0 489 511.8"><path fill="#FF7A59" fill-rule="nonzero" d="M375.25 168.45V107.5c16.43-7.68 26.97-24.15 27.08-42.29V63.8c0-25.95-21.05-46.99-47-46.99h-1.37c-25.95 0-46.99 21.04-46.99 46.99v1.41a46.985 46.985 0 0027.29 42.3v60.94c-23.13 3.53-44.98 13.18-63.19 27.84L103.88 66.16c1.19-4.29 1.83-8.73 1.89-13.17v-.11C105.77 23.68 82.09 0 52.88 0 23.68 0 0 23.68 0 52.88c0 29.18 23.64 52.85 52.81 52.89 9.17-.08 18.16-2.59 26.06-7.23l164.62 128.07a133.501 133.501 0 00-22.16 73.61c0 27.39 8.46 54.17 24.18 76.58l-50.06 50.06a43.926 43.926 0 00-12.43-1.81c-23.96 0-43.38 19.42-43.38 43.37 0 23.96 19.42 43.38 43.38 43.38 23.95 0 43.37-19.42 43.37-43.38v-.13a41.81 41.81 0 00-2.02-12.5l49.52-49.56a133.687 133.687 0 0081.54 27.78c73.76 0 133.57-59.81 133.57-133.57 0-66.05-48.3-122.2-113.61-132.06l-.14.07zm-20.39 200.4c-36.79-1.52-65.85-31.79-65.85-68.62 0-35.43 26.97-65.06 62.23-68.38h3.62c35.8 2.73 63.46 32.58 63.46 68.48 0 35.91-27.66 65.76-63.45 68.48l-.01.04zm0 0z"/></svg><span>HubSpot</span></span>
+        <span class="stack-logo"><svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"><g transform="scale(32)"><clipPath id="prefix__a"><path d="M0 0h16v16H0z"/></clipPath><g clip-path="url(#prefix__a)"><path d="M6.989 4.036L.062 17.818a.58.58 0 00.257.774l3.733 1.876a.58.58 0 00.775-.256L11.753 6.43a.58.58 0 00-.257-.775L7.763 3.78a.576.576 0 00-.774.257v-.001z" fill="url(#prefix___Linear2)" fill-rule="nonzero" transform="scale(.66667)"/><path d="M19.245 3.832h4.179c.318 0 .577.26.577.577v15.425a.58.58 0 01-.577.578h-4.179a.58.58 0 01-.577-.578V4.41c0-.318.259-.577.577-.577v-.001z" fill="url(#prefix___Linear3)" fill-rule="nonzero" transform="scale(.66667)"/><path d="M12.815 4.085L9.85 19.108a.579.579 0 00.453.677l4.095.826c.314.063.62-.14.681-.454l2.964-15.022a.58.58 0 00-.453-.677l-4.096-.827a.579.579 0 00-.68.454h.001z" fill="url(#prefix___Linear4)" fill-rule="nonzero" transform="scale(.66667)"/></g></g><defs><linearGradient id="prefix___Linear2" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(10.5 -19.5 19.5 10.5 1.5 19.5)"><stop offset="0" stop-color="#f0f"/><stop offset=".17" stop-color="#e90cf9"/><stop offset=".54" stop-color="#c023ed"/><stop offset=".73" stop-color="#b02de9"/><stop offset="1" stop-color="#b02de9"/></linearGradient><linearGradient id="prefix___Linear3" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(24 -24 24 24 0 24)"><stop offset="0" stop-color="#b02de9"/><stop offset=".02" stop-color="#b02de9"/><stop offset=".8" stop-color="#6d00cc"/><stop offset="1" stop-color="#6d00cc"/></linearGradient><linearGradient id="prefix___Linear4" x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(24 -24 24 24 0 24)"><stop offset="0" stop-color="#f0f"/><stop offset=".02" stop-color="#f0f"/><stop offset=".09" stop-color="#e90cf9"/><stop offset=".23" stop-color="#c023ed"/><stop offset=".3" stop-color="#b02de9"/><stop offset=".42" stop-color="#a42be3"/><stop offset=".63" stop-color="#8626d5"/><stop offset=".85" stop-color="#6021c3"/><stop offset="1" stop-color="#6021c3"/></linearGradient></defs></svg><span>Make</span></span>
+        <span class="stack-logo"><svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"><path d="M512 179.2c0 28.267-23.51 51.2-52.522 51.2-24.448 0-45.014-16.32-50.86-38.4h-73.3c-12.843 0-23.787 9.045-25.9 21.397l-2.154 12.63A50.917 50.917 0 01290.197 256c8.79 7.552 15.02 18.005 17.067 29.973l2.133 12.63c2.262 12.458 13.291 21.546 25.942 21.397h20.8c5.824-22.08 26.39-38.4 50.859-38.4 29.013 0 52.5 22.933 52.5 51.2 0 28.267-23.53 51.2-52.5 51.2-24.47 0-45.014-16.32-50.86-38.4h-20.8c-25.685 0-47.573-18.09-51.797-42.773l-2.154-12.63c-2.262-12.437-13.27-21.525-25.899-21.397h-21.461c-6.57 20.992-26.582 36.267-50.262 36.267s-43.69-15.275-50.24-36.267h-30.762c-6.571 20.992-26.582 36.267-50.24 36.267-29.014 0-52.523-22.934-52.523-51.2 0-28.267 23.51-51.2 52.523-51.2 25.237 0 46.336 17.386 51.37 40.533h28.523c5.035-23.147 26.133-40.533 51.37-40.533 25.26 0 46.337 17.386 51.371 40.533h20.31c12.821 0 23.786-9.045 25.877-21.397l2.176-12.63c4.224-24.682 26.133-42.773 51.798-42.773h73.3c5.846-22.08 26.412-38.4 50.86-38.4C488.49 128 512 150.933 512 179.2zm-26.24 0c0 14.144-11.776 25.6-26.282 25.6-14.507 0-26.24-11.456-26.24-25.6 0-14.144 11.733-25.6 26.24-25.6 14.506 0 26.26 11.456 26.26 25.6h.022zM52.501 279.467c14.507 0 26.24-11.456 26.24-25.6 0-14.144-11.733-25.6-26.24-25.6-14.506 0-26.261 11.456-26.261 25.6 0 14.144 11.733 25.6 26.24 25.6h.021zm131.264 0c14.507 0 26.262-11.456 26.262-25.6 0-14.144-11.734-25.6-26.24-25.6-14.507 0-26.262 11.456-26.262 25.6 0 14.144 11.734 25.6 26.24 25.6zm223.19 78.933c14.507 0 26.24-11.456 26.24-25.6 0-14.144-11.733-25.6-26.24-25.6-14.507 0-26.24 11.456-26.24 25.6 0 14.144 11.733 25.6 26.24 25.6z" fill="#ea4b71"/></svg><span>n8n</span></span>
+        <span class="stack-logo"><svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.87 122.89"><defs><style>.cls-1{fill:#8ab4f8;}.cls-2{fill:#4285f4;}.cls-3{fill:#246fdb;}</style></defs><polygon class="cls-1" points="72.13 118.22 50.8 96.86 96.63 50.56 118.35 72.28 72.13 118.22 72.13 118.22"/><path class="cls-2" d="M72.29,26.23,50.56,4.5,4.5,50.56a15.35,15.35,0,0,0,0,21.71h0l46.06,46.06,21.31-21.4L37.07,61.45,72.29,26.23Z"/><path class="cls-1" d="M118.35,50.56,72.29,4.5A15.36,15.36,0,0,0,50.56,26.22L96.65,72.28a15.36,15.36,0,0,0,21.72-21.72Z"/><path class="cls-3" d="M76.48,107.66a15.23,15.23,0,1,0-15.22,15.23,15.22,15.22,0,0,0,15.22-15.23Z"/></svg><span>GTM</span></span>
+        <span class="stack-logo"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 301112 333331" shape-rendering="geometricPrecision" text-rendering="geometricPrecision" image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"><path d="M301110 291619c124 22886-18333 41521-41206 41644-1700 14-3415-82-5101-288-21227-3140-36776-21611-36256-43057V43342c-507-21474 15084-39944 36324-43057 22721-2660 43304 13602 45964 36324 192 1673 288 3346 274 5032v249977z" fill="#f9ab00"/><path d="M41288 250756c22804 0 41288 18484 41288 41288s-18484 41288-41288 41288S0 314848 0 292044s18484-41288 41288-41288zm108630-125126c-22913 1261-40685 20472-40150 43413v110892c0 30099 13246 48364 32649 52258 22393 4539 44209-9928 48748-32320 562-2743 836-5526 822-8323V167124c41-22886-18470-41467-41356-41507-233 0-480 0-713 14z" fill="#e37400"/></svg><span>GA4</span></span>
+        <span class="stack-logo"><svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2"><path d="M253.397 165.568H74.005c-17.088 0-31.189-13.995-31.338-31.083V31.083C42.667 13.739 56.96 0 74.283 0H221.76c17.643 0 31.637 14.037 31.637 31.083v134.485zM445.483 345.92H253.589V165.333h191.894c18.56 0 33.877 15.296 33.877 33.835v112.939c0 18.88-15.296 33.835-33.877 33.835v-.022zM221.76 512H74.283c-17.323 0-31.616-14.016-31.616-31.018V377.45c0-17.003 14.293-31.019 31.616-31.019h179.114v134.55c0 17.002-14.293 31.018-31.637 31.018z" fill="#fd5402" fill-rule="nonzero"/></svg><span>Replit</span></span>
+        <span class="stack-logo"><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 186.59 298.85"><defs><style>.cls-1{fill:#4285f4;}.cls-2{fill:#aecbfa;}.cls-3{fill:#5e97f6;}</style></defs><path class="cls-2" d="M92.3,0c-14.97,0-26.19,11.22-26.19,26.19,0,4.99,1.25,9.98,4.99,14.97l11.22-11.22v-3.74c0-6.24,4.99-11.22,11.22-11.22s11.22,4.99,11.22,11.22-4.99,11.22-11.22,11.22h-3.74l-11.22,9.98c12.47,7.48,28.7,4.99,36.17-7.48,7.48-12.47,4.99-28.7-7.48-36.17C103.53,1.27,98.54.02,92.3.02v-.02Z"/><path class="cls-3" d="M82.32,76.09c0-8.73-2.49-17.46-7.48-24.94l-14.97,14.97c1.25,3.74,2.49,6.24,2.49,9.98,0,6.24-2.49,11.22-6.24,14.97l7.48,19.97c12.47-7.48,18.71-21.2,18.71-34.92l.02-.03Z"/><path class="cls-3" d="M42.4,97.29c-11.22,0-21.2-8.73-21.2-19.97s8.73-21.2,19.97-21.2c3.74,0,8.73,1.25,12.47,3.74l14.97-13.72c-8.73-7.48-17.46-11.22-27.44-11.22C18.71,34.92,0,53.64,0,76.09s17.46,41.17,41.17,41.17c2.49,0,6.24,0,8.73-1.25l-7.48-18.71h-.02Z"/><path class="cls-1" d="M93.55,113.5c-8.73,0-17.46,1.25-26.19,3.74l11.22,27.44c4.99,0,9.98-1.25,14.97-1.25,34.92,0,62.37,28.7,62.37,62.37s-28.7,62.37-62.37,62.37-62.37-28.7-62.37-62.37c0-23.71,12.47-44.91,33.67-54.89l-11.22-27.44C7.48,145.93-11.22,202.06,11.22,246.96c22.45,46.16,78.58,64.85,123.48,42.4,46.16-22.45,64.85-78.58,42.4-123.48-16.21-31.18-48.64-52.38-83.57-52.38h.02Z"/></svg><span>Looker Studio</span></span>
       </div>
     </div>
   </div>
@@ -1641,14 +1503,29 @@
 <!-- AEO CALLOUT -->
 <div class="aeo-callout">
   <div class="aeo-callout-inner">
-    <div class="aeo-badge-wrap">
-      <div class="aeo-badge">AEO</div>
-      <div class="aeo-badge-label">Forward-Looking</div>
+    <div class="services-header">
+      <div>
+        <div class="section-label fade-up">Answer Engine Optimization</div>
+        <h2 class="services-h2 fade-up delay-1">Traditional SEO is dead. We've already <em>moved on.</em></h2>
+      </div>
+
     </div>
-    <div>
-      <div class="aeo-callout-eyebrow">Search is changing</div>
-      <h2 class="aeo-callout-h2">Traditional SEO is dead.<br>We've already <em>moved on.</em></h2>
-      <p class="aeo-callout-p">We optimize your site for AEO — Answer Engine Optimization — ensuring your brand becomes the primary source cited by AI agents like ChatGPT, Perplexity, and Google's AI Overviews. When a buyer asks an AI "what's the best solution for X," your brand should be the answer. We make sure it is.</p>
+    <div class="aeo-platforms">
+      <div class="aeo-platform">
+        <div class="aeo-platform-label">AI Search Platform</div>
+        <div class="aeo-platform-name">ChatGPT</div>
+        <p class="aeo-platform-desc">We structure your content so OpenAI's models surface your brand as the authoritative answer for your category.</p>
+      </div>
+      <div class="aeo-platform">
+        <div class="aeo-platform-label">AI Search Platform</div>
+        <div class="aeo-platform-name">Perplexity</div>
+        <p class="aeo-platform-desc">Perplexity cites sources directly. We make sure yours is among them — for every high-intent query in your space.</p>
+      </div>
+      <div class="aeo-platform">
+        <div class="aeo-platform-label">AI Search Platform</div>
+        <div class="aeo-platform-name">Google AI Overviews</div>
+        <p class="aeo-platform-desc">Google's AI Overviews are replacing traditional results. We optimise your pages to be pulled into those summaries.</p>
+      </div>
     </div>
   </div>
 </div>
@@ -1658,7 +1535,7 @@
   <div class="section-inner">
     <div class="section-label fade-up" data-num="04">Methodology</div>
     <h2 class="method-h2 fade-up delay-1">
-      A four-phase process.<br><em>Zero</em> ambiguity.
+      A four-phase process. <em>Zero</em> ambiguity.
     </h2>
     <div class="phases fade-up delay-2">
       <div class="phase">
@@ -1716,250 +1593,243 @@
 <!-- ICP -->
 <section class="icp" id="clients">
   <div class="section-inner">
-    <div class="section-label fade-up" data-num="05">Who We Serve</div>
-    <h2 class="services-h2 fade-up delay-1">
-      Whatever your industry,<br>your website should <em>work harder.</em>
-    </h2>
+    <div class="section-label fade-up">Who We Serve</div>
+    <h2 class="services-h2 fade-up delay-1">Whatever your industry, your website should <em>work harder.</em></h2>
 
-    <div class="icp-tabs-wrapper fade-up delay-2">
-      <div class="icp-tab-nav">
-        <button class="icp-tab-btn active" data-tab="saas"><span class="tab-icon">⚙️</span> SaaS & Tech</button>
-        <button class="icp-tab-btn" data-tab="ecom"><span class="tab-icon">🛍️</span> E-commerce</button>
-        <button class="icp-tab-btn" data-tab="health"><span class="tab-icon">🏥</span> Healthcare</button>
-        <button class="icp-tab-btn" data-tab="realestate"><span class="tab-icon">🏢</span> Real Estate</button>
-        <button class="icp-tab-btn" data-tab="legal"><span class="tab-icon">⚖️</span> Professional Services</button>
-        <button class="icp-tab-btn" data-tab="hospitality"><span class="tab-icon">🍽️</span> Hospitality</button>
-        <button class="icp-tab-btn" data-tab="education"><span class="tab-icon">🎓</span> Education</button>
-        <button class="icp-tab-btn" data-tab="agency"><span class="tab-icon">✦</span> Agencies</button>
-      </div>
+    <div class="icp-accordion fade-up delay-2">
 
-      <div class="icp-panel-wrap">
-
-        <!-- SaaS -->
-        <div class="icp-panel active" id="panel-saas">
-          <div class="icp-panel-left">
+      <!-- 001 SaaS -->
+      <div class="icp-item open">
+        <button class="icp-item-header" onclick="toggleIcp(this)">
+          <span class="icp-item-num">01</span>
+          <span class="icp-item-title">SaaS & Tech Startups</span>
+          <span class="icp-item-arrow">→</span>
+        </button>
+        <div class="icp-item-body">
+          <div class="icp-item-left">
+            <div class="icp-item-pain">We ship great product but our marketing site hasn't been touched in a year. The dev team won't go near it — they're heads-down on the roadmap.</div>
             <div>
-              <div class="icp-panel-eyebrow">B2B SaaS & Tech Startups</div>
-              <h3 class="icp-panel-title">Your product ships daily.<br>Your <em>marketing site</em> doesn't.</h3>
-            </div>
-            <div class="icp-panel-pain">We ship great product but our marketing site hasn't been touched in a year. The dev team won't go near it — they're heads-down on the roadmap.</div>
-          </div>
-          <div class="icp-panel-right">
-            <div>
-              <div class="icp-panel-label">What we deliver</div>
+              <div class="icp-item-label">What we deliver</div>
               <ul class="icp-deliverables">
                 <li>AI-powered ROI calculators & interactive demos that generate pipeline</li>
                 <li>Autonomous landing page deployment — no engineering tickets, ever</li>
                 <li>Accurate GA4 + GTM tracking so ad spend stops bleeding</li>
                 <li>Monthly CRO experiments with Looker Studio reporting</li>
               </ul>
-            </div>
-            <div class="icp-tags">
-              <span class="icp-tag">Landing pages</span>
-              <span class="icp-tag">AI web-apps</span>
-              <span class="icp-tag">CRO testing</span>
-              <span class="icp-tag">Tracking integrity</span>
+              <div class="icp-tags">
+                <span class="icp-tag">Landing pages</span>
+                <span class="icp-tag">AI web-apps</span>
+                <span class="icp-tag">CRO testing</span>
+                <span class="icp-tag">Tracking integrity</span>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- E-commerce -->
-        <div class="icp-panel" id="panel-ecom">
-          <div class="icp-panel-left">
+      <!-- 002 E-commerce -->
+      <div class="icp-item">
+        <button class="icp-item-header" onclick="toggleIcp(this)">
+          <span class="icp-item-num">02</span>
+          <span class="icp-item-title">E-commerce & DTC Brands</span>
+          <span class="icp-item-arrow">→</span>
+        </button>
+        <div class="icp-item-body">
+          <div class="icp-item-left">
+            <div class="icp-item-pain">Our store looks great but conversions are flat. We have traffic but the checkout flow leaks customers at every step.</div>
             <div>
-              <div class="icp-panel-eyebrow">E-commerce & DTC Brands</div>
-              <h3 class="icp-panel-title">Traffic is there.<br>The <em>conversion funnel</em> isn't.</h3>
-            </div>
-            <div class="icp-panel-pain">Our store looks great but conversions are flat. We have traffic but the checkout flow leaks customers at every step.</div>
-          </div>
-          <div class="icp-panel-right">
-            <div>
-              <div class="icp-panel-label">What we deliver</div>
+              <div class="icp-item-label">What we deliver</div>
               <ul class="icp-deliverables">
                 <li>Full funnel audit from ad click to purchase confirmation</li>
                 <li>AI-powered product finder that personalises recommendations</li>
                 <li>Upsell & cross-sell flows that lift average order value</li>
                 <li>Abandoned cart recovery automations via SMS & email</li>
               </ul>
-            </div>
-            <div class="icp-tags">
-              <span class="icp-tag">Funnel rebuild</span>
-              <span class="icp-tag">AI product finder</span>
-              <span class="icp-tag">AOV optimisation</span>
-              <span class="icp-tag">Recovery flows</span>
+              <div class="icp-tags">
+                <span class="icp-tag">Funnel rebuild</span>
+                <span class="icp-tag">AI product finder</span>
+                <span class="icp-tag">AOV optimisation</span>
+                <span class="icp-tag">Recovery flows</span>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Healthcare -->
-        <div class="icp-panel" id="panel-health">
-          <div class="icp-panel-left">
+      <!-- 003 Healthcare -->
+      <div class="icp-item">
+        <button class="icp-item-header" onclick="toggleIcp(this)">
+          <span class="icp-item-num">03</span>
+          <span class="icp-item-title">Medical & Healthcare Clinics</span>
+          <span class="icp-item-arrow">→</span>
+        </button>
+        <div class="icp-item-body">
+          <div class="icp-item-left">
+            <div class="icp-item-pain">We get enquiries but half are the wrong patients or no-shows. Our site doesn't pre-qualify or follow up automatically.</div>
             <div>
-              <div class="icp-panel-eyebrow">Medical & Dental Clinics</div>
-              <h3 class="icp-panel-title">Turn high traffic into<br><em>qualified patients.</em></h3>
-            </div>
-            <div class="icp-panel-pain">We get enquiries but half are the wrong patients or no-shows. Our site doesn't pre-qualify or follow up automatically.</div>
-          </div>
-          <div class="icp-panel-right">
-            <div>
-              <div class="icp-panel-label">What we deliver</div>
+              <div class="icp-item-label">What we deliver</div>
               <ul class="icp-deliverables">
                 <li>AI intake agent that pre-qualifies patients before booking</li>
                 <li>Automated appointment scheduling with reminder sequences</li>
                 <li>Missed-call SMS follow-up so no lead goes cold</li>
                 <li>Trust-building design with clear service & pricing pages</li>
               </ul>
-            </div>
-            <div class="icp-tags">
-              <span class="icp-tag">Intake automation</span>
-              <span class="icp-tag">Booking flows</span>
-              <span class="icp-tag">AI triage</span>
-              <span class="icp-tag">SMS follow-up</span>
+              <div class="icp-tags">
+                <span class="icp-tag">Intake automation</span>
+                <span class="icp-tag">Booking flows</span>
+                <span class="icp-tag">AI triage</span>
+                <span class="icp-tag">SMS follow-up</span>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Real Estate -->
-        <div class="icp-panel" id="panel-realestate">
-          <div class="icp-panel-left">
+      <!-- 004 Real Estate -->
+      <div class="icp-item">
+        <button class="icp-item-header" onclick="toggleIcp(this)">
+          <span class="icp-item-num">04</span>
+          <span class="icp-item-title">Real Estate & Property</span>
+          <span class="icp-item-arrow">→</span>
+        </button>
+        <div class="icp-item-body">
+          <div class="icp-item-left">
+            <div class="icp-item-pain">Listings are excellent but the website doesn't convert browsers. People leave without knowing what to do next.</div>
             <div>
-              <div class="icp-panel-eyebrow">Real Estate & Property</div>
-              <h3 class="icp-panel-title">Great listings.<br>Website is a <em>dead end.</em></h3>
-            </div>
-            <div class="icp-panel-pain">Listings are excellent but the website doesn't convert browsers. People leave without knowing what to do next.</div>
-          </div>
-          <div class="icp-panel-right">
-            <div>
-              <div class="icp-panel-label">What we deliver</div>
+              <div class="icp-item-label">What we deliver</div>
               <ul class="icp-deliverables">
                 <li>Dynamic property search with AI-powered match scoring</li>
                 <li>Instant WhatsApp & SMS alerts when matching listings go live</li>
                 <li>Valuation request funnels that capture warm seller leads</li>
                 <li>Agent CRM integration with automatic lead routing</li>
               </ul>
-            </div>
-            <div class="icp-tags">
-              <span class="icp-tag">Property search</span>
-              <span class="icp-tag">AI matching</span>
-              <span class="icp-tag">Lead alerts</span>
-              <span class="icp-tag">CRM routing</span>
+              <div class="icp-tags">
+                <span class="icp-tag">Property search</span>
+                <span class="icp-tag">AI matching</span>
+                <span class="icp-tag">Lead alerts</span>
+                <span class="icp-tag">CRM routing</span>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Legal -->
-        <div class="icp-panel" id="panel-legal">
-          <div class="icp-panel-left">
+      <!-- 005 Legal -->
+      <div class="icp-item">
+        <button class="icp-item-header" onclick="toggleIcp(this)">
+          <span class="icp-item-num">05</span>
+          <span class="icp-item-title">Law Firms & Professional Services</span>
+          <span class="icp-item-arrow">→</span>
+        </button>
+        <div class="icp-item-body">
+          <div class="icp-item-left">
+            <div class="icp-item-pain">We have real expertise but our website feels outdated. Prospects can't tell if we're the right fit before they even call.</div>
             <div>
-              <div class="icp-panel-eyebrow">Law Firms & Consultancies</div>
-              <h3 class="icp-panel-title">Stop looking like<br>a <em>brochure.</em></h3>
-            </div>
-            <div class="icp-panel-pain">We have real expertise but our website feels outdated. Prospects can't tell if we're the right fit before they even call.</div>
-          </div>
-          <div class="icp-panel-right">
-            <div>
-              <div class="icp-panel-label">What we deliver</div>
+              <div class="icp-item-label">What we deliver</div>
               <ul class="icp-deliverables">
                 <li>AI intake assistant that pre-qualifies consultations 24/7</li>
                 <li>Elegant case study architecture that builds authority</li>
                 <li>AEO content structuring so you appear in AI search answers</li>
                 <li>Retainer & service calculator tools that shorten the sales cycle</li>
               </ul>
-            </div>
-            <div class="icp-tags">
-              <span class="icp-tag">AEO content</span>
-              <span class="icp-tag">AI intake</span>
-              <span class="icp-tag">Authority design</span>
-              <span class="icp-tag">Lead qualification</span>
+              <div class="icp-tags">
+                <span class="icp-tag">AEO content</span>
+                <span class="icp-tag">AI intake</span>
+                <span class="icp-tag">Authority design</span>
+                <span class="icp-tag">Lead qualification</span>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Hospitality -->
-        <div class="icp-panel" id="panel-hospitality">
-          <div class="icp-panel-left">
+      <!-- 006 Hospitality -->
+      <div class="icp-item">
+        <button class="icp-item-header" onclick="toggleIcp(this)">
+          <span class="icp-item-num">06</span>
+          <span class="icp-item-title">Restaurants, Hotels & Venues</span>
+          <span class="icp-item-arrow">→</span>
+        </button>
+        <div class="icp-item-body">
+          <div class="icp-item-left">
+            <div class="icp-item-pain">People find us on Google then book through third-party platforms that take 20–30% commission. We don't own our customers.</div>
             <div>
-              <div class="icp-panel-eyebrow">Restaurants, Hotels & Venues</div>
-              <h3 class="icp-panel-title">People find you.<br>Then book through <em>someone else.</em></h3>
-            </div>
-            <div class="icp-panel-pain">People find us on Google then book through third-party platforms that take 20–30% commission. We don't own our customers.</div>
-          </div>
-          <div class="icp-panel-right">
-            <div>
-              <div class="icp-panel-label">What we deliver</div>
+              <div class="icp-item-label">What we deliver</div>
               <ul class="icp-deliverables">
                 <li>Commission-free direct booking engine on your own domain</li>
                 <li>AI concierge for reservations, menus & dietary queries</li>
                 <li>Post-visit loyalty sequences that drive repeat bookings</li>
                 <li>Event & private hire inquiry funnels with instant quotes</li>
               </ul>
-            </div>
-            <div class="icp-tags">
-              <span class="icp-tag">Direct booking</span>
-              <span class="icp-tag">AI concierge</span>
-              <span class="icp-tag">Loyalty flows</span>
-              <span class="icp-tag">Commission-free</span>
+              <div class="icp-tags">
+                <span class="icp-tag">Direct booking</span>
+                <span class="icp-tag">AI concierge</span>
+                <span class="icp-tag">Loyalty flows</span>
+                <span class="icp-tag">Commission-free</span>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Education -->
-        <div class="icp-panel" id="panel-education">
-          <div class="icp-panel-left">
+      <!-- 007 Education -->
+      <div class="icp-item">
+        <button class="icp-item-header" onclick="toggleIcp(this)">
+          <span class="icp-item-num">07</span>
+          <span class="icp-item-title">Courses, Academies & Coaches</span>
+          <span class="icp-item-arrow">→</span>
+        </button>
+        <div class="icp-item-body">
+          <div class="icp-item-left">
+            <div class="icp-item-pain">People land on our course page and leave. We can't tell where they drop off or why they don't convert.</div>
             <div>
-              <div class="icp-panel-eyebrow">Courses, Academies & Coaches</div>
-              <h3 class="icp-panel-title">People visit.<br>They don't <em>enrol.</em></h3>
-            </div>
-            <div class="icp-panel-pain">People land on our course page and leave. We can't tell where they drop off or why they don't convert.</div>
-          </div>
-          <div class="icp-panel-right">
-            <div>
-              <div class="icp-panel-label">What we deliver</div>
+              <div class="icp-item-label">What we deliver</div>
               <ul class="icp-deliverables">
                 <li>AI course recommender that matches visitors to the right programme</li>
                 <li>Cohort countdown & urgency pages that trigger enrolment</li>
                 <li>Drop-off triggered drip sequences that re-engage cold leads</li>
                 <li>Student portal & community page integrated with your LMS</li>
               </ul>
-            </div>
-            <div class="icp-tags">
-              <span class="icp-tag">Enrolment funnels</span>
-              <span class="icp-tag">AI recommender</span>
-              <span class="icp-tag">Drip sequences</span>
-              <span class="icp-tag">LMS integration</span>
+              <div class="icp-tags">
+                <span class="icp-tag">Enrolment funnels</span>
+                <span class="icp-tag">AI recommender</span>
+                <span class="icp-tag">Drip sequences</span>
+                <span class="icp-tag">LMS integration</span>
+              </div>
             </div>
           </div>
         </div>
+      </div>
 
-        <!-- Agency -->
-        <div class="icp-panel" id="panel-agency">
-          <div class="icp-panel-left">
+      <!-- 008 Agencies -->
+      <div class="icp-item">
+        <button class="icp-item-header" onclick="toggleIcp(this)">
+          <span class="icp-item-num">08</span>
+          <span class="icp-item-title">Creative & Marketing Agencies</span>
+          <span class="icp-item-arrow">→</span>
+        </button>
+        <div class="icp-item-body">
+          <div class="icp-item-left">
+            <div class="icp-item-pain">We're so busy delivering for clients that our own website is years behind. It doesn't reflect the quality of work we actually do.</div>
             <div>
-              <div class="icp-panel-eyebrow">Creative & Marketing Agencies</div>
-              <h3 class="icp-panel-title">Building for clients.<br>Your own site is <em>embarrassing.</em></h3>
-            </div>
-            <div class="icp-panel-pain">We're so busy delivering for clients that our own website is years behind. It doesn't reflect the quality of work we actually do.</div>
-          </div>
-          <div class="icp-panel-right">
-            <div>
-              <div class="icp-panel-label">What we deliver</div>
+              <div class="icp-item-label">What we deliver</div>
               <ul class="icp-deliverables">
                 <li>Flagship agency site that becomes your best sales tool</li>
                 <li>White-label WebOps — offer AI web-apps to your own clients</li>
                 <li>Case study CMS that makes updating your portfolio effortless</li>
                 <li>New business proposal pages that close without a call</li>
               </ul>
-            </div>
-            <div class="icp-tags">
-              <span class="icp-tag">White-label</span>
-              <span class="icp-tag">Portfolio CMS</span>
-              <span class="icp-tag">Agency retainers</span>
-              <span class="icp-tag">Proposal pages</span>
+              <div class="icp-tags">
+                <span class="icp-tag">White-label</span>
+                <span class="icp-tag">Portfolio CMS</span>
+                <span class="icp-tag">Agency retainers</span>
+                <span class="icp-tag">Proposal pages</span>
+              </div>
             </div>
           </div>
         </div>
-
       </div>
+
     </div>
   </div>
 </section>
@@ -1977,7 +1847,7 @@
         <div class="pricing-card-head">
           <div class="pricing-tier">Tier 1 · One-Time</div>
           <div class="pricing-name">Technical Growth Audit</div>
-          <div class="pricing-price"><sup>$</sup>500<span class="pricing-cadence">starting price</span></div>
+          <div class="pricing-price"><sup>€</sup>500<span class="pricing-cadence">starting price</span></div>
         </div>
         <div class="pricing-card-body">
           <ul class="pricing-features">
@@ -1989,14 +1859,14 @@
             <li>AEO readiness assessment</li>
             <li>Branded PDF report & roadmap</li>
           </ul>
-          <a href="https://cal.com/interfacelab.pro/30min" target="_blank" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book an Audit</a>
+          <a href="#" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book an Audit</a>
         </div>
       </div>
       <div class="pricing-card featured">
         <div class="pricing-card-head">
           <div class="pricing-tier">Tier 2 · Project</div>
           <div class="pricing-name">Foundation Build</div>
-          <div class="pricing-price"><sup>$</sup>4k<span class="pricing-cadence">– $15,000 one-time</span></div>
+          <div class="pricing-price"><sup>€</sup>4k<span class="pricing-cadence">– €15,000 one-time</span></div>
         </div>
         <div class="pricing-card-body">
           <ul class="pricing-features">
@@ -2008,14 +1878,14 @@
             <li>Looker Studio dashboard setup</li>
             <li>Pre-launch QA & team handoff</li>
           </ul>
-          <a href="https://cal.com/interfacelab.pro/30min" target="_blank" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Start Building</a>
+          <a href="#" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Start Building</a>
         </div>
       </div>
       <div class="pricing-card">
         <div class="pricing-card-head">
           <div class="pricing-tier">Tier 3 · Retainer</div>
           <div class="pricing-name">Growth WebOps</div>
-          <div class="pricing-price"><sup>$</sup>800<span class="pricing-cadence">– $4,000 / month</span></div>
+          <div class="pricing-price"><sup>€</sup>800<span class="pricing-cadence">– €4,000 / month</span></div>
         </div>
         <div class="pricing-card-body">
           <ul class="pricing-features">
@@ -2026,7 +1896,7 @@
             <li>Speed & performance monitoring</li>
             <li>Deep-dive Looker Studio reports</li>
           </ul>
-          <a href="https://cal.com/interfacelab.pro/30min" target="_blank" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Embed Our Team</a>
+          <a href="#" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Embed Our Team</a>
         </div>
       </div>
     </div>
@@ -2040,14 +1910,13 @@
   <div class="cta-bg-ring r3"></div>
   <span class="cta-label">Let's Build Together</span>
   <h2 class="cta-h2">
-    Ready to stop losing<br>revenue to a <em>broken</em><br>marketing site?
+    Ready to stop losing revenue to a <em>broken</em> marketing site?
   </h2>
   <p class="cta-sub">
     Start with a $500 Technical Audit. We'll identify your exact revenue leaks, show you the fix, and embed as your WebOps team on a continuous growth loop.
   </p>
   <div class="cta-actions">
-    <a href="https://cal.com/interfacelab.pro/30min" target="_blank" class="btn-light" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book Your $500 Audit →</a>
-    <a href="https://cal.com/interfacelab.pro/30min" target="_blank" class="btn-outline-light" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Schedule a Call</a>
+    <a href="#" class="btn-light" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Schedule a Call</a>
   </div>
 </section>
 
@@ -2055,11 +1924,9 @@
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <a href="#" class="footer-logo">
-        <span class="footer-logo-mark">IL</span>
-        Interface Lab OÜ
+      <a href="#" class="footer-logo"><svg width="36" height="21" viewBox="0 0 264 152" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 7.99999C0 3.58171 3.58172 0 8 0H166.98C171.399 0 174.98 3.58172 174.98 8V55.0057C174.98 59.424 171.399 63.0057 166.98 63.0057H7.99999C3.58172 63.0057 0 59.424 0 55.0057V7.99999Z" fill="#ffffff"/><path d="M0 96.5268C0 92.1086 3.58172 88.5269 8 88.5269H255.446C259.864 88.5269 263.446 92.1086 263.446 96.5269V143.533C263.446 147.951 259.864 151.533 255.446 151.533H7.99999C3.58171 151.533 0 147.951 0 143.533V96.5268Z" fill="#ffffff"/></svg>Interface Lab
       </a>
-      <p class="footer-tagline">Webflow-native WebOps partner for ambitious SaaS teams and growing businesses. We build, operate, and grow your marketing site.</p>
+      <p class="footer-tagline">The WebOps partner for ambitious teams. We build, operate, and grow your marketing site.</p>
     </div>
     <div>
       <div class="footer-col-title">Services</div>
@@ -2088,7 +1955,7 @@
     </div>
   </div>
   <div class="footer-bottom">
-    <span class="footer-copy">© 2026 Interface Lab OÜ. All rights reserved.</span>
+    <span class="footer-copy">© 2026 Interface Lab. All rights reserved.</span>
     <ul class="footer-bottom-links">
       <li><a href="#">Privacy Policy</a></li>
       <li><a href="#">Terms of Service</a></li>
@@ -2124,6 +1991,14 @@
   (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
   Cal("init", "30min", {origin:"https://app.cal.com"});
   Cal.ns["30min"]("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+</script>
+<script>
+function toggleIcp(btn) {
+  const item = btn.closest('.icp-item');
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.icp-item').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
 </script>
 </body>
 </html>
