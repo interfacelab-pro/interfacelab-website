@@ -11,7 +11,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 })(window,document,'script','dataLayer','GTM-WTD734R6');</script>
 <!-- End Google Tag Manager -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Interface Lab — Webflow Native WebOps Partner</title>
+<title>Interface Lab — WebOps Partner</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet" />
@@ -217,6 +217,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border: none;
     transition: opacity 0.2s, transform 0.2s;
     display: inline-block;
+    cursor: pointer;
   }
   .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
 
@@ -1067,6 +1068,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     color: var(--ink);
     text-decoration: none;
     transition: background 0.25s, color 0.25s, border-color 0.25s;
+    cursor: pointer;
   }
   .pricing-cta:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
   .pricing-card.featured .pricing-cta {
@@ -1127,6 +1129,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     border: none;
     transition: opacity 0.2s, transform 0.2s;
     display: inline-block;
+    cursor: pointer;
   }
   .btn-light:hover { opacity: 0.88; transform: translateY(-1px); }
   .btn-outline-light {
@@ -1247,14 +1250,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   /* ── MOBILE ── */
   @media (max-width: 900px) {
-    /* ── NAV ── */
     nav { padding: 16px 20px; }
     .nav-links { display: none; }
-
-    /* ── SHARED CONTAINER ── */
     .section-inner { padding: 0 20px; }
-
-    /* ── HERO ── */
     .hero { padding: 100px 0 56px; }
     .hero::after { display: none; }
     .hero-h1 { font-size: clamp(36px, 8vw, 52px); }
@@ -1264,78 +1262,52 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .hero-stats { grid-template-columns: 1fr 1fr; margin-top: 40px; }
     .hero-stat { padding: 24px 20px; }
     .hero-stat-num { font-size: 36px; }
-
-    /* ── ABOUT ── */
     .about { padding: 72px 0; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
     .about-h2 { font-size: clamp(30px, 7vw, 44px); }
     .about-right { padding-top: 0; }
-
-    /* ── ENGINES ── */
     .engines { padding: 72px 0; }
     .engines-grid { grid-template-columns: 1fr; }
     .services-header { flex-direction: column; align-items: flex-start; gap: 12px; }
     .services-note { text-align: left; max-width: 100%; }
-
-    /* ── SERVICES ── */
     .services { padding: 72px 0; }
     .services-grid { grid-template-columns: 1fr; }
     .service-card { padding: 32px 24px; }
-
-    /* ── STACK ── */
     .stack { padding: 48px 0; }
     .stack-inner { flex-direction: column; gap: 20px; }
     .stack-divider { width: 40px; height: 1px; }
-
-    /* ── AEO ── */
     .aeo-callout { padding: 56px 0; }
     .aeo-callout-inner { grid-template-columns: 1fr; gap: 28px; padding: 0 20px; }
     .aeo-top { grid-template-columns: 1fr; gap: 20px; margin-bottom: 32px; }
     .aeo-platforms { grid-template-columns: 1fr; }
-
-    /* ── METHODOLOGY ── */
     .methodology { padding: 72px 0; }
     .phases { grid-template-columns: 1fr; border-left: none; }
     .phase { border-right: none; border-left: 1px solid rgba(255,255,255,0.08); padding: 32px 24px; }
-
-    /* ── ICP ── */
     .icp { padding: 72px 0; }
     .icp-accordion { margin-top: 36px; }
     .icp-item-header { gap: 16px; padding: 20px 0; }
     .icp-item-num { min-width: 24px; font-size: 11px; }
     .icp-item-title { font-size: clamp(17px, 4.5vw, 22px); }
     .icp-item-arrow { width: 32px; height: 32px; font-size: 14px; }
-    .icp-item-body {
-      grid-template-columns: 1fr;
-      gap: 28px;
-      padding: 0 0 28px 0;
-    }
+    .icp-item-body { grid-template-columns: 1fr; gap: 28px; padding: 0 0 28px 0; }
     .icp-panel { grid-template-columns: 1fr; }
     .icp-panel-left { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 24px; }
     .icp-panel-right { padding: 32px 24px; }
     .icp-tab-btn { padding: 12px 14px; font-size: 11px; }
-
-    /* ── PRICING ── */
     .pricing { padding: 72px 0; }
     .pricing-grid { grid-template-columns: 1fr; }
     .pricing-card-head { padding: 28px 24px 20px; }
     .pricing-card-body { padding: 24px 24px 28px; }
     .pricing-price { font-size: 40px; }
-
-    /* ── CTA ── */
     .cta-section { padding: 80px 20px; }
     .cta-h2 { font-size: clamp(32px, 8vw, 56px); }
     .cta-actions { flex-direction: column; align-items: center; gap: 12px; }
     .btn-light, .btn-outline-light { width: 100%; text-align: center; }
-
-    /* ── FOOTER ── */
     footer { padding: 48px 20px 32px; }
     .footer-inner { grid-template-columns: 1fr 1fr; gap: 36px; margin-bottom: 40px; }
     .footer-brand { grid-column: 1 / -1; }
     .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
     .footer-bottom-links { justify-content: center; }
-
-    /* ── SEPARATOR ── */
     div[style*="padding:0 48px"] { padding: 0 20px !important; }
   }
 
@@ -1363,7 +1335,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <li><a href="#services">Services</a></li>
     <li><a href="#methodology">Methodology</a></li>
     <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#" class="nav-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Let's Talk</a></li>
+    <li><a href="javascript:void(0)" class="nav-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Let's Talk</a></li>
   </ul>
 </nav>
 
@@ -1383,8 +1355,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           We embed as your fractional WebOps team — uniting design, development, and marketing into a single agile pod that eliminates developer backlogs and turns your site into a revenue machine.
         </p>
         <div class="hero-actions">
-          <a href="#" class="btn-primary" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Work With Us</a>
-
+          <a href="javascript:void(0)" class="btn-primary" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Work With Us</a>
         </div>
       </div>
     </div>
@@ -1598,7 +1569,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="section-label fade-up">Answer Engine Optimization</div>
         <h2 class="services-h2 fade-up delay-1">Traditional SEO is dead. We've already <em>moved on.</em></h2>
       </div>
-
     </div>
     <div class="aeo-platforms">
       <div class="aeo-platform">
@@ -1853,10 +1823,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </ul>
               <div class="icp-tags">
                 <span class="icp-tag">Direct booking</span>
-                <span class="icp-tag">Direct booking</span>
                 <span class="icp-tag">Chat widget</span>
                 <span class="icp-tag">Loyalty emails</span>
                 <span class="icp-tag">Event enquiries</span>
+              </div>
             </div>
           </div>
         </div>
@@ -1949,7 +1919,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li>AEO readiness assessment</li>
             <li>Branded PDF report & roadmap</li>
           </ul>
-          <a href="#" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book an Audit</a>
+          <a href="javascript:void(0)" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Book an Audit</a>
         </div>
       </div>
       <div class="pricing-card featured">
@@ -1968,7 +1938,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li>Looker Studio dashboard setup</li>
             <li>Pre-launch QA & team handoff</li>
           </ul>
-          <a href="#" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Start Building</a>
+          <a href="javascript:void(0)" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Start Building</a>
         </div>
       </div>
       <div class="pricing-card">
@@ -1986,7 +1956,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <li>Speed & performance monitoring</li>
             <li>Deep-dive Looker Studio reports</li>
           </ul>
-          <a href="#" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Embed Our Team</a>
+          <a href="javascript:void(0)" class="pricing-cta" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Embed Our Team</a>
         </div>
       </div>
     </div>
@@ -2007,7 +1977,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     Start with a $500 Technical Audit. We'll identify your exact revenue leaks, show you the fix, and embed as your WebOps team on a continuous growth loop.
   </p>
   <div class="cta-actions">
-    <a href="#" class="btn-light" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Schedule a Call</a>
+    <a href="javascript:void(0)" class="btn-light" data-cal-link="interfacelab.pro/30min" data-cal-namespace="30min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Schedule a Call</a>
   </div>
 </section>
 
@@ -2043,7 +2013,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="footer-col-title">Connect</div>
       <ul class="footer-links">
         <li><a href="https://www.linkedin.com/company/interface-lab-pro" target="_blank" rel="noopener">LinkedIn</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#4f2c20213b2e2c3b0f26213b2a3d292e2c2a232e2d613f3d20"><span class="__cf_email__" data-cfemail="20434f4e5441435460494e544552464143454c41420e50524f">contact@interfacelab.pro</span></a></li>
+        <li><a href="mailto:contact@interfacelab.pro">contact@interfacelab.pro</a></li>
       </ul>
     </div>
   </div>
@@ -2057,7 +2027,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </footer>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Tab switching
   document.querySelectorAll('.icp-tab-btn').forEach(btn => {
     btn.addEventListener('click', () => {
